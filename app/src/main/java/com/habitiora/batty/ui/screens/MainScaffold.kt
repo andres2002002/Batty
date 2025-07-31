@@ -9,12 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.habitiora.batty.navigation.MainNavHost
 import com.habitiora.batty.navigation.MainNavigationBar
+import com.habitiora.batty.navigation.MainTopBar
 
 @Composable
 fun MainScaffold() {
     val navController = rememberNavController()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        topBar = { MainTopBar(navController) },
         bottomBar = { MainNavigationBar(navController) }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)){

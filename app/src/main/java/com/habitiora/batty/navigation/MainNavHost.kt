@@ -2,22 +2,29 @@ package com.habitiora.batty.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.habitiora.batty.ui.screens.BatteryMainInfo
+import com.habitiora.batty.R
+import com.habitiora.batty.ui.screens.main.BatteryMainInfo
+import com.habitiora.batty.ui.screens.history.BatteryHistoryScreen
+import com.habitiora.batty.ui.screens.info.InfoScreen
+import com.habitiora.batty.ui.screens.settings.SettingsScreen
 
 @Composable
 fun MainNavHost(
@@ -31,10 +38,13 @@ fun MainNavHost(
             BatteryMainInfo()
         }
         composable(Screens.History.route) {
+            BatteryHistoryScreen()
         }
         composable(Screens.Settings.route) {
+            SettingsScreen()
         }
         composable(Screens.Info.route) {
+            InfoScreen()
         }
     }
 }
@@ -47,12 +57,10 @@ fun MainNavigationBar(
         mutableStateOf(navController.currentDestination?.route?: Screens.BatteryMainInfo.route)
     }
     val items = mapOf(
-        "Home" to Screens.BatteryMainInfo,
-        "History" to Screens.History,
-        "Settings" to Screens.Settings,
-        "Info" to Screens.Info,
+        R.string.menu_home to Screens.BatteryMainInfo,
+        R.string.menu_history to Screens.History,
+        R.string.menu_info to Screens.Info,
     )
-    Icons.Filled.Settings
 
     NavigationBar {
         items.forEach { item ->
@@ -60,13 +68,36 @@ fun MainNavigationBar(
             val icon = if (selected) item.value.activeIconRes else item.value.inactiveIconRes
             NavigationBarItem(
                 selected = selected,
-                icon = { Icon(ImageVector.vectorResource(icon), contentDescription = item.key) },
-                label = { Text(item.key) },
+                icon = { Icon(ImageVector.vectorResource(icon), contentDescription = stringResource(item.key)) },
+                label = { Text(stringResource(item.key)) },
                 onClick = {
+                    if (navController.currentDestination?.route == item.value.route) return@NavigationBarItem
                     selectedItem = item.value.route
                     navController.navigate(item.value.route)
                 }
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainTopBar(
+    navController: NavHostController,
+){
+    TopAppBar(
+        title = { Text(stringResource(R.string.app_name)) },
+        actions = {
+            IconButton(
+                onClick = {
+                    if (navController.currentDestination?.route == Screens.Settings.route)
+                        navController.navigateUp()
+                    else
+                        navController.navigate(Screens.Settings.route)
+                }
+            ) {
+                Icon(Icons.Filled.Settings, stringResource(R.string.menu_settings))
+            }
+        }
+    )
 }
