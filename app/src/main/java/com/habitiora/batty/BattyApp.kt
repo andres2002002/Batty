@@ -2,6 +2,7 @@ package com.habitiora.batty
 
 import android.app.Application
 import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -34,14 +35,14 @@ class BattyApp: Application() {
 
     /** A tree which logs important information for crash reporting.  */
     private class CrashReportingTree : Timber.Tree() {
-        //val crashlytics = FirebaseCrashlytics.getInstance()
+        val crashlytics = FirebaseCrashlytics.getInstance()
         override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) return
-//            if (tag == TAG_CRASHLYTICS) {
-//                val messageFirebase = "$tag: $message, ${t?.message}"
-//                crashlytics.log(messageFirebase)
-//            }
-            else return
+                val messageFirebase = "$tag: $message, ${t?.message}"
+                crashlytics.log(messageFirebase)
+                if (t != null) {
+                    crashlytics.recordException(t)
+                }
         }
     }
 }

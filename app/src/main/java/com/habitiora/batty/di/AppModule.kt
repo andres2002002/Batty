@@ -2,12 +2,10 @@ package com.habitiora.batty.di
 
 import android.app.NotificationManager
 import android.content.Context
-import android.os.PowerManager
 import com.habitiora.batty.data.proto.ThresholdsDataStore
 import com.habitiora.batty.services.NotificationHelper
-import com.habitiora.batty.services.PermissionsRequesterFactory
-import com.habitiora.batty.services.PermissionsRequesterImpl
 import com.habitiora.batty.services.SettingsDataStore
+import com.habitiora.batty.utils.BatteryHistoryStrategy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,9 +24,6 @@ object AppModule {
         context.getSystemService(NotificationManager::class.java)
 
     @Provides
-    fun providePermissionsRequesterFactory(): PermissionsRequesterFactory = PermissionsRequesterImpl()
-
-    @Provides
     @Singleton
     fun provideNotificationHelper(
         @ApplicationContext context: Context,
@@ -45,4 +40,8 @@ object AppModule {
     @Singleton
     fun provideThresholdsDataStore(@ApplicationContext context: Context): ThresholdsDataStore =
         ThresholdsDataStore(context)
+
+    @Provides
+    @Singleton
+    fun provideBatteryHistoryStrategy(): BatteryHistoryStrategy = BatteryHistoryStrategy()
 }
