@@ -1,4 +1,6 @@
 import com.google.protobuf.gradle.proto
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,16 +11,18 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
 
     alias(libs.plugins.protobuf)
+
+    alias(libs.plugins.google.service)
 }
 
 android {
     namespace = "com.habitiora.batty"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.habitiora.batty"
         minSdk = 28
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -48,8 +52,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            freeCompilerArgs.add("-Xannotation-default-target=param-property")
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
     buildFeatures {
         buildConfig = true
@@ -70,6 +77,12 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("com.google.guava:guava:33.4.8-android")
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -87,6 +100,7 @@ dependencies {
     //hilt
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.compiler)
     ksp(libs.hilt.compiler)
 
     //data store
@@ -97,6 +111,22 @@ dependencies {
 
     //timber
     implementation(libs.timber)
+
+    ksp(libs.guava)
+
+    //room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.pagin)
+
+    //firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+
+    //MPA charts
+    implementation(libs.github.mpandroidchart)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

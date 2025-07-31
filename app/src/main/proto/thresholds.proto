@@ -10,8 +10,6 @@ message ThresholdsConfig {
   // Umbrales de carga alta (por ejemplo: [85,90,98])
   repeated int32 high_thresholds = 2;
 
-  // Estado de notificación: nivel → ya notificado?
-  map<int32, bool> triggered_low = 3;
-  // Estado de notificación: nivel → ya notificado?
-  map<int32, bool> triggered_high = 4;
+  // Estado de notificación: nivelUltimaNotificacion
+  int32 triggered_level = 3;
 }

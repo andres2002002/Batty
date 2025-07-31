@@ -24,8 +24,7 @@ class ThresholdsDataStore @Inject constructor(
     val highThresholds: Flow<List<Int>> = dataStore.data.map { it.highThresholdsList }
 
     // Flow de estados de notificación
-    val triggeredLow: Flow<Map<Int, Boolean>> = dataStore.data.map { it.triggeredLowMap }
-    val triggeredHigh: Flow<Map<Int, Boolean>> = dataStore.data.map { it.triggeredHighMap }
+    val triggeredLevel: Flow<Int> = dataStore.data.map { it.triggeredLevel }
 
     // Guardar nuevos umbrales (si quieres actualizar las listas)
     suspend fun updateThresholds(low: List<Int>, high: List<Int>) {
@@ -39,19 +38,29 @@ class ThresholdsDataStore @Inject constructor(
         }
     }
 
-    // Marcar un umbral como notificado
-    suspend fun markLowTriggered(level: Int, triggered: Boolean) {
+    suspend fun updateLowThresholds(low: List<Int>) {
         dataStore.updateData { current ->
-            val builder = current.toBuilder()
-            builder.putTriggeredLow(level, triggered)
-            builder.build()
+            current.toBuilder()
+                .clearLowThresholds()
+                .addAllLowThresholds(low)
+                .build()
         }
     }
 
-    suspend fun markHighTriggered(level: Int, triggered: Boolean) {
+    suspend fun updateHighThresholds(high: List<Int>) {
+        dataStore.updateData { current ->
+            current.toBuilder()
+                .clearHighThresholds()
+                .addAllHighThresholds(high)
+                .build()
+        }
+    }
+
+    // Marcar un umbral como notificado
+    suspend fun markLevelTriggered(level: Int) {
         dataStore.updateData { current ->
             val builder = current.toBuilder()
-            builder.putTriggeredHigh(level, triggered)
+            builder.setTriggeredLevel(level)
             builder.build()
         }
     }
