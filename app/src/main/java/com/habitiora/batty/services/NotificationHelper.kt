@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -30,10 +29,10 @@ class NotificationHelper @Inject constructor(
     fun createForegroundChannel() {
         val channel = NotificationChannel(
             BATTERY_MONITOR_CHANNEL_ID,
-            "Battery Alerts",
+            context.getString(R.string.battery_monitor_channel),
             NotificationManager.IMPORTANCE_LOW
         ).apply {
-            description = "Notificaciones del estado de batería"
+            description =  context.getString(R.string.battery_monitor_description)
         }
         notificationManager.createNotificationChannel(channel)
     }
@@ -41,10 +40,10 @@ class NotificationHelper @Inject constructor(
     fun createCriticalChannel() {
         val channel = NotificationChannel(
             CRITICAL_CHANNEL_ID,
-            "Alertas críticas",
+            context.getString(R.string.battery_status_notification_channel),
             NotificationManager.IMPORTANCE_HIGH
         ).apply {
-            description = "Notificaciones que pueden ignorar el modo DND"
+            description = context.getString(R.string.battery_status_notification_description)
             setBypassDnd(true)
         }
         notificationManager.createNotificationChannel(channel)
@@ -60,25 +59,13 @@ class NotificationHelper @Inject constructor(
         return true
     }
 
-    fun showNotification(title: String, message: String) {
-        val notification = NotificationCompat.Builder(context, BATTERY_MONITOR_CHANNEL_ID)
-            .setSmallIcon(R.drawable.rounded_battery_horiz_050_24)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .build()
-
-        Timber.i("Notification sent: $title - $message")
-        if (!checkPermission()) return
-        NotificationManagerCompat.from(context).notify(BATTERY_MONITOR_NOTIFICATION_ID, notification)
-    }
-
-    fun showCriticalNotification(title: String, msg: String) {
+    fun displayBatteryNotification(title: String, msg: String, icon: Int, isCritical: Boolean) {
+        val priority = if (isCritical) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_DEFAULT
         val notification = NotificationCompat.Builder(context, CRITICAL_CHANNEL_ID)
-            .setSmallIcon(R.drawable.rounded_battery_horiz_050_24)
+            .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(msg)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(priority)
             .setCategory(NotificationCompat.CATEGORY_ALARM) // sugiere alto nivel
             .build()
         Timber.i("Critical notification sent: $title - $msg")
