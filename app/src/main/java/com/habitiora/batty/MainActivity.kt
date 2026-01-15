@@ -1,47 +1,43 @@
 package com.habitiora.batty
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.habitiora.batty.ui.screens.MainScaffold
 import com.habitiora.batty.ui.theme.BattyTheme
+import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             BattyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainScaffold()
             }
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BattyTheme {
-        Greeting("Android")
+//        val content: View = findViewById(android.R.id.content)
+//        content.viewTreeObserver.addOnPreDrawListener(
+//            object : ViewTreeObserver.OnPreDrawListener {
+//                override fun onPreDraw(): Boolean {
+//                    return if (true) {
+//                        content.viewTreeObserver.removeOnPreDrawListener(this)
+//                        true
+//                    } else {
+//                        false
+//                    }
+//                }
+//            }
+//        )
     }
 }
