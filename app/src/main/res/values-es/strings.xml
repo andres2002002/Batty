@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Batty</string>
+
+    <!-- Status -->
+    <string name="status_charging">Cargando</string>
+    <string name="status_discharging">Descargando</string>
+    <string name="status_full">Completo</string>
+    <string name="status_not_charging">No cargando</string>
+    <string name="status_ac_charger">Cargador AC</string>
+    <string name="status_usb_charger">Cargador USB</string>
+    <string name="status_wireless_charger">Cargador Inalámbrico</string>
+    <string name="status_unknown">Desconocido</string>
+    <string name="connected">Conectado</string>
+    <string name="disconnected">Desconectado</string>
+    <string name="monitoring_on">Monitoreo Activo</string>
+    <string name="monitoring_off">Monitoreo Inactivo</string>
+
+    <!-- Temperature -->
+    <string name="temperature_title">Temperatura</string>
+    <string name="temperature_not_available">No Disponible</string>
+    <string name="temperature_very_warm">Muy Caliente</string>
+    <string name="temperature_warm">Caliente</string>
+    <string name="temperature_cold">Frío</string>
+    <string name="temperature_normal">Normal</string>
+
+    <!-- Voltage -->
+    <string name="voltage_title">Voltaje</string>
+    <string name="voltage_not_available">No Disponible</string>
+    <string name="voltage_low">Bajo</string>
+    <string name="voltage_normal">Normal</string>
+    <string name="voltage_high">Alto</string>
+    <string name="technical_info_title">Información Técnica</string>
+    <string name="current_title">Corriente</string>
+    <string name="current_capacity">Capacidad Actual</string>
+
+    <!-- Battery Health -->
+    <string name="health_device">Salud</string>
+    <string name="health_unknown">Desconocido</string>
+    <string name="health_good">Buena</string>
+    <string name="health_overheat">Sobrecalentado</string>
+    <string name="health_dead">Muerto</string>
+    <string name="health_over_voltage">Sobretensión</string>
+    <string name="health_unspecified_failure">Fallo no Especificado</string>
+    <string name="health_cold">Frío</string>
+    <string name="system_status_title">Estado del Sistema</string>
+    <string name="screen_status">Pantalla</string>
+    <string name="energy_save_mode">Ahorro de Energía</string>
+    <string name="statistics_title">Estadísticas</string>
+    <string name="statistics_charging_rate">Tasa de Carga</string>
+    <string name="statistics_discharge_rate">Tasa de Descarga</string>
+    <string name="statistics_estimated_time_remaining">Tiempo Estimado Restante</string>
+
+    <!-- Battery Notifications -->
+    <string name="battery_monitor_channel">Monitor de Batería</string>
+    <string name="battery_monitor_description">Notificaciones para el monitor de batería</string>
+    <string name="battery_status_notification_channel">Notificación de estado de la batería</string>
+    <string name="battery_status_notification_description">Notificación sobre el estado de la batería (requiere No Molestar)</string>
+    <string name="initializing_monitoring">Inicializando Monitoreo…</string>
+    <string name="battery_state">"Batería: "</string>
+    <string name="charging_until_completing">Cargando hasta completar</string>
+    <string name="on_low_battery_threshold">En el umbral de batería baja</string>
+    <string name="on_high_battery_threshold">En el umbral de alta batería</string>
+    <string name="on_critical_battery_threshold">En el umbral crítico de la batería</string>
+    <string name="monitoring_level">Monitoreando nivel</string>
+    <string name="battery_fully">Totalmente Cargado</string>
+    <string name="battery_low">Batería baja</string>
+    <string name="battery_level_max">Nivel máximo alcanzado:</string>
+    <string name="battery_level_high">Nivel alto alcanzado:</string>
+    <string name="battery_level_low">Nivel bajo alcanzado:</string>
+    <string name="battery_level_critical">Nivel crítico alcanzado:</string>
+
+    <!-- Battery History Screen -->
+    <string name="history_title">Historial de la batería</string>
+    <string name="history_registers_count">Registros</string>
+    <string name="history_metrics_to_display">Métricas para mostrar</string>
+    <string name="history_empty">No hay historial disponible</string>
+    <string name="history_empty_description">Los datos aparecerán aquí una vez registrada la información de la batería.</string>
+
+    <string name="history_trends_chart_title">Gráfico de tendencias</string>
+    <string name="contract">Contraer</string>
+    <string name="expand">Expandir</string>
+    <string name="close">Cerrar</string>
+    <string name="no_data">Sin datos</string>
+
+    <string name="history_point_details_title">Detalles del Punto</string>
+    <string name="history_point_level">Nivel</string>
+    <string name="history_point_status">Estado</string>
+    <string name="history_point_temperature">Temperatura</string>
+    <string name="history_point_voltage">Voltaje</string>
+    <string name="history_point_charging_type">Tipo de carga</string>
+    <string name="history_point_current">Corriente</string>
+    <string name="history_point_time">Fecha y hora</string>
+
+    <string name="history_statistical_summary_title">Resumen Estadístico</string>
+    <string name="history_average_level">Nivel Promedio</string>
+    <string name="history_average_temperature">Temperatura Promedio</string>
+    <string name="history_charging_time">Tiempo de carga</string>
+
+    <!-- Battery Metrics -->
+    <string name="metrics_battery_level">Nivel de Batería</string>
+    <string name="metrics_temperature">Temperatura</string>
+    <string name="metrics_voltage">Voltaje</string>
+    <string name="metrics_current">Current</string>
+    <string name="metrics_charging_rate">Tasa de Carga</string>
+    <string name="metrics_discharge_rate">Tasa de Descarga</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_history">Historial</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="menu_info">Info</string>
+
+    <!-- Messages Permissionss -->
+    <string name="message_allow">Permitir</string>
+    <string name="message_deny">Denegar</string>
+    <string name="message_notification_title">Permitir Notificaciones de Batería</string>
+    <string name="message_notification_description">Para que Batty pueda enviarte alertas importantes sobre el estado de tu batería (ej. batería baja, carga completa) y mostrar una notificación persistente con información en tiempo real, necesitamos tu permiso para enviar notificaciones. ¡No te quedes sin batería sin saberlo!</string>
+    <string name="message_notification_route">Si no ves la solicitud de permiso, puedes activarlas manualmente en: Ajustes > Aplicaciones > Batty > Notificaciones.</string>
+    <string name="message_dnd_title">Permitir notificaciones de la batería en el modo No molestar</string>
+    <string name="message_dnd_description">Para que Batty te envíe alertas importantes sobre el estado de la batería (por ejemplo, batería baja, carga completa) mientras juegas, necesitamos tu permiso para enviar notificaciones en el modo No molestar.</string>
+    <string name="message_dnd_route">Si no ves la solicitud, puedes activarlo manualmente en: Ajustes > Aplicaciones > [Tu App] > Permisos > Acceso especial > Acceso a No Molestar.</string>
+
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Ajustes de la batería</string>
+    <string name="low_threshold_title">Nivel de alerta de batería baja</string>
+    <string name="high_threshold_title">Nivel de alerta de batería alta</string>
+    <string name="show_battery_alerts">Mostrar alertas de batería</string>
+    <string name="show_battery_alerts_description">Recibe notificaciones sobre el estado de tu batería</string>
+    <string name="show_battery_alerts_dnd">Mostrar notificaciones en el modo No molestar</string>
+    <string name="show_battery_alerts_dnd_description">Recibe notificaciones en el modo No molestar, ideal para notificarte mientras juegas</string>
+    <string name="add_battery_trigger">Añadir disparador de batería</string>
+    <string name="new_battery_trigger">Nuevo Activador</string>
+    <string name="delete_battery_trigger">Borrar disparador de batería</string>
+    <string name="update_battery_trigger">Actualizar disparador de batería</string>
+    <string name="save_battery_trigger">Guardar Activador</string>
+    <string name="low_trigger_name">Alerta de Descarga</string>
+    <string name="high_trigger_name">Alerta de Carga</string>
+
+    <!-- Info Screen -->
+    <string name="app_description_short">Monitor inteligente de batería</string>
+    <string name="app_description_long_title">¿Qué hace Batty?</string>
+    <string name="app_description_long">Batty monitorea continuamente los niveles de batería de tu dispositivo en segundo plano y te envía notificaciones importantes que pueden atravesar el modo \"No Molestar\" cuando sea crítico.</string>
+
+    <string name="main_functions">Funciones principales</string>
+    <string name="background_monitoring">Monitoreo en segundo plano</string>
+    <string name="background_monitoring_description">Seguimiento continuo sin afectar el rendimiento del dispositivo</string>
+    <string name="notifications_criticals">Notificaciones Críticas</string>
+    <string name="notifications_criticals_description">Alertas que pueden pasar el modo "No Molestar" en situaciones importantes</string>
+    <string name="history_monitoring">Historial de Batería</string>
+    <string name="history_monitoring_description">Registro detallado del estado de tu batería a lo largo del tiempo</string>
+
+    <string name="permissions_required">Permisos necesarios</string>
+    <string name="notifications_permission">Notificaciones</string>
+    <string name="notifications_permission_description">Para el envío de notificaciones y monitoreo en segundo plano</string>
+    <string name="dnd_permission">Acceso durante No molestar</string>
+    <string name="dnd_permission_description">Para el envío de notificaciones en el modo No molestar</string>
+
+    <string name="privacity_and_data_title">Privacidad y datos</string>
+    <string name="privacity_and_data_description">Todos los datos del historial de batería se almacenan únicamente en tu dispositivo. Batty no recopila ni envía información personal a servidores externos.</string>
+    <string name="info_settings_title">Configuración</string>
+    <string name="info_settings_description">Puedes personalizar los umbrales de batería crítica y tipos de notificaciones desde la pantalla de configuracion de la aplicación.</string>
+
+    <string name="info_app_version_title">Información de la app</string>
+    <string name="info_app_version">Versión</string>
+    <string name="info_last_update">Última actualización</string>
+
+</resources>
