@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.habitiora.batty.data.proto";
+option java_multiple_files = true;
+
+message ThresholdsConfig {
+  // Umbrales de carga baja (por ejemplo: [15,10,7,4])
+  repeated int32 low_thresholds = 1;
+
+  // Umbrales de carga alta (por ejemplo: [85,90,98])
+  repeated int32 high_thresholds = 2;
+
+  // Estado de notificación: nivelUltimaNotificacion
+  int32 triggered_level = 3;
+}
