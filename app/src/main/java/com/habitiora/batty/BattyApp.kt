@@ -17,10 +17,10 @@ class BattyApp: Application() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             plant(DebugTree())
-            Log.i("MoniFlexApp", "onCreate: Timber inicializado")
+            Timber.i("onCreate: Timber inicializado")
         } else {
-            Log.i("MoniFlexApp", "onCreate: Timber inicializado en modo producción")
             plant(CrashReportingTree())
+            Timber.i("onCreate: Timber inicializado en modo producción")
         }
 //        WorkManager.initialize(
 //            this,
@@ -38,11 +38,11 @@ class BattyApp: Application() {
         val crashlytics = FirebaseCrashlytics.getInstance()
         override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) return
-                val messageFirebase = "$tag: $message, ${t?.message}"
-                crashlytics.log(messageFirebase)
-                if (t != null) {
-                    crashlytics.recordException(t)
-                }
+            val messageFirebase = "$tag: $message, ${t?.message}"
+            crashlytics.log(messageFirebase)
+            if (t != null) {
+                crashlytics.recordException(t)
+            }
         }
     }
 }
