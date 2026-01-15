@@ -1,3 +1,174 @@
 <resources>
     <string name="app_name">Batty</string>
+
+    <!-- Status -->
+    <string name="status_charging">Charging</string>
+    <string name="status_discharging">Discharging</string>
+    <string name="status_full">Full</string>
+    <string name="status_not_charging">Not charging</string>
+    <string name="status_ac_charger">AC Charger</string>
+    <string name="status_usb_charger">USB Charger</string>
+    <string name="status_wireless_charger">Wireless Charger</string>
+    <string name="status_unknown">Unknown</string>
+
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+
+    <string name="monitoring_on">Monitoring On</string>
+    <string name="monitoring_off">Monitoring Off</string>
+
+    <!-- Temperature -->
+    <string name="temperature_title">Temperature</string>
+    <string name="temperature_not_available">Not available</string>
+    <string name="temperature_very_warm">Very Warm</string>
+    <string name="temperature_warm">Warm</string>
+    <string name="temperature_cold">Cold</string>
+    <string name="temperature_normal">Normal</string>
+
+    <!-- Voltage -->
+    <string name="voltage_title">Voltage</string>
+    <string name="voltage_not_available">Not available</string>
+    <string name="voltage_low">Low</string>
+    <string name="voltage_normal">Normal</string>
+    <string name="voltage_high">High</string>
+
+    <string name="technical_info_title">Technical Info</string>
+    <string name="current_title">Current</string>
+    <string name="current_capacity">Current Capacity</string>
+
+    <!-- Battery Health -->
+    <string name="health_device">Health</string>
+    <string name="health_unknown">Unknown</string>
+    <string name="health_good">Good</string>
+    <string name="health_overheat">Overheat</string>
+    <string name="health_dead">Dead</string>
+    <string name="health_over_voltage">Over Voltage</string>
+    <string name="health_unspecified_failure">Unspecified Failure</string>
+    <string name="health_cold">Cold</string>
+
+    <string name="system_status_title">System Status</string>
+    <string name="screen_status">Screen</string>
+    <string name="energy_save_mode">Energy Save Mode</string>
+
+    <string name="statistics_title">Statistics</string>
+    <string name="statistics_charging_rate">Charging Rate</string>
+    <string name="statistics_discharge_rate">Discharge Rate</string>
+    <string name="statistics_estimated_time_remaining">Estimated Time Remaining</string>
+
+    <!-- Battery Notifications -->
+    <string name="battery_monitor_channel">Battery Monitor</string>
+    <string name="battery_monitor_description">Notifications for battery monitor</string>
+    <string name="battery_status_notification_channel">Battery Status Notification</string>
+    <string name="battery_status_notification_description">Notification for battery status (requires DND)</string>
+
+    <string name="initializing_monitoring">Initializing monitoring…</string>
+    <string name="battery_state">Battery: </string>
+    <string name="charging_until_completing">Charging until completing</string>
+    <string name="on_low_battery_threshold">On the low battery threshold</string>
+    <string name="on_high_battery_threshold">On the high battery threshold</string>
+    <string name="on_critical_battery_threshold">On the critical battery threshold</string>
+    <string name="monitoring_level">Monitoring level</string>
+
+    <string name="battery_fully">Fully Charged</string>
+    <string name="battery_low">Low Battery</string>
+
+    <string name="battery_level_max">Maximum level reached:</string>
+    <string name="battery_level_high">High level reached:</string>
+    <string name="battery_level_low">Low level reached:</string>
+    <string name="battery_level_critical">Critical level reached:</string>
+
+    <!-- Battery History Screen -->
+    <string name="history_title">Battery History</string>
+    <string name="history_registers_count">Registers</string>
+    <string name="history_metrics_to_display">Metrics to display</string>
+    <string name="history_empty">No history available</string>
+    <string name="history_empty_description">The data will appear here once battery information is registered.</string>
+    
+    <string name="history_trends_chart_title">Trends Chart</string>
+    <string name="contract">Contract</string>
+    <string name="expand">Expand</string>
+    <string name="close">Close</string>
+    <string name="no_data">No data</string>
+
+    <string name="history_point_details_title">Details of the Point</string>
+    <string name="history_point_level">Level</string>
+    <string name="history_point_status">Status</string>
+    <string name="history_point_temperature">Temperature</string>
+    <string name="history_point_voltage">Voltage</string>
+    <string name="history_point_charging_type">Charging Type</string>
+    <string name="history_point_current">Current</string>
+    <string name="history_point_time">Date and Time</string>
+
+    <string name="history_statistical_summary_title">Statistical Summary</string>
+    <string name="history_average_level">Average Level</string>
+    <string name="history_average_temperature">Average Temperature</string>
+    <string name="history_charging_time">Charging Time</string>
+
+    <!-- Battery Metrics -->
+    <string name="metrics_battery_level">Battery Level</string>
+    <string name="metrics_temperature">Temperature</string>
+    <string name="metrics_voltage">Voltage</string>
+    <string name="metrics_current">Current</string>
+    <string name="metrics_charging_rate">Charging Rate</string>
+    <string name="metrics_discharge_rate">Discharge Rate</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_history">History</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_info">Info</string>
+
+    <!-- Messages Permissionss -->
+    <string name="message_allow">Allow</string>
+    <string name="message_deny">Deny</string>
+    <string name="message_notification_title">Allow Battery Notifications</string>
+    <string name="message_notification_description">For Batty to send you important alerts about your battery status (ex., low battery, full charge) and display a persistent notification with real-time information, we need your permission to send notifications. Don\'t run out of battery without knowing!</string>
+    <string name="message_notification_route">If you don\'t see the permission request, you can enable them manually in: Settings > Apps > Batty > Notifications.</string>
+    <string name="message_dnd_title">Allow Battery Notifications in Do Not Disturb Mode</string>
+    <string name="message_dnd_description">For Batty to send you important alerts about your battery status (ex., low battery, full charge) while you\'re playing, we need your permission to send notifications in Do Not Disturb mode.</string>
+    <string name="message_dnd_route">If you don\'t see the request, you can activate it manually in: Settings > Apps > [Your App] > Permissions > Special app access > Do Not Disturb access.</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Battery Settings</string>
+    <string name="low_threshold_title">Low Battery Alert Level</string>
+    <string name="high_threshold_title">High Battery Alert Level</string>
+    <string name="show_battery_alerts">Show Battery Alerts</string>
+    <string name="show_battery_alerts_description">Receive notifications about the status of your battery</string>
+    <string name="show_battery_alerts_dnd">Show notifications in Do Not Disturb mode</string>
+    <string name="show_battery_alerts_dnd_description">Receive notifications in Do Not Disturb mode, ideal for notifications while gaming</string>
+    <string name="add_battery_trigger">Add Battery Trigger</string>
+    <string name="new_battery_trigger">New Trigger</string>
+    <string name="delete_battery_trigger">Delete Battery Trigger</string>
+    <string name="update_battery_trigger">Update Battery Trigger</string>
+    <string name="save_battery_trigger">Save Trigger</string>
+    <string name="low_trigger_name">Discharge Alert</string>
+    <string name="high_trigger_name">Charge Alert</string>
+
+    <!-- Info Screen -->
+    <string name="app_description_short">Intelligent battery monitor</string>
+    <string name="app_description_long_title">What\'s Batty doing?</string>
+    <string name="app_description_long">Batty continuously monitors your device\'s battery levels in the background and sends you important notifications that can break through "Do Not Disturb" mode when critical.</string>
+
+    <string name="main_functions">Main functions</string>
+    <string name="background_monitoring">Background monitoring</string>
+    <string name="background_monitoring_description">Continuous monitoring without affecting device performance</string>
+    <string name="notifications_criticals">Critical Notifications</string>
+    <string name="notifications_criticals_description">Alerts that can override "Do Not Disturb" mode in important situations</string>
+    <string name="history_monitoring">Battery History</string>
+    <string name="history_monitoring_description">Detailed record of your battery status over time</string>
+
+    <string name="permissions_required">Necessary permissions</string>
+    <string name="notifications_permission">Notifications</string>
+    <string name="notifications_permission_description">For sending notifications and monitoring in the background</string>
+    <string name="dnd_permission">Access during Do Not Disturb</string>
+    <string name="dnd_permission_description">To send notifications in Do Not Disturb mode</string>
+
+    <string name="privacity_and_data_title">Privacy and data</string>
+    <string name="privacity_and_data_description">All battery history data is stored only on your device. Batty does not collect or send personal information to external servers.</string>
+    <string name="info_settings_title">Settings</string>
+    <string name="info_settings_description">You can customize critical battery thresholds and notification types from the application settings screen.</string>
+
+    <string name="info_app_version_title">App information</string>
+    <string name="info_app_version">Version</string>
+    <string name="info_last_update">Last update</string>
 </resources>
