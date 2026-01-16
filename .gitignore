@@ -1,4 +1,5 @@
 *.iml
+*.aab
 .gradle
 /local.properties
 /.idea/caches
@@ -8,8 +9,8 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 /app/google-services.json
+/app/release
 .DS_Store
-/app/google-services.json
 /build
 /captures
 .externalNativeBuild
