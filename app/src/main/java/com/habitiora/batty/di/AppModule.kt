@@ -2,7 +2,12 @@ package com.habitiora.batty.di
 
 import android.app.NotificationManager
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.dataStoreFile
+import com.habitiora.batty.data.datastore.ThresholdsConfig
 import com.habitiora.batty.data.proto.ThresholdsDataStore
+import com.habitiora.batty.data.proto.ThresholdsSerializer
 import com.habitiora.batty.services.NotificationHelper
 import com.habitiora.batty.services.SettingsDataStore
 import com.habitiora.batty.utils.BatteryHistoryStrategy
@@ -17,6 +22,17 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideThresholdsDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<ThresholdsConfig> {
+        return DataStoreFactory.create(
+            serializer = ThresholdsSerializer,
+            produceFile = { context.dataStoreFile("thresholds_config.json") }
+        )
+    }
 
     @Provides
     @Singleton
@@ -35,11 +51,6 @@ object AppModule {
     @Singleton
     fun provideSettingsDataStore(@ApplicationContext context: Context): SettingsDataStore =
         SettingsDataStore(context)
-
-    @Provides
-    @Singleton
-    fun provideThresholdsDataStore(@ApplicationContext context: Context): ThresholdsDataStore =
-        ThresholdsDataStore(context)
 
     @Provides
     @Singleton

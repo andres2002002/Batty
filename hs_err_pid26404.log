@@ -1,0 +1,855 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 361168 bytes. Error detail: Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (arena.cpp:168), pid=26404, tid=25040
+#
+# JRE version: OpenJDK Runtime Environment (21.0.9) (build 21.0.9+-14649483-b1163.86)
+# Java VM: OpenJDK 64-Bit Server VM (21.0.9+-14649483-b1163.86, mixed mode, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler -Xallow-no-source-files -classpath D:\Programas\Andorid_SDK\platforms\android-36\android.jar;D:\Programas\Andorid_SDK\build-tools\36.0.0\core-lambda-stubs.jar;D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\intermediates\compile_r_class_jar\debug\generateDebugRFile\R.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\737901ee60ad82a1bc36678fa39f60fa\workspace\transformed\hilt-navigation-compose-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\40b8ee790129c4c6a5b5b4fb47cc6766\workspace\transformed\hilt-lifecycle-viewmodel-compose-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\433b07252dbacf330c3729b4705a8fc8\workspace\transformed\hilt-lifecycle-viewmodel-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\0c766333564c3f5008fea169a47d8817\workspace\transformed\hilt-android-2.59.2-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f3e99ca05b3cddbf9f372a1632721f19\workspace\transformed\navigation-runtime-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\94b6990f09ec80eceb9d5a00ad94b67b\workspace\transformed\navigation-common-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\36a90ed5cb88358b0f6958e0aa73d30f\workspace\transformed\navigation-compose-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\760071605c07fb4506af4b5db76bde3c\workspace\transformed\material3-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3558c84fdd6d6d817089e6f003d518d1\workspace\transformed\foundation-layout-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a78bea6974f2ec2f3582923b02ee4ec9\workspace\transformed\material-ripple-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b2eabd2aa54cdd8e506e949ce0077cac\workspace\transformed\foundation-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\67589885d6f229ee53ddefe0638345ca\workspace\transformed\animation-core-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f43c18ce9c6f8a61d23205ee08ee523a\workspace\transformed\animation-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\47c32788c3e3901a499e1374a290c186\workspace\transformed\ui-tooling-data-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\604ae0eafbe7186f6e41780512abf1e9\workspace\transformed\ui-util-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\72cf0c5bc7612c2292b2117a8180c023\workspace\transformed\ui-unit-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\4f2cff1b63baa21d0d4256d141e17f5a\workspace\transformed\ui-geometry-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\5e3fb4197efaa0e0363d17f1eba1b9e4\workspace\transformed\ui-text-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\2fcb2262fa04ba82a4e555ba64b2b9a5\workspace\transformed\ui-tooling-preview-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a4a3b8f9270f99b390d336cd5a28b9e6\workspace\transformed\ui-tooling-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\d4c6967c45c27195d175385d9b97c52b\workspace\transformed\ui-graphics-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\10ad0d2521d46a5b1b4074e31b9962b9\workspace\transformed\firebase-analytics-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b860b3ab0bc3e4d403870cdfa66bc2fc\workspace\transformed\play-services-measurement-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\4c363b1b8507e9502aac84f55cbdae58\workspace\transformed\play-services-measurement-api-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a76d28555b5b6cd1a44c628a21e7ffbe\workspace\transformed\play-services-measurement-sdk-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3d9d44abd04939c686c5689edd8a462c\workspace\transformed\firebase-crashlytics-20.0.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\20966bf1f3358dd349e8db1c95d6fe74\workspace\transformed\firebase-installations-19.1.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\0b9d2aea30b6b5d60745e4f85688a796\workspace\transformed\play-services-measurement-impl-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a4184b444111499547e30cd2b14f7112\workspace\transformed\firebase-sessions-3.0.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\cc1f06ae4f30beff641f8e428e0ea811\workspace\transformed\firebase-common-22.0.1-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.room\room-common-jvm\2.8.4\3aeefef6615720bec8c860dd0786b48552ef3300\room-common-jvm-2.8.4.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\24965975267e4625f6d529ce77346ce6\workspace\transformed\room-paging-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\67eaebde2ead1f9f996d1308f4e26527\workspace\transformed\room-runtime-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\dbadccd7814e1467b778002b7671003b\workspace\transformed\room-ktx-2.8.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a4c64b2a71080f21bb1bcf64c50ddcfe\workspace\transformed\navigationevent-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\14ff7bd3f02739b8d2fd887645db3e96\workspace\transformed\navigationevent-compose-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b42cdd94e69345c5282d93d0d71bcee2\workspace\transformed\runtime-retain-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\260707b20db066b491f71f727bc15a63\workspace\transformed\runtime-annotation-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f3fc0cefb3bc1d9bf1051610e9dcd7d1\workspace\transformed\runtime-saveable-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\4752ef181ced3d4d69a619ac3098775a\workspace\transformed\play-services-stats-17.0.2-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\d38f57a254938ae3dc624daf837c2c6f\workspace\transformed\legacy-support-core-utils-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\6dff4c41c746cce4471c04fafb0cc4f2\workspace\transformed\loader-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\739a7634aead4fa042d53fb02399b5ea\workspace\transformed\viewpager-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\27cd46f32501cde5a4995fde406706f7\workspace\transformed\customview-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\9d84140724b6a7e014a587e348dceb5c\workspace\transformed\play-services-base-18.5.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\9bf7a33babd2eb0d0c85601512e91989\workspace\transformed\core-1.17.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b96142e57778cc591ea57cf9954adf07\workspace\transformed\activity-ktx-1.12.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\1bf2148e4a19d280cdd7ae1c7454deff\workspace\transformed\lifecycle-livedata-core-ktx-2.10.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a3ab07d094a3f07c1c1065a7e45d4c63\workspace\transformed\lifecycle-viewmodel-ktx-2.10.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\2799c7fdacb06b5d30eabb542246c843\workspace\transformed\lifecycle-livedata-2.10.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\c2d92460d76ef40e5ef715bfb0aff802\workspace\transformed\lifecycle-viewmodel-savedstate-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3a588e4d9046dbffc3b3518979e6981c\workspace\transformed\lifecycle-viewmodel-2.10.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\03a04e256748f73a4b934ef341ef1a06\workspace\transformed\lifecycle-viewmodel-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.lifecycle\lifecycle-common-jvm\2.10.0\2b7a92c746f3339efc533a2da0024e596760f816\lifecycle-common-jvm-2.10.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\af0064eb144e5f4b949d5515ca5d014e\workspace\transformed\lifecycle-runtime-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\e93f4988b78823de98fd7b14662b2fa9\workspace\transformed\lifecycle-runtime-compose-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b0323ba3c3e636aaee46d33b45719bd2\workspace\transformed\savedstate-ktx-1.4.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\25b8adbba1e5b851050bd27502c46269\workspace\transformed\savedstate-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\60e01ad99f2ad2816d9dbc74a5c5b8f8\workspace\transformed\savedstate-compose-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3ce0934e18540db4310b7d79a5b67107\workspace\transformed\runtime-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-android\1.9.0\6cf3b8df5a2ce8c6b0dffe55657a827c405ee2fe\kotlinx-coroutines-android-1.9.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.datastore\datastore-core-okio-jvm\1.2.0\16e01a0603ce8cf206b21a304ff1ded7a9bff1da\datastore-core-okio-jvm-1.2.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\ec2b180659ca8c2e456b421950e6e6b5\workspace\transformed\datastore-core-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\5d3214b3641517e1c66dc2abcd386310\workspace\transformed\datastore-preferences-core-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\90d692a740a0e53e07f0aeb18418a7fd\workspace\transformed\datastore-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\987baba09f3e15e0e5dd21c9ed8bc317\workspace\transformed\datastore-preferences-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\ca04d2ad5a7fb9a7139b7663e2309d61\workspace\transformed\paging-common-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\51ee8a4133cad27bb1c109b8f7cadc34\workspace\transformed\ads-adservices-java-1.1.0-beta11-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\1a60d245db04bbc49387889fe7106ef0\workspace\transformed\ads-adservices-1.1.0-beta11-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.9.0\9beade4c1c1569e4f36cbd2c37e02e3e41502601\kotlinx-coroutines-core-jvm-1.9.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-play-services\1.9.0\9d715295c29dddf8c381565c513fb2d9923f9f41\kotlinx-coroutines-play-services-1.9.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f5bf9fcf7c629e23805db464a9e4e318\workspace\transformed\play-services-tasks-18.4.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\10e35712e1b2c3555e1e5b23014b1d62\workspace\transformed\firebase-measurement-connector-20.0.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\796f635089e65f622cefcddb643ae84b\workspace\transformed\play-services-ads-identifier-18.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\e4914d3ade36fa14b7f1798104f51ed2\workspace\transformed\play-services-measurement-sdk-api-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\45368721ad027eb5f5e285378e624d65\workspace\transformed\play-services-measurement-base-23.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\993e2bb701c5262730286fc108103392\workspace\transformed\play-services-basement-18.8.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\92282eae5638184cb5042ecea161c7cc\workspace\transformed\fragment-1.5.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\05fafac5e1a0973f2537368434bfb559\workspace\transformed\lifecycle-livedata-core-2.10.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\76d55a3aa98bbf9268d494a421e6941c\workspace\transformed\lifecycle-runtime-ktx-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\11c7cf0b9df7fa1b0582d854c3374e69\workspace\transformed\lifecycle-viewmodel-compose-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\766986f96277440ee21a0e3084a82609\workspace\transformed\material-icons-extended-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\021eff100fd7a34deaa420270696cf6b\workspace\transformed\material-icons-core-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\0d28e7be958a1d34cf8835a6b33d6d8f\workspace\transformed\ui-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\8b0915f1e1c2c82d8c412c22b024ec79\workspace\transformed\ui-test-manifest-1.10.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\2886ba95ef7aea24989af0fa603ccbbe\workspace\transformed\activity-1.12.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f9b447146e6f1c1c91e134b8ad17a7e7\workspace\transformed\activity-compose-1.12.4-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\5c30f4741a1ba0a72e98422217d6b5df\workspace\transformed\core-ktx-1.17.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\51f1a32a1f6a81a473db4893022f1a38\workspace\transformed\timber-5.0.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\69bf48d87e00dc443bfcf4ff5736c7bb\workspace\transformed\uicomponents-1.1.33-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.databinding\compiler\3.2.0-alpha11\3ba82bbbfd2e7b2a8288ef3d4d2cfc639ea05242\compiler-3.2.0-alpha11.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.databinding\compilerCommon\3.2.0-alpha11\682edce917eeb75967935af6d4bfd6e9d0394450\compilerCommon-3.2.0-alpha11.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jre8\1.2.0\505f55b9619bbc5f5e26c77427dd24a6a441eef1\kotlin-stdlib-jre8-1.2.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-serialization-json-jvm\1.10.0\a74d7819e02bad98af4d6b56c4f45aa6d31ef4ad\kotlinx-serialization-json-jvm-1.10.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-serialization-core-jvm\1.10.0\9400c03c056953bbbf30e861e63735c90e9eb320\kotlinx-serialization-core-jvm-1.10.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\87c8188cfb056a1fa3b7d0e5fbfab6bb\workspace\transformed\annotation-experimental-1.4.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a9cc152c214af876beeb3f04e0eeb53d\workspace\transformed\core-viewtree-1.0.0-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.android.tools.build.jetifier\jetifier-core\0.0.1\5b5ea95092f19b670dcf5a6ada4359e5203c79bf\jetifier-core-0.0.1.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jre7\1.2.0\ec8b969e26fbcf2265a4d1a1539c4d1d4c5af380\kotlin-stdlib-jre7-1.2.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\4c1b31fb50cb7d24e127aaadf19107b2\workspace\transformed\versionedparcelable-1.1.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\0f2b883d2defb76f720de8417cad6836\workspace\transformed\firebase-config-interop-16.0.1-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\ea2338c0ad68cf9495b5c6c135e3ffd8\workspace\transformed\firebase-encoders-json-18.0.1-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.firebase\firebase-encoders\17.0.0\26f52dc549c42575b155f8c720e84059ee600a85\firebase-encoders-17.0.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.collection\collection-jvm\1.5.0\7ba2c69414d46ebc2dd76598bdd0a75c54281a57\collection-jvm-1.5.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\36c4d823486ee7bdf18fa37b0834909e\workspace\transformed\sqlite-framework-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\8b2d88502f224fa1b01344b4421f9b9e\workspace\transformed\sqlite-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3fb26e111cb46e8c9e1483c411127c1c\workspace\transformed\core-runtime-2.2.0-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.arch.core\core-common\2.2.0\5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3\core-common-2.2.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\de50b2df8e5a170033bca09b3e85b889\workspace\transformed\documentfile-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\5e9a314247e50911bd54b1263aa78bec\workspace\transformed\localbroadcastmanager-1.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\c1d66275e7425a6d1a66b62988469d91\workspace\transformed\print-1.0.0-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.annotation\annotation-jvm\1.9.1\b17951747e38bf3986a24431b9ba0d039958aa5f\annotation-jvm-1.9.1.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk8\1.8.0\ed04f49e186a116753ad70d34f0ac2925d1d8020\kotlin-stdlib-jdk8-1.8.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk7\1.8.0\3c91271347f678c239607abb676d4032a7898427\kotlin-stdlib-jdk7-1.8.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio-jvm\3.9.1\79696e3f4ff05d41ba2b3dc68adb5808a2e5dc53\okio-jvm-3.9.1.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\2.3.10\8b80e2f80a3b7daa99c16017f91d4c72cd8b31a6\kotlin-stdlib-2.3.10.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\9c69d0d302fca9aa67cfe9e404ea6a59\workspace\transformed\MPAndroidChart-3.1.0-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\23.0.0\8cc20c07506ec18e0834947b84a864bfc094484e\annotations-23.0.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.dagger\hilt-core\2.59.2\cda9f5ad96a46b544461de23c8d9bbf325db59b2\hilt-core-2.59.2.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.59.2\2055356a898b7e4bdd24d15640185241e7cffb9a\dagger-2.59.2.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\bb45761c41aa2014618df0d55cf03d36\workspace\transformed\dagger-lint-aar-2.59.2-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\androidx.databinding\baseLibrary\3.2.0-alpha11\c3e018c0735c8621cf0bea3dd190889d5b82180f\baseLibrary-3.2.0-alpha11.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.antlr\antlr4\4.5.3\f35db7e4b2446e4174ba6a73db7bd6b3e6bb5da1\antlr4-4.5.3.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.googlecode.juniversalchardet\juniversalchardet\1.0.3\cd49678784c46aa8789c060538e0154013bb421b\juniversalchardet-1.0.3.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\33.5.0-android\2de535c561afd432141f58466649f637d201eabe\guava-33.5.0-android.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\b421526c5f297295adef1c886e5246c39d4ac629\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jspecify\jspecify\1.0.0\7425a601c1c7ec76645a78d22b8c6a627edee507\jspecify-1.0.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\jakarta.inject\jakarta.inject-api\2.0.1\4c28afe1991a941d7702fe1362c365f0a8641d1e\jakarta.inject-api-2.0.1.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.android.databinding\baseLibrary\3.2.0-alpha11\9dc0edc273e2f4e6ac9ceff6dd445866b6313554\baseLibrary-3.2.0-alpha11.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.squareup\javapoet\1.8.0\e858dc62ef484048540d27d36f3ec2177a3fa9b1\javapoet-1.8.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.android.tools\annotations\24.5.0\7f2bcdf40b008f15481324327b7f9e377b0b1697\annotations-24.5.0.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\ca2e3f9107fdc4a948c5d3bfe43b4536\workspace\transformed\firebase-components-19.0.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\621171521fc3944e839e149b6b36d504\workspace\transformed\firebase-installations-interop-17.3.0-api.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.firebase\firebase-annotations\17.0.0\fd04a6accd970e0fcf9baf2424abe2926e00d0e2\firebase-annotations-17.0.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.guava\failureaccess\1.0.3\aeaffd00d57023a2c947393ed251f0354f0985fc\failureaccess-1.0.3.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.41.0\4381275efdef6ddfae38f002c31e84cd001c97f0\error_prone_annotations-2.41.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\com.google.j2objc\j2objc-annotations\3.1\a892ca9507839bbdb900d64310ac98256cab992f\j2objc-annotations-3.1.jar -d D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\intermediates\built_in_kotlinc\debug\compileDebugKotlin\classes -jdk-home D:\Programas\Android Studio Meerkat\jbr -jvm-target 21 -module-name app -no-reflect -no-stdlib -language-version 2.3 -Xplugin=C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compose-compiler-plugin-embeddable\2.3.10\be0626cc87f259017a2111024f63f1d6bbf2c298\kotlin-compose-compiler-plugin-embeddable-2.3.10.jar,C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-serialization-compiler-plugin-embeddable\2.3.10\1909518218c5b1245ecd91f3113c4b8cf69c7d24\kotlin-serialization-compiler-plugin-embeddable-2.3.10.jar -P plugin:androidx.compose.compiler.plugins.kotlin:sourceInformation=true,plugin:androidx.compose.compiler.plugins.kotlin:traceMarkersEnabled=true -Xannotation-default-target=param-property -Xuse-inline-scopes-numbers -Xallow-unstable-dependencies D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\source\buildConfig\debug\com\habitiora\batty\BuildConfig.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\BattyApp_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\manager\BatterySaveManager_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\manager\BatteryTimeEstimator_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\manager\RegisterReceiverManager_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\manager\SessionManager_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\manager\ThresholdsManager_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\proto\ThresholdsDataStore_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\repository\BatteryEntityRepositoryImpl_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\data\repository\SettingsRepositoryImp_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\AppModule_ProvideBatteryHistoryStrategyFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\AppModule_ProvideNotificationHelperFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\AppModule_ProvideNotificationManagerFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\AppModule_ProvideSettingsDataStoreFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\AppModule_ProvideThresholdsDataStoreFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\BatteryNotifyModule_ProvideBatteryReceiverFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\BatteryNotifyModule_ProvideBatteryTimeEstimatorFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\BatteryNotifyModule_ProvideRegisterReceiverManagerFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\BatteryNotifyModule_ProvideSessionManagerFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\DataBaseModule_ProvideAppDatabaseFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\DataBaseModule_ProvideBatteryDaoFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\RepositoryModule_ProvideBatteryEntityRepositoryFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\di\RepositoryModule_ProvidesSettingsRepositoryFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\Hilt_MainActivity.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\MainActivity_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\BatteryForegroundService_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\BatteryForegroundService_MembersInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\BatteryReceiver_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\BatteryStateProviderImp_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\controller\BatteryServiceController_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\Hilt_BatteryForegroundService.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\NotificationHelper_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\services\SettingsDataStore_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel_HiltModules.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel_HiltModules_KeyModule_ProvideFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel_HiltModules.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel_HiltModules_KeyModule_ProvideFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel_HiltModules.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel_HiltModules_BindsModule_Binds_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel_HiltModules_KeyModule_ProvideFactory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel_HiltModules_KeyModule_Provide_LazyMapKey.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\com\habitiora\batty\utils\BatteryHistoryStrategy_Factory.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\dagger\hilt\internal\aggregatedroot\codegen\_com_habitiora_batty_BattyApp.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_BattyApp_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_di_AppModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_di_BatteryNotifyModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_di_DataBaseModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_di_RepositoryModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_MainActivity_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_services_BatteryForegroundService_GeneratedInjector.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_history_BatteryHistoryViewModel_HiltModules_BindsModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_history_BatteryHistoryViewModel_HiltModules_KeyModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_main_BatteryInfoViewModel_HiltModules_BindsModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_main_BatteryInfoViewModel_HiltModules_KeyModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_settings_SettingsViewModel_HiltModules_BindsModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\java\hilt_aggregated_deps\_com_habitiora_batty_ui_screens_settings_SettingsViewModel_HiltModules_KeyModule.java D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\BattyApp.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\converters\BatteryMappers.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\dao\BatteryEntityDao.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\database\AppDatabase.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\database\converters\BatteryTypeConverters.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\datastore\ThresholdsConfig.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\entity\BatteryEntity.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\manager\BatterySaveManager.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\manager\BatteryTimeEstimator.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\manager\RegisterReciverManager.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\manager\SessionManager.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\manager\ThresholdsManager.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\proto\ThresholdsDataStore.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\proto\ThresholdsSerializer.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\repository\BatteryEntityRepository.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\data\repository\SettingsRepository.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\di\AppModule.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\di\BatteryNotifyModule.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\di\DataBaseModule.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\di\RepositoryModule.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\domain\model\AnimationDirection.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\domain\model\BatteryHealth.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\domain\model\BatteryState.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\domain\model\ChargingType.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\domain\repository\SettingsRepository.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\MainActivity.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\navigation\MainNavHost.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\navigation\Screens.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\BatteryForegroundService.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\BatteryReceiver.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\BatteryStateProvider.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\controller\BatteryServiceController.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\NotificationHelper.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\PermissionsHelper.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\services\SettingsDataStore.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\components\charts\line\AdvancedLineEntry.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\components\charts\line\LineChart.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\components\RequestMultiplePermissions.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\components\RequestPermission.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\history\BatteryHistoryScreen.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\history\BatteryHistoryViewModel.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\info\InfoScreen.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\main\BatteryInfoViewModel.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\main\BatteryMainInfoScreen.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\MainScaffold.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\settings\SettingsScreen.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\screens\settings\SettingsViewModel.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\theme\Color.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\theme\Theme.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\ui\theme\Type.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\utils\BatteryHistoryStrategy.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\src\main\java\com\habitiora\batty\utils\StringToDecimalFormatt.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\kotlin\com\habitiora\batty\data\dao\BatteryEntityDao_Impl.kt D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\generated\ksp\debug\kotlin\com\habitiora\batty\data\database\AppDatabase_Impl.kt
+
+Host: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 12 cores, 15G,  Windows 11 , 64 bit Build 26100 (10.0.26100.7705)
+Time: Fri Mar  6 23:16:00 2026 Hora estándar central (México) elapsed time: 8.559325 seconds (0d 0h 0m 8s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001e54747b8c0):  JavaThread "C2 CompilerThread2" daemon [_thread_in_native, id=25040, stack(0x000000c637f00000,0x000000c638000000) (1024K)]
+
+
+Current CompileTask:
+C2:8559 10238       4       kotlin.collections.CollectionsKt___CollectionsKt::joinToString$default (94 bytes)
+
+Stack: [0x000000c637f00000,0x000000c638000000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6d6c99]
+V  [jvm.dll+0x866b83]
+V  [jvm.dll+0x86919e]
+V  [jvm.dll+0x869883]
+V  [jvm.dll+0x280776]
+V  [jvm.dll+0xc07cd]
+V  [jvm.dll+0xc0d03]
+V  [jvm.dll+0x3b986b]
+V  [jvm.dll+0x1dfac4]
+V  [jvm.dll+0x2495b4]
+V  [jvm.dll+0x248a31]
+V  [jvm.dll+0x1c7344]
+V  [jvm.dll+0x2581ae]
+V  [jvm.dll+0x2566f6]
+V  [jvm.dll+0x3f48a6]
+V  [jvm.dll+0x80f118]
+V  [jvm.dll+0x6d54ed]
+C  [ucrtbase.dll+0x37b0]
+C  [KERNEL32.DLL+0x2e8d7]
+C  [ntdll.dll+0x8c40c]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001e5473b81a0, length=13, elements={
+0x000001e5233df440, 0x000001e53f75ec10, 0x000001e53f774850, 0x000001e53f7762c0,
+0x000001e53f77aec0, 0x000001e53f77b920, 0x000001e53f77c380, 0x000001e53f78f430,
+0x000001e53f79e6d0, 0x000001e53f7a2190, 0x000001e53f791500, 0x000001e53f9cd850,
+0x000001e54747b8c0
+}
+
+Java Threads: ( => current thread )
+  0x000001e5233df440 JavaThread "main"                              [_thread_in_Java, id=15716, stack(0x000000c636c00000,0x000000c636d00000) (1024K)]
+  0x000001e53f75ec10 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=5020, stack(0x000000c637400000,0x000000c637500000) (1024K)]
+  0x000001e53f774850 JavaThread "Reference Handler"          daemon [_thread_blocked, id=11544, stack(0x000000c637500000,0x000000c637600000) (1024K)]
+  0x000001e53f7762c0 JavaThread "Finalizer"                  daemon [_thread_blocked, id=14120, stack(0x000000c637600000,0x000000c637700000) (1024K)]
+  0x000001e53f77aec0 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=14976, stack(0x000000c637700000,0x000000c637800000) (1024K)]
+  0x000001e53f77b920 JavaThread "Attach Listener"            daemon [_thread_blocked, id=21128, stack(0x000000c637800000,0x000000c637900000) (1024K)]
+  0x000001e53f77c380 JavaThread "Service Thread"             daemon [_thread_blocked, id=5428, stack(0x000000c637900000,0x000000c637a00000) (1024K)]
+  0x000001e53f78f430 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=19752, stack(0x000000c637a00000,0x000000c637b00000) (1024K)]
+  0x000001e53f79e6d0 JavaThread "C2 CompilerThread0"         daemon [_thread_in_native, id=10280, stack(0x000000c637b00000,0x000000c637c00000) (1024K)]
+  0x000001e53f7a2190 JavaThread "C1 CompilerThread0"         daemon [_thread_in_vm, id=26388, stack(0x000000c637c00000,0x000000c637d00000) (1024K)]
+  0x000001e53f791500 JavaThread "Notification Thread"        daemon [_thread_blocked, id=16076, stack(0x000000c637d00000,0x000000c637e00000) (1024K)]
+  0x000001e53f9cd850 JavaThread "C2 CompilerThread1"         daemon [_thread_in_native, id=23756, stack(0x000000c637e00000,0x000000c637f00000) (1024K)]
+=>0x000001e54747b8c0 JavaThread "C2 CompilerThread2"         daemon [_thread_in_native, id=25040, stack(0x000000c637f00000,0x000000c638000000) (1024K)]
+Total: 13
+
+Other Threads:
+  0x000001e53f6ded40 VMThread "VM Thread"                           [id=21732, stack(0x000000c637300000,0x000000c637400000) (1024K)]
+  0x000001e53ecb8c40 WatcherThread "VM Periodic Task Thread"        [id=8988, stack(0x000000c637200000,0x000000c637300000) (1024K)]
+  0x000001e523450440 WorkerThread "GC Thread#0"                     [id=26380, stack(0x000000c636d00000,0x000000c636e00000) (1024K)]
+  0x000001e5445320e0 WorkerThread "GC Thread#1"                     [id=3700, stack(0x000000c638000000,0x000000c638100000) (1024K)]
+  0x000001e544532480 WorkerThread "GC Thread#2"                     [id=26048, stack(0x000000c638100000,0x000000c638200000) (1024K)]
+  0x000001e544532820 WorkerThread "GC Thread#3"                     [id=25836, stack(0x000000c638200000,0x000000c638300000) (1024K)]
+  0x000001e54455d0f0 WorkerThread "GC Thread#4"                     [id=24404, stack(0x000000c638300000,0x000000c638400000) (1024K)]
+  0x000001e54455d8a0 WorkerThread "GC Thread#5"                     [id=7792, stack(0x000000c638400000,0x000000c638500000) (1024K)]
+  0x000001e5445dba10 WorkerThread "GC Thread#6"                     [id=10904, stack(0x000000c638500000,0x000000c638600000) (1024K)]
+  0x000001e544ba0d70 WorkerThread "GC Thread#7"                     [id=15052, stack(0x000000c638600000,0x000000c638700000) (1024K)]
+  0x000001e544b9f7b0 WorkerThread "GC Thread#8"                     [id=3420, stack(0x000000c638700000,0x000000c638800000) (1024K)]
+  0x000001e544ba1850 WorkerThread "GC Thread#9"                     [id=16312, stack(0x000000c638a00000,0x000000c638b00000) (1024K)]
+  0x000001e523462870 ConcurrentGCThread "G1 Main Marker"            [id=12088, stack(0x000000c636e00000,0x000000c636f00000) (1024K)]
+  0x000001e523463b10 WorkerThread "G1 Conc#0"                       [id=17768, stack(0x000000c636f00000,0x000000c637000000) (1024K)]
+  0x000001e544ba14b0 WorkerThread "G1 Conc#1"                       [id=15124, stack(0x000000c638800000,0x000000c638900000) (1024K)]
+  0x000001e544b9e590 WorkerThread "G1 Conc#2"                       [id=19820, stack(0x000000c638900000,0x000000c638a00000) (1024K)]
+  0x000001e53eb87290 ConcurrentGCThread "G1 Refine#0"               [id=3228, stack(0x000000c637000000,0x000000c637100000) (1024K)]
+  0x000001e53eb89ed0 ConcurrentGCThread "G1 Service"                [id=3564, stack(0x000000c637100000,0x000000c637200000) (1024K)]
+Total: 18
+
+Threads with active compile tasks:
+C2 CompilerThread0  8578 10210       4       org.jetbrains.kotlin.resolve.calls.inference.model.MutableConstraintStorage::<init> (164 bytes)
+C1 CompilerThread0  8578 10231       3       org.jetbrains.kotlin.fir.deserialization.ClassDeserializationKt::deserializeClassToSymbol (3270 bytes)
+C2 CompilerThread1  8578 10027       4       org.jetbrains.kotlin.fir.resolve.calls.tower.FirTowerResolveTask::processCandidatesWithGivenImplicitReceiverAsValue (2988 bytes)
+C2 CompilerThread2  8578 10238       4       kotlin.collections.CollectionsKt___CollectionsKt::joinToString$default (94 bytes)
+Total: 4
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ff8025f7090] MethodCompileQueue_lock - owner thread: 0x000001e53f7a2190
+[0x00007ff8025f8590] CodeCache_lock - owner thread: 0x000001e53f7a2190
+[0x00007ff8025f8710] Compile_lock - owner thread: 0x000001e53f7a2190
+
+Heap address: 0x0000000702000000, size: 4064 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) not mapped
+Compressed class space mapped at: 0x0000000800000000-0x0000000840000000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x40000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 4 size 8 Array Of Cards #cards 16 size 48 Howl #buckets 8 coarsen threshold 3686 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 4096
+ CPUs: 12 total, 12 available
+ Memory: 16251M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 2M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 254M
+ Heap Max Capacity: 4064M
+ Pre-touch: Disabled
+ Parallel Workers: 10
+ Concurrent Workers: 3
+ Concurrent Refinement Workers: 10
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 262144K, used 148313K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 15 young (30720K), 6 survivors (12288K)
+ Metaspace       used 74713K, committed 75136K, reserved 1179648K
+  class space    used 8617K, committed 8832K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, TAMS=top-at-mark-start, PB=parsable bottom
+|   0|0x0000000702000000, 0x0000000702200000, 0x0000000702200000|100%|HS|  |TAMS 0x0000000702000000| PB 0x0000000702000000| Complete 
+|   1|0x0000000702200000, 0x0000000702400000, 0x0000000702400000|100%|HC|  |TAMS 0x0000000702200000| PB 0x0000000702200000| Complete 
+|   2|0x0000000702400000, 0x0000000702600000, 0x0000000702600000|100%| O|  |TAMS 0x0000000702400000| PB 0x0000000702400000| Untracked 
+|   3|0x0000000702600000, 0x0000000702800000, 0x0000000702800000|100%| O|  |TAMS 0x0000000702600000| PB 0x0000000702600000| Untracked 
+|   4|0x0000000702800000, 0x0000000702a00000, 0x0000000702a00000|100%| O|  |TAMS 0x0000000702800000| PB 0x0000000702800000| Untracked 
+|   5|0x0000000702a00000, 0x0000000702c00000, 0x0000000702c00000|100%| O|  |TAMS 0x0000000702a00000| PB 0x0000000702a00000| Untracked 
+|   6|0x0000000702c00000, 0x0000000702e00000, 0x0000000702e00000|100%| O|  |TAMS 0x0000000702c00000| PB 0x0000000702c00000| Untracked 
+|   7|0x0000000702e00000, 0x0000000703000000, 0x0000000703000000|100%| O|  |TAMS 0x0000000702e00000| PB 0x0000000702e00000| Untracked 
+|   8|0x0000000703000000, 0x0000000703200000, 0x0000000703200000|100%| O|  |TAMS 0x0000000703000000| PB 0x0000000703000000| Untracked 
+|   9|0x0000000703200000, 0x0000000703400000, 0x0000000703400000|100%| O|  |TAMS 0x0000000703200000| PB 0x0000000703200000| Untracked 
+|  10|0x0000000703400000, 0x0000000703600000, 0x0000000703600000|100%| O|  |TAMS 0x0000000703400000| PB 0x0000000703400000| Untracked 
+|  11|0x0000000703600000, 0x0000000703800000, 0x0000000703800000|100%| O|  |TAMS 0x0000000703600000| PB 0x0000000703600000| Untracked 
+|  12|0x0000000703800000, 0x0000000703a00000, 0x0000000703a00000|100%| O|  |TAMS 0x0000000703800000| PB 0x0000000703800000| Untracked 
+|  13|0x0000000703a00000, 0x0000000703c00000, 0x0000000703c00000|100%| O|  |TAMS 0x0000000703a00000| PB 0x0000000703a00000| Untracked 
+|  14|0x0000000703c00000, 0x0000000703e00000, 0x0000000703e00000|100%| O|  |TAMS 0x0000000703c00000| PB 0x0000000703c00000| Untracked 
+|  15|0x0000000703e00000, 0x0000000704000000, 0x0000000704000000|100%| O|  |TAMS 0x0000000703e00000| PB 0x0000000703e00000| Untracked 
+|  16|0x0000000704000000, 0x0000000704200000, 0x0000000704200000|100%| O|  |TAMS 0x0000000704000000| PB 0x0000000704000000| Untracked 
+|  17|0x0000000704200000, 0x0000000704400000, 0x0000000704400000|100%| O|  |TAMS 0x0000000704200000| PB 0x0000000704200000| Untracked 
+|  18|0x0000000704400000, 0x0000000704600000, 0x0000000704600000|100%| O|  |TAMS 0x0000000704400000| PB 0x0000000704400000| Untracked 
+|  19|0x0000000704600000, 0x0000000704800000, 0x0000000704800000|100%| O|  |TAMS 0x0000000704600000| PB 0x0000000704600000| Untracked 
+|  20|0x0000000704800000, 0x0000000704a00000, 0x0000000704a00000|100%| O|  |TAMS 0x0000000704800000| PB 0x0000000704800000| Untracked 
+|  21|0x0000000704a00000, 0x0000000704c00000, 0x0000000704c00000|100%| O|  |TAMS 0x0000000704a00000| PB 0x0000000704a00000| Untracked 
+|  22|0x0000000704c00000, 0x0000000704e00000, 0x0000000704e00000|100%| O|  |TAMS 0x0000000704c00000| PB 0x0000000704c00000| Untracked 
+|  23|0x0000000704e00000, 0x0000000705000000, 0x0000000705000000|100%| O|  |TAMS 0x0000000704e00000| PB 0x0000000704e00000| Untracked 
+|  24|0x0000000705000000, 0x0000000705200000, 0x0000000705200000|100%| O|  |TAMS 0x0000000705000000| PB 0x0000000705000000| Untracked 
+|  25|0x0000000705200000, 0x0000000705400000, 0x0000000705400000|100%| O|  |TAMS 0x0000000705200000| PB 0x0000000705200000| Untracked 
+|  26|0x0000000705400000, 0x0000000705600000, 0x0000000705600000|100%| O|  |TAMS 0x0000000705400000| PB 0x0000000705400000| Untracked 
+|  27|0x0000000705600000, 0x0000000705800000, 0x0000000705800000|100%| O|  |TAMS 0x0000000705600000| PB 0x0000000705600000| Untracked 
+|  28|0x0000000705800000, 0x0000000705a00000, 0x0000000705a00000|100%| O|  |TAMS 0x0000000705800000| PB 0x0000000705800000| Untracked 
+|  29|0x0000000705a00000, 0x0000000705c00000, 0x0000000705c00000|100%| O|  |TAMS 0x0000000705a00000| PB 0x0000000705a00000| Untracked 
+|  30|0x0000000705c00000, 0x0000000705e00000, 0x0000000705e00000|100%| O|  |TAMS 0x0000000705c00000| PB 0x0000000705c00000| Untracked 
+|  31|0x0000000705e00000, 0x0000000706000000, 0x0000000706000000|100%| O|  |TAMS 0x0000000705e00000| PB 0x0000000705e00000| Untracked 
+|  32|0x0000000706000000, 0x0000000706200000, 0x0000000706200000|100%| O|Cm|TAMS 0x0000000706000000| PB 0x0000000706000000| Complete 
+|  33|0x0000000706200000, 0x0000000706400000, 0x0000000706400000|100%| O|  |TAMS 0x0000000706200000| PB 0x0000000706200000| Untracked 
+|  34|0x0000000706400000, 0x0000000706600000, 0x0000000706600000|100%| O|  |TAMS 0x0000000706400000| PB 0x0000000706400000| Untracked 
+|  35|0x0000000706600000, 0x0000000706800000, 0x0000000706800000|100%| O|  |TAMS 0x0000000706600000| PB 0x0000000706600000| Untracked 
+|  36|0x0000000706800000, 0x0000000706a00000, 0x0000000706a00000|100%| O|  |TAMS 0x0000000706800000| PB 0x0000000706800000| Untracked 
+|  37|0x0000000706a00000, 0x0000000706c00000, 0x0000000706c00000|100%| O|  |TAMS 0x0000000706a00000| PB 0x0000000706a00000| Untracked 
+|  38|0x0000000706c00000, 0x0000000706e00000, 0x0000000706e00000|100%| O|  |TAMS 0x0000000706c00000| PB 0x0000000706c00000| Untracked 
+|  39|0x0000000706e00000, 0x0000000707000000, 0x0000000707000000|100%| O|  |TAMS 0x0000000706e00000| PB 0x0000000706e00000| Untracked 
+|  40|0x0000000707000000, 0x0000000707200000, 0x0000000707200000|100%| O|  |TAMS 0x0000000707000000| PB 0x0000000707000000| Untracked 
+|  41|0x0000000707200000, 0x0000000707400000, 0x0000000707400000|100%| O|  |TAMS 0x0000000707200000| PB 0x0000000707200000| Untracked 
+|  42|0x0000000707400000, 0x0000000707600000, 0x0000000707600000|100%| O|  |TAMS 0x0000000707400000| PB 0x0000000707400000| Untracked 
+|  43|0x0000000707600000, 0x0000000707800000, 0x0000000707800000|100%| O|  |TAMS 0x0000000707600000| PB 0x0000000707600000| Untracked 
+|  44|0x0000000707800000, 0x0000000707a00000, 0x0000000707a00000|100%| O|  |TAMS 0x0000000707800000| PB 0x0000000707800000| Untracked 
+|  45|0x0000000707a00000, 0x0000000707c00000, 0x0000000707c00000|100%| O|  |TAMS 0x0000000707a00000| PB 0x0000000707a00000| Untracked 
+|  46|0x0000000707c00000, 0x0000000707e00000, 0x0000000707e00000|100%| O|  |TAMS 0x0000000707c00000| PB 0x0000000707c00000| Untracked 
+|  47|0x0000000707e00000, 0x0000000708000000, 0x0000000708000000|100%| O|  |TAMS 0x0000000707e00000| PB 0x0000000707e00000| Untracked 
+|  48|0x0000000708000000, 0x0000000708200000, 0x0000000708200000|100%| O|  |TAMS 0x0000000708000000| PB 0x0000000708000000| Untracked 
+|  49|0x0000000708200000, 0x0000000708400000, 0x0000000708400000|100%| O|  |TAMS 0x0000000708200000| PB 0x0000000708200000| Untracked 
+|  50|0x0000000708400000, 0x0000000708600000, 0x0000000708600000|100%| O|  |TAMS 0x0000000708400000| PB 0x0000000708400000| Untracked 
+|  51|0x0000000708600000, 0x0000000708800000, 0x0000000708800000|100%| O|  |TAMS 0x0000000708600000| PB 0x0000000708600000| Untracked 
+|  52|0x0000000708800000, 0x0000000708a00000, 0x0000000708a00000|100%| O|Cm|TAMS 0x0000000708800000| PB 0x0000000708800000| Complete 
+|  53|0x0000000708a00000, 0x0000000708c00000, 0x0000000708c00000|100%| O|  |TAMS 0x0000000708a00000| PB 0x0000000708a00000| Untracked 
+|  54|0x0000000708c00000, 0x0000000708e00000, 0x0000000708e00000|100%| O|  |TAMS 0x0000000708c00000| PB 0x0000000708c00000| Untracked 
+|  55|0x0000000708e00000, 0x0000000709000000, 0x0000000709000000|100%| O|  |TAMS 0x0000000708e00000| PB 0x0000000708e00000| Untracked 
+|  56|0x0000000709000000, 0x0000000709200000, 0x0000000709200000|100%| O|  |TAMS 0x0000000709000000| PB 0x0000000709000000| Untracked 
+|  57|0x0000000709200000, 0x00000007092d66b0, 0x0000000709400000| 41%| O|  |TAMS 0x0000000709200000| PB 0x0000000709200000| Untracked 
+|  58|0x0000000709400000, 0x0000000709400000, 0x0000000709600000|  0%| F|  |TAMS 0x0000000709400000| PB 0x0000000709400000| Untracked 
+|  59|0x0000000709600000, 0x0000000709600000, 0x0000000709800000|  0%| F|  |TAMS 0x0000000709600000| PB 0x0000000709600000| Untracked 
+|  60|0x0000000709800000, 0x0000000709800000, 0x0000000709a00000|  0%| F|  |TAMS 0x0000000709800000| PB 0x0000000709800000| Untracked 
+|  61|0x0000000709a00000, 0x0000000709a00000, 0x0000000709c00000|  0%| F|  |TAMS 0x0000000709a00000| PB 0x0000000709a00000| Untracked 
+|  62|0x0000000709c00000, 0x0000000709c00000, 0x0000000709e00000|  0%| F|  |TAMS 0x0000000709c00000| PB 0x0000000709c00000| Untracked 
+|  63|0x0000000709e00000, 0x0000000709e00000, 0x000000070a000000|  0%| F|  |TAMS 0x0000000709e00000| PB 0x0000000709e00000| Untracked 
+|  64|0x000000070a000000, 0x000000070a000000, 0x000000070a200000|  0%| F|  |TAMS 0x000000070a000000| PB 0x000000070a000000| Untracked 
+|  65|0x000000070a200000, 0x000000070a200000, 0x000000070a400000|  0%| F|  |TAMS 0x000000070a200000| PB 0x000000070a200000| Untracked 
+|  66|0x000000070a400000, 0x000000070a400000, 0x000000070a600000|  0%| F|  |TAMS 0x000000070a400000| PB 0x000000070a400000| Untracked 
+|  67|0x000000070a600000, 0x000000070a600000, 0x000000070a800000|  0%| F|  |TAMS 0x000000070a600000| PB 0x000000070a600000| Untracked 
+|  68|0x000000070a800000, 0x000000070a800000, 0x000000070aa00000|  0%| F|  |TAMS 0x000000070a800000| PB 0x000000070a800000| Untracked 
+|  69|0x000000070aa00000, 0x000000070aa00000, 0x000000070ac00000|  0%| F|  |TAMS 0x000000070aa00000| PB 0x000000070aa00000| Untracked 
+|  70|0x000000070ac00000, 0x000000070ac00000, 0x000000070ae00000|  0%| F|  |TAMS 0x000000070ac00000| PB 0x000000070ac00000| Untracked 
+|  71|0x000000070ae00000, 0x000000070ae00000, 0x000000070b000000|  0%| F|  |TAMS 0x000000070ae00000| PB 0x000000070ae00000| Untracked 
+|  72|0x000000070b000000, 0x000000070b000000, 0x000000070b200000|  0%| F|  |TAMS 0x000000070b000000| PB 0x000000070b000000| Untracked 
+|  73|0x000000070b200000, 0x000000070b200000, 0x000000070b400000|  0%| F|  |TAMS 0x000000070b200000| PB 0x000000070b200000| Untracked 
+|  74|0x000000070b400000, 0x000000070b400000, 0x000000070b600000|  0%| F|  |TAMS 0x000000070b400000| PB 0x000000070b400000| Untracked 
+|  75|0x000000070b600000, 0x000000070b600000, 0x000000070b800000|  0%| F|  |TAMS 0x000000070b600000| PB 0x000000070b600000| Untracked 
+|  76|0x000000070b800000, 0x000000070b800000, 0x000000070ba00000|  0%| F|  |TAMS 0x000000070b800000| PB 0x000000070b800000| Untracked 
+|  77|0x000000070ba00000, 0x000000070bc00000, 0x000000070bc00000|100%| S|CS|TAMS 0x000000070ba00000| PB 0x000000070ba00000| Complete 
+|  78|0x000000070bc00000, 0x000000070be00000, 0x000000070be00000|100%| S|CS|TAMS 0x000000070bc00000| PB 0x000000070bc00000| Complete 
+|  79|0x000000070be00000, 0x000000070c000000, 0x000000070c000000|100%| S|CS|TAMS 0x000000070be00000| PB 0x000000070be00000| Complete 
+|  80|0x000000070c000000, 0x000000070c200000, 0x000000070c200000|100%| S|CS|TAMS 0x000000070c000000| PB 0x000000070c000000| Complete 
+|  81|0x000000070c200000, 0x000000070c400000, 0x000000070c400000|100%| S|CS|TAMS 0x000000070c200000| PB 0x000000070c200000| Complete 
+|  82|0x000000070c400000, 0x000000070c600000, 0x000000070c600000|100%| S|CS|TAMS 0x000000070c400000| PB 0x000000070c400000| Complete 
+|  83|0x000000070c600000, 0x000000070c600000, 0x000000070c800000|  0%| F|  |TAMS 0x000000070c600000| PB 0x000000070c600000| Untracked 
+|  84|0x000000070c800000, 0x000000070c800000, 0x000000070ca00000|  0%| F|  |TAMS 0x000000070c800000| PB 0x000000070c800000| Untracked 
+|  85|0x000000070ca00000, 0x000000070ca00000, 0x000000070cc00000|  0%| F|  |TAMS 0x000000070ca00000| PB 0x000000070ca00000| Untracked 
+|  86|0x000000070cc00000, 0x000000070cc00000, 0x000000070ce00000|  0%| F|  |TAMS 0x000000070cc00000| PB 0x000000070cc00000| Untracked 
+|  87|0x000000070ce00000, 0x000000070ce00000, 0x000000070d000000|  0%| F|  |TAMS 0x000000070ce00000| PB 0x000000070ce00000| Untracked 
+|  88|0x000000070d000000, 0x000000070d000000, 0x000000070d200000|  0%| F|  |TAMS 0x000000070d000000| PB 0x000000070d000000| Untracked 
+|  89|0x000000070d200000, 0x000000070d200000, 0x000000070d400000|  0%| F|  |TAMS 0x000000070d200000| PB 0x000000070d200000| Untracked 
+|  90|0x000000070d400000, 0x000000070d400000, 0x000000070d600000|  0%| F|  |TAMS 0x000000070d400000| PB 0x000000070d400000| Untracked 
+|  91|0x000000070d600000, 0x000000070d600000, 0x000000070d800000|  0%| F|  |TAMS 0x000000070d600000| PB 0x000000070d600000| Untracked 
+|  92|0x000000070d800000, 0x000000070d800000, 0x000000070da00000|  0%| F|  |TAMS 0x000000070d800000| PB 0x000000070d800000| Untracked 
+|  93|0x000000070da00000, 0x000000070da00000, 0x000000070dc00000|  0%| F|  |TAMS 0x000000070da00000| PB 0x000000070da00000| Untracked 
+|  94|0x000000070dc00000, 0x000000070dc00000, 0x000000070de00000|  0%| F|  |TAMS 0x000000070dc00000| PB 0x000000070dc00000| Untracked 
+|  95|0x000000070de00000, 0x000000070de00000, 0x000000070e000000|  0%| F|  |TAMS 0x000000070de00000| PB 0x000000070de00000| Untracked 
+|  96|0x000000070e000000, 0x000000070e000000, 0x000000070e200000|  0%| F|  |TAMS 0x000000070e000000| PB 0x000000070e000000| Untracked 
+|  97|0x000000070e200000, 0x000000070e200000, 0x000000070e400000|  0%| F|  |TAMS 0x000000070e200000| PB 0x000000070e200000| Untracked 
+|  98|0x000000070e400000, 0x000000070e400000, 0x000000070e600000|  0%| F|  |TAMS 0x000000070e400000| PB 0x000000070e400000| Untracked 
+|  99|0x000000070e600000, 0x000000070e600000, 0x000000070e800000|  0%| F|  |TAMS 0x000000070e600000| PB 0x000000070e600000| Untracked 
+| 100|0x000000070e800000, 0x000000070e800000, 0x000000070ea00000|  0%| F|  |TAMS 0x000000070e800000| PB 0x000000070e800000| Untracked 
+| 101|0x000000070ea00000, 0x000000070ea00000, 0x000000070ec00000|  0%| F|  |TAMS 0x000000070ea00000| PB 0x000000070ea00000| Untracked 
+| 102|0x000000070ec00000, 0x000000070ec00000, 0x000000070ee00000|  0%| F|  |TAMS 0x000000070ec00000| PB 0x000000070ec00000| Untracked 
+| 103|0x000000070ee00000, 0x000000070ee00000, 0x000000070f000000|  0%| F|  |TAMS 0x000000070ee00000| PB 0x000000070ee00000| Untracked 
+| 104|0x000000070f000000, 0x000000070f000000, 0x000000070f200000|  0%| F|  |TAMS 0x000000070f000000| PB 0x000000070f000000| Untracked 
+| 105|0x000000070f200000, 0x000000070f200000, 0x000000070f400000|  0%| F|  |TAMS 0x000000070f200000| PB 0x000000070f200000| Untracked 
+| 106|0x000000070f400000, 0x000000070f400000, 0x000000070f600000|  0%| F|  |TAMS 0x000000070f400000| PB 0x000000070f400000| Untracked 
+| 107|0x000000070f600000, 0x000000070f600000, 0x000000070f800000|  0%| F|  |TAMS 0x000000070f600000| PB 0x000000070f600000| Untracked 
+| 108|0x000000070f800000, 0x000000070f800000, 0x000000070fa00000|  0%| F|  |TAMS 0x000000070f800000| PB 0x000000070f800000| Untracked 
+| 109|0x000000070fa00000, 0x000000070fa00000, 0x000000070fc00000|  0%| F|  |TAMS 0x000000070fa00000| PB 0x000000070fa00000| Untracked 
+| 110|0x000000070fc00000, 0x000000070fc00000, 0x000000070fe00000|  0%| F|  |TAMS 0x000000070fc00000| PB 0x000000070fc00000| Untracked 
+| 111|0x000000070fe00000, 0x000000070fe00000, 0x0000000710000000|  0%| F|  |TAMS 0x000000070fe00000| PB 0x000000070fe00000| Untracked 
+| 112|0x0000000710000000, 0x0000000710000000, 0x0000000710200000|  0%| F|  |TAMS 0x0000000710000000| PB 0x0000000710000000| Untracked 
+| 113|0x0000000710200000, 0x0000000710200000, 0x0000000710400000|  0%| F|  |TAMS 0x0000000710200000| PB 0x0000000710200000| Untracked 
+| 114|0x0000000710400000, 0x0000000710400000, 0x0000000710600000|  0%| F|  |TAMS 0x0000000710400000| PB 0x0000000710400000| Untracked 
+| 115|0x0000000710600000, 0x0000000710600000, 0x0000000710800000|  0%| F|  |TAMS 0x0000000710600000| PB 0x0000000710600000| Untracked 
+| 116|0x0000000710800000, 0x0000000710800000, 0x0000000710a00000|  0%| F|  |TAMS 0x0000000710800000| PB 0x0000000710800000| Untracked 
+| 117|0x0000000710a00000, 0x0000000710a00000, 0x0000000710c00000|  0%| F|  |TAMS 0x0000000710a00000| PB 0x0000000710a00000| Untracked 
+| 118|0x0000000710c00000, 0x0000000710e00000, 0x0000000710e00000|100%| E|  |TAMS 0x0000000710c00000| PB 0x0000000710c00000| Complete 
+| 119|0x0000000710e00000, 0x0000000711000000, 0x0000000711000000|100%| E|CS|TAMS 0x0000000710e00000| PB 0x0000000710e00000| Complete 
+| 120|0x0000000711000000, 0x0000000711200000, 0x0000000711200000|100%| E|CS|TAMS 0x0000000711000000| PB 0x0000000711000000| Complete 
+| 121|0x0000000711200000, 0x0000000711400000, 0x0000000711400000|100%| E|CS|TAMS 0x0000000711200000| PB 0x0000000711200000| Complete 
+| 122|0x0000000711400000, 0x0000000711600000, 0x0000000711600000|100%| E|CS|TAMS 0x0000000711400000| PB 0x0000000711400000| Complete 
+| 123|0x0000000711600000, 0x0000000711800000, 0x0000000711800000|100%| E|CS|TAMS 0x0000000711600000| PB 0x0000000711600000| Complete 
+| 124|0x0000000711800000, 0x0000000711a00000, 0x0000000711a00000|100%| E|CS|TAMS 0x0000000711800000| PB 0x0000000711800000| Complete 
+| 125|0x0000000711a00000, 0x0000000711c00000, 0x0000000711c00000|100%| E|CS|TAMS 0x0000000711a00000| PB 0x0000000711a00000| Complete 
+| 126|0x0000000711c00000, 0x0000000711e00000, 0x0000000711e00000|100%| E|CS|TAMS 0x0000000711c00000| PB 0x0000000711c00000| Complete 
+|2031|0x00000007ffe00000, 0x0000000800000000, 0x0000000800000000|100%| O|  |TAMS 0x00000007ffe00000| PB 0x00000007ffe00000| Untracked 
+
+Card table byte_map: [0x000001e5380a0000,0x000001e538890000] _byte_map_base: 0x000001e534890000
+
+Marking Bits: (CMBitMap*) 0x000001e523450b40
+ Bits: [0x000001e538890000, 0x000001e53c810000)
+
+Polling page: 0x000001e527bf0000
+
+Metaspace:
+
+Usage:
+  Non-class:     64.55 MB used.
+      Class:      8.42 MB used.
+       Both:     72.96 MB used.
+
+Virtual space:
+  Non-class space:      128.00 MB reserved,      64.75 MB ( 51%) committed,  2 nodes.
+      Class space:        1.00 GB reserved,       8.62 MB ( <1%) committed,  1 nodes.
+             Both:        1.12 GB reserved,      73.38 MB (  6%) committed. 
+
+Chunk freelists:
+   Non-Class:  14.53 MB
+       Class:  7.30 MB
+        Both:  21.83 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 114.00 MB
+CDS: off
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 6.
+num_arena_births: 362.
+num_arena_deaths: 0.
+num_vsnodes_births: 3.
+num_vsnodes_deaths: 0.
+num_space_committed: 1173.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 6.
+num_chunks_taken_from_freelist: 2637.
+num_chunk_merges: 6.
+num_chunk_splits: 2195.
+num_chunks_enlarged: 1988.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=6010Kb max_used=6010Kb free=113989Kb
+ bounds [0x000001e52f6e0000, 0x000001e52fcc0000, 0x000001e536c10000]
+CodeHeap 'profiled nmethods': size=120000Kb used=29785Kb max_used=29785Kb free=90215Kb
+ bounds [0x000001e527c10000, 0x000001e529930000, 0x000001e52f140000]
+CodeHeap 'non-nmethods': size=5760Kb used=1579Kb max_used=1658Kb free=4180Kb
+ bounds [0x000001e52f140000, 0x000001e52f3b0000, 0x000001e52f6e0000]
+CodeCache: size=245760Kb, used=37374Kb, max_used=37453Kb, free=208384Kb
+ total_blobs=9899, nmethods=9172, adapters=627, full_count=0
+Compilation: enabled, stopped_count=0, restarted_count=0
+
+Compilation events (20 events):
+Event: 8.507 Thread 0x000001e53f7a2190 nmethod 10227 0x000001e5298d7610 code [0x000001e5298d7c20, 0x000001e5298db600]
+Event: 8.507 Thread 0x000001e53f7a2190 10229       3       org.jetbrains.kotlin.fir.declarations.FirResolvedDeclarationStatus::accept (13 bytes)
+Event: 8.507 Thread 0x000001e53f7a2190 nmethod 10229 0x000001e5298dc510 code [0x000001e5298dc740, 0x000001e5298dcde8]
+Event: 8.507 Thread 0x000001e53f7a2190 10226       3       org.jetbrains.kotlin.fir.resolve.dfa.LogicSystem::copyImplications (60 bytes)
+Event: 8.507 Thread 0x000001e53f7a2190 nmethod 10226 0x000001e5298dd090 code [0x000001e5298dd2a0, 0x000001e5298dda80]
+Event: 8.508 Thread 0x000001e53f79e6d0 nmethod 10206 0x000001e52fcaf790 code [0x000001e52fcafa20, 0x000001e52fcb11a0]
+Event: 8.508 Thread 0x000001e53f79e6d0 10212       4       kotlin.text.StringsKt__StringsKt::lastIndexOf (49 bytes)
+Event: 8.509 Thread 0x000001e53f7a2190 10231       3       org.jetbrains.kotlin.fir.deserialization.ClassDeserializationKt::deserializeClassToSymbol (3270 bytes)
+Event: 8.509 Thread 0x000001e54747b8c0 nmethod 10208 0x000001e52fcb1d10 code [0x000001e52fcb2000, 0x000001e52fcb41d8]
+Event: 8.509 Thread 0x000001e54747b8c0 10230       4       org.jetbrains.kotlin.fir.types.TypeConstructionUtilsKt::constructClassType$default (45 bytes)
+Event: 8.510 Thread 0x000001e53f79e6d0 nmethod 10212 0x000001e52fcb4a10 code [0x000001e52fcb4bc0, 0x000001e52fcb4f10]
+Event: 8.510 Thread 0x000001e53f79e6d0 10235       4       org.jetbrains.kotlin.load.kotlin.MemberSignature$Companion::fromMethodSignatureAndParameterIndex (41 bytes)
+Event: 8.511 Thread 0x000001e54747b8c0 nmethod 10230 0x000001e52fcb5310 code [0x000001e52fcb54c0, 0x000001e52fcb5710]
+Event: 8.511 Thread 0x000001e54747b8c0 10211       4       org.jetbrains.kotlin.fir.deserialization.AnnotationDeserializationUtilKt::loadAnnotationsFromMetadata$default (21 bytes)
+Event: 8.518 Thread 0x000001e53f79e6d0 nmethod 10235 0x000001e52fcb5990 code [0x000001e52fcb5b40, 0x000001e52fcb6380]
+Event: 8.518 Thread 0x000001e53f79e6d0 10243       4       kotlin.text.StringsKt__AppendableKt::appendElement (99 bytes)
+Event: 8.522 Thread 0x000001e54747b8c0 nmethod 10211 0x000001e52fcb6510 code [0x000001e52fcb67a0, 0x000001e52fcb7568]
+Event: 8.522 Thread 0x000001e54747b8c0 10238       4       kotlin.collections.CollectionsKt___CollectionsKt::joinToString$default (94 bytes)
+Event: 8.525 Thread 0x000001e53f79e6d0 nmethod 10243 0x000001e52fcb8010 code [0x000001e52fcb8260, 0x000001e52fcb8990]
+Event: 8.525 Thread 0x000001e53f79e6d0 10209       4       org.jetbrains.kotlin.resolve.calls.inference.model.NewConstraintSystemImpl::<init> (152 bytes)
+
+GC Heap History (20 events):
+Event: 5.033 GC heap before
+{Heap before GC invocations=11 (full 0):
+ garbage-first heap   total 104448K, used 77824K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 21 young (43008K), 3 survivors (6144K)
+ Metaspace       used 57587K, committed 57920K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.047 GC heap after
+{Heap after GC invocations=12 (full 0):
+ garbage-first heap   total 104448K, used 47827K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 57587K, committed 57920K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.154 GC heap before
+{Heap before GC invocations=12 (full 0):
+ garbage-first heap   total 104448K, used 82643K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 20 young (40960K), 3 survivors (6144K)
+ Metaspace       used 57832K, committed 58112K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.165 GC heap after
+{Heap after GC invocations=13 (full 0):
+ garbage-first heap   total 104448K, used 57344K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 57832K, committed 58112K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.229 GC heap before
+{Heap before GC invocations=13 (full 0):
+ garbage-first heap   total 104448K, used 86016K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 17 young (34816K), 3 survivors (6144K)
+ Metaspace       used 57836K, committed 58112K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.235 GC heap after
+{Heap after GC invocations=14 (full 0):
+ garbage-first heap   total 143360K, used 65171K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 57836K, committed 58112K, reserved 1114112K
+  class space    used 6716K, committed 6848K, reserved 1048576K
+}
+Event: 5.345 GC heap before
+{Heap before GC invocations=15 (full 0):
+ garbage-first heap   total 143360K, used 112275K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 26 young (53248K), 3 survivors (6144K)
+ Metaspace       used 57836K, committed 58112K, reserved 1114112K
+  class space    used 6717K, committed 6848K, reserved 1048576K
+}
+Event: 5.350 GC heap after
+{Heap after GC invocations=16 (full 0):
+ garbage-first heap   total 143360K, used 77824K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 4 young (8192K), 4 survivors (8192K)
+ Metaspace       used 57836K, committed 58112K, reserved 1114112K
+  class space    used 6717K, committed 6848K, reserved 1048576K
+}
+Event: 5.675 GC heap before
+{Heap before GC invocations=16 (full 0):
+ garbage-first heap   total 143360K, used 116736K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 23 young (47104K), 4 survivors (8192K)
+ Metaspace       used 59156K, committed 59456K, reserved 1114112K
+  class space    used 6870K, committed 6976K, reserved 1048576K
+}
+Event: 5.690 GC heap after
+{Heap after GC invocations=17 (full 0):
+ garbage-first heap   total 143360K, used 90112K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 59156K, committed 59456K, reserved 1114112K
+  class space    used 6870K, committed 6976K, reserved 1048576K
+}
+Event: 5.782 GC heap before
+{Heap before GC invocations=17 (full 0):
+ garbage-first heap   total 143360K, used 118784K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 18 young (36864K), 3 survivors (6144K)
+ Metaspace       used 59454K, committed 59776K, reserved 1114112K
+  class space    used 6897K, committed 7040K, reserved 1048576K
+}
+Event: 5.793 GC heap after
+{Heap after GC invocations=18 (full 0):
+ garbage-first heap   total 143360K, used 101245K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 59454K, committed 59776K, reserved 1114112K
+  class space    used 6897K, committed 7040K, reserved 1048576K
+}
+Event: 5.992 GC heap before
+{Heap before GC invocations=19 (full 0):
+ garbage-first heap   total 172032K, used 123773K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 14 young (28672K), 3 survivors (6144K)
+ Metaspace       used 59954K, committed 60224K, reserved 1114112K
+  class space    used 6929K, committed 7040K, reserved 1048576K
+}
+Event: 6.000 GC heap after
+{Heap after GC invocations=20 (full 0):
+ garbage-first heap   total 172032K, used 107815K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 2 survivors (4096K)
+ Metaspace       used 59954K, committed 60224K, reserved 1114112K
+  class space    used 6929K, committed 7040K, reserved 1048576K
+}
+Event: 6.503 GC heap before
+{Heap before GC invocations=20 (full 0):
+ garbage-first heap   total 172032K, used 142631K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 20 young (40960K), 2 survivors (4096K)
+ Metaspace       used 65018K, committed 65408K, reserved 1114112K
+  class space    used 7525K, committed 7680K, reserved 1048576K
+}
+Event: 6.512 GC heap after
+{Heap after GC invocations=21 (full 0):
+ garbage-first heap   total 172032K, used 113843K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 65018K, committed 65408K, reserved 1114112K
+  class space    used 7525K, committed 7680K, reserved 1048576K
+}
+Event: 6.942 GC heap before
+{Heap before GC invocations=21 (full 0):
+ garbage-first heap   total 172032K, used 148659K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 20 young (40960K), 3 survivors (6144K)
+ Metaspace       used 69385K, committed 69696K, reserved 1114112K
+  class space    used 8083K, committed 8192K, reserved 1048576K
+}
+Event: 6.952 GC heap after
+{Heap after GC invocations=22 (full 0):
+ garbage-first heap   total 262144K, used 119513K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 69385K, committed 69696K, reserved 1114112K
+  class space    used 8083K, committed 8192K, reserved 1048576K
+}
+Event: 8.388 GC heap before
+{Heap before GC invocations=23 (full 0):
+ garbage-first heap   total 262144K, used 209625K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 47 young (96256K), 3 survivors (6144K)
+ Metaspace       used 74544K, committed 74944K, reserved 1179648K
+  class space    used 8605K, committed 8768K, reserved 1048576K
+}
+Event: 8.402 GC heap after
+{Heap after GC invocations=24 (full 0):
+ garbage-first heap   total 262144K, used 131929K [0x0000000702000000, 0x0000000800000000)
+  region size 2048K, 6 young (12288K), 6 survivors (12288K)
+ Metaspace       used 74544K, committed 74944K, reserved 1179648K
+  class space    used 8605K, committed 8768K, reserved 1048576K
+}
+
+Dll operation events (3 events):
+Event: 0.007 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\java.dll
+Event: 0.011 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\zip.dll
+Event: 1.091 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\verify.dll
+
+Deoptimization events (20 events):
+Event: 8.492 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e52fc83954 sp=0x000000c636cf8e70
+Event: 8.492 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194422 sp=0x000000c636cf8d60 mode 2
+Event: 8.516 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e5285675d7 sp=0x000000c636cfa340
+Event: 8.516 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194bc2 sp=0x000000c636cf9860 mode 0
+Event: 8.543 Thread 0x000001e5233df440 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001e52fb600ec relative=0x00000000000003cc
+Event: 8.543 Thread 0x000001e5233df440 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001e52fb600ec method=org.jetbrains.kotlin.resolve.calls.inference.model.MutableConstraintStorage.getHasContradiction()Z @ 41 c2
+Event: 8.543 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e52fb600ec sp=0x000000c636cf9090
+Event: 8.543 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194422 sp=0x000000c636cf8fb8 mode 2
+Event: 8.543 Thread 0x000001e5233df440 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001e52fb600ec relative=0x00000000000003cc
+Event: 8.543 Thread 0x000001e5233df440 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001e52fb600ec method=org.jetbrains.kotlin.resolve.calls.inference.model.MutableConstraintStorage.getHasContradiction()Z @ 41 c2
+Event: 8.543 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e52fb600ec sp=0x000000c636cf9090
+Event: 8.543 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194422 sp=0x000000c636cf8fb8 mode 2
+Event: 8.545 Thread 0x000001e5233df440 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001e52fb600ec relative=0x00000000000003cc
+Event: 8.545 Thread 0x000001e5233df440 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001e52fb600ec method=org.jetbrains.kotlin.resolve.calls.inference.model.MutableConstraintStorage.getHasContradiction()Z @ 41 c2
+Event: 8.545 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e52fb600ec sp=0x000000c636cf9090
+Event: 8.545 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194422 sp=0x000000c636cf8fb8 mode 2
+Event: 8.545 Thread 0x000001e5233df440 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001e52fb600ec relative=0x00000000000003cc
+Event: 8.545 Thread 0x000001e5233df440 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001e52fb600ec method=org.jetbrains.kotlin.resolve.calls.inference.model.MutableConstraintStorage.getHasContradiction()Z @ 41 c2
+Event: 8.545 Thread 0x000001e5233df440 DEOPT PACKING pc=0x000001e52fb600ec sp=0x000000c636cf9090
+Event: 8.545 Thread 0x000001e5233df440 DEOPT UNPACKING pc=0x000001e52f194422 sp=0x000000c636cf8fb8 mode 2
+
+Classes loaded (20 events):
+Event: 7.578 Loading class java/util/stream/Node$OfPrimitive
+Event: 7.578 Loading class java/util/stream/Node$OfPrimitive done
+Event: 7.579 Loading class java/util/stream/Node$OfInt done
+Event: 7.579 Loading class java/util/stream/Nodes$EmptyNode$OfInt done
+Event: 7.579 Loading class java/util/stream/Nodes$EmptyNode$OfLong
+Event: 7.579 Loading class java/util/stream/Node$OfLong
+Event: 7.579 Loading class java/util/stream/Node$OfLong done
+Event: 7.579 Loading class java/util/stream/Nodes$EmptyNode$OfLong done
+Event: 7.579 Loading class java/util/stream/Nodes$EmptyNode$OfDouble
+Event: 7.579 Loading class java/util/stream/Node$OfDouble
+Event: 7.579 Loading class java/util/stream/Node$OfDouble done
+Event: 7.579 Loading class java/util/stream/Nodes$EmptyNode$OfDouble done
+Event: 7.579 Loading class java/util/stream/Nodes$FixedNodeBuilder
+Event: 7.579 Loading class java/util/stream/Node$Builder
+Event: 7.579 Loading class java/util/stream/Node$Builder done
+Event: 7.579 Loading class java/util/stream/Nodes$ArrayNode
+Event: 7.579 Loading class java/util/stream/Nodes$ArrayNode done
+Event: 7.579 Loading class java/util/stream/Nodes$FixedNodeBuilder done
+Event: 7.619 Loading class java/util/ComparableTimSort
+Event: 7.619 Loading class java/util/ComparableTimSort done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 6.321 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070a4113c0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000070a4113c0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.321 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070a41e498}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000070a41e498) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.322 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070a422c40}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000070a422c40) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.322 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070a426d28}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x000000070a426d28) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.330 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070a495688}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, int, java.lang.Object, java.lang.Object)'> (0x000000070a495688) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.461 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x0000000709e330d8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, int, java.lang.Object)'> (0x0000000709e330d8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.468 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x0000000709e7cdd0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, int, java.lang.Object, java.lang.Object)'> (0x0000000709e7cdd0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.500 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x0000000709fedc38}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, int, java.lang.Object, java.lang.Object)'> (0x0000000709fedc38) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 6.803 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070ab39a38}: 'java.lang.Object java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, long, java.lang.Object)'> (0x000000070ab39a38) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.524 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x00000007105ef910}: 'java.lang.Object java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007105ef910) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.629 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070fef0878}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x000000070fef0878) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.648 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070fcb0190}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070fcb0190) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.748 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070f692940}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000070f692940) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.748 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070f697700}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x000000070f697700) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.753 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070f6b3b50}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070f6b3b50) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.797 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070eb883a0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070eb883a0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.798 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070eb91800}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, int, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070eb91800) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 7.798 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070eb99120}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(int, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070eb99120) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 8.253 Thread 0x000001e5233df440 Exception <a 'java/lang/NoSuchMethodError'{0x000000070ceeedc8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x000000070ceeedc8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 784]
+Event: 8.470 Thread 0x000001e5233df440 Implicit null exception at 0x000001e52fbe0188 to 0x000001e52fbe0404
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 7.906 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 7.906 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 7.923 Executing VM operation: ICBufferFull
+Event: 7.923 Executing VM operation: ICBufferFull done
+Event: 8.011 Executing VM operation: ICBufferFull
+Event: 8.011 Executing VM operation: ICBufferFull done
+Event: 8.024 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 8.024 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 8.028 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 8.028 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+Event: 8.142 Executing VM operation: ICBufferFull
+Event: 8.142 Executing VM operation: ICBufferFull done
+Event: 8.296 Executing VM operation: ICBufferFull
+Event: 8.296 Executing VM operation: ICBufferFull done
+Event: 8.388 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause)
+Event: 8.402 Executing VM operation: G1CollectForAllocation (G1 Evacuation Pause) done
+Event: 8.483 Executing VM operation: ICBufferFull
+Event: 8.483 Executing VM operation: ICBufferFull done
+Event: 8.526 Executing VM operation: HandshakeAllThreads (Deoptimize)
+Event: 8.526 Executing VM operation: HandshakeAllThreads (Deoptimize) done
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (20 events):
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528020a90
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528022790
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528022e10
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528050490
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528050810
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528065310
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e52816c990
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5281ab610
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528296c90
+Event: 7.008 Thread 0x000001e53f6ded40 flushing osr nmethod 0x000001e5283f8610
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528435490
+Event: 7.008 Thread 0x000001e53f6ded40 flushing osr nmethod 0x000001e52843cf10
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e52852a590
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5285aa590
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5285b4810
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e528628910
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e52869cd90
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5286a7a10
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5286e8110
+Event: 7.008 Thread 0x000001e53f6ded40 flushing  nmethod 0x000001e5286eb710
+
+Events (20 events):
+Event: 0.044 Thread 0x000001e5233df440 Thread added: 0x000001e53f78f430
+Event: 0.044 Thread 0x000001e5233df440 Thread added: 0x000001e53f79e6d0
+Event: 0.044 Thread 0x000001e5233df440 Thread added: 0x000001e53f7a2190
+Event: 0.069 Thread 0x000001e5233df440 Thread added: 0x000001e53f791500
+Event: 0.077 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\net.dll
+Event: 0.079 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\nio.dll
+Event: 0.089 Thread 0x000001e53f79e6d0 Thread added: 0x000001e53f9cd8a0
+Event: 0.089 Thread 0x000001e53f79e6d0 Thread added: 0x000001e53f9cdf50
+Event: 0.096 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\zip.dll
+Event: 0.136 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\jimage.dll
+Event: 0.564 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\management.dll
+Event: 0.569 Loaded shared library D:\Programas\Android Studio Meerkat\jbr\bin\management_ext.dll
+Event: 1.883 Thread 0x000001e53f9cdf50 Thread exited: 0x000001e53f9cdf50
+Event: 2.070 Thread 0x000001e53f79e6d0 Thread added: 0x000001e547206a50
+Event: 2.921 Thread 0x000001e547206a50 Thread exited: 0x000001e547206a50
+Event: 2.978 Thread 0x000001e53f7a2190 Thread added: 0x000001e546067df0
+Event: 3.539 Thread 0x000001e546067df0 Thread exited: 0x000001e546067df0
+Event: 3.974 Thread 0x000001e53f9cd8a0 Thread exited: 0x000001e53f9cd8a0
+Event: 4.717 Thread 0x000001e53f7a2190 Thread added: 0x000001e53f9cd850
+Event: 4.727 Thread 0x000001e53f7a2190 Thread added: 0x000001e54747b8c0
+
+
+Dynamic libraries:
+0x00007ff7a62b0000 - 0x00007ff7a62ba000 	D:\Programas\Android Studio Meerkat\jbr\bin\java.exe
+0x00007ff87de40000 - 0x00007ff87e0a8000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff87cff0000 - 0x00007ff87d0b9000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff87aaf0000 - 0x00007ff87aee1000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff87b220000 - 0x00007ff87b36b000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff873190000 - 0x00007ff8731a8000 	D:\Programas\Android Studio Meerkat\jbr\bin\jli.dll
+0x00007ff8722b0000 - 0x00007ff8722cb000 	D:\Programas\Android Studio Meerkat\jbr\bin\VCRUNTIME140.dll
+0x00007ff87d450000 - 0x00007ff87d616000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff87a7d0000 - 0x00007ff87a7f7000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff87d710000 - 0x00007ff87d73b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff87b0f0000 - 0x00007ff87b21b000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff87a720000 - 0x00007ff87a7c3000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff8632d0000 - 0x00007ff863563000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7824_none_3e0870b2e3345462\COMCTL32.dll
+0x00007ff87dd50000 - 0x00007ff87ddf9000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff87c530000 - 0x00007ff87c561000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff8747a0000 - 0x00007ff8747ac000 	D:\Programas\Android Studio Meerkat\jbr\bin\vcruntime140_1.dll
+0x00007ff855a90000 - 0x00007ff855b1d000 	D:\Programas\Android Studio Meerkat\jbr\bin\msvcp140.dll
+0x00007ff801a40000 - 0x00007ff8026d6000 	D:\Programas\Android Studio Meerkat\jbr\bin\server\jvm.dll
+0x00007ff87c840000 - 0x00007ff87c8f4000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff87d740000 - 0x00007ff87d7e6000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff87c410000 - 0x00007ff87c528000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff87bbe0000 - 0x00007ff87bc54000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff87a580000 - 0x00007ff87a5de000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ff872710000 - 0x00007ff87271b000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff8676b0000 - 0x00007ff8676e5000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff87a560000 - 0x00007ff87a574000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ff8794c0000 - 0x00007ff8794db000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ff874670000 - 0x00007ff87467a000 	D:\Programas\Android Studio Meerkat\jbr\bin\jimage.dll
+0x00007ff878890000 - 0x00007ff878ad2000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ff87d0c0000 - 0x00007ff87d446000 	C:\WINDOWS\System32\combase.dll
+0x00007ff87cf10000 - 0x00007ff87cfe7000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ff84fad0000 - 0x00007ff84fb0b000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ff87aef0000 - 0x00007ff87af95000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ff871ab0000 - 0x00007ff871ad0000 	D:\Programas\Android Studio Meerkat\jbr\bin\java.dll
+0x00007ff871a90000 - 0x00007ff871aa8000 	D:\Programas\Android Studio Meerkat\jbr\bin\zip.dll
+0x00007ff87bcb0000 - 0x00007ff87c402000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ff87a980000 - 0x00007ff87aaea000 	C:\WINDOWS\System32\wintypes.dll
+0x00007ff87b370000 - 0x00007ff87bbd3000 	C:\WINDOWS\System32\windows.storage.dll
+0x00007ff87ca20000 - 0x00007ff87cb16000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ff87c600000 - 0x00007ff87c667000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ff87a640000 - 0x00007ff87a669000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ff874260000 - 0x00007ff874270000 	D:\Programas\Android Studio Meerkat\jbr\bin\net.dll
+0x00007ff8733f0000 - 0x00007ff873517000 	C:\WINDOWS\SYSTEM32\WINHTTP.dll
+0x00007ff879a30000 - 0x00007ff879a9b000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ff8719a0000 - 0x00007ff8719b6000 	D:\Programas\Android Studio Meerkat\jbr\bin\nio.dll
+0x00007ff872e30000 - 0x00007ff872e39000 	D:\Programas\Android Studio Meerkat\jbr\bin\management.dll
+0x00007ff871a80000 - 0x00007ff871a8b000 	D:\Programas\Android Studio Meerkat\jbr\bin\management_ext.dll
+0x00007ff87c5f0000 - 0x00007ff87c5f8000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ff8748b0000 - 0x00007ff8748c0000 	D:\Programas\Android Studio Meerkat\jbr\bin\verify.dll
+
+JVMTI agents: none
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;D:\Programas\Android Studio Meerkat\jbr\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7824_none_3e0870b2e3345462;D:\Programas\Android Studio Meerkat\jbr\bin\server
+
+VM Arguments:
+java_command: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler -Xallow-no-source-files -classpath D:\Programas\Andorid_SDK\platforms\android-36\android.jar;D:\Programas\Andorid_SDK\build-tools\36.0.0\core-lambda-stubs.jar;D:\Akari\20_Work_Projects\Active\Android_Proyects\Batty\app\build\intermediates\compile_r_class_jar\debug\generateDebugRFile\R.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\737901ee60ad82a1bc36678fa39f60fa\workspace\transformed\hilt-navigation-compose-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\40b8ee790129c4c6a5b5b4fb47cc6766\workspace\transformed\hilt-lifecycle-viewmodel-compose-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\433b07252dbacf330c3729b4705a8fc8\workspace\transformed\hilt-lifecycle-viewmodel-1.3.0-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\0c766333564c3f5008fea169a47d8817\workspace\transformed\hilt-android-2.59.2-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f3e99ca05b3cddbf9f372a1632721f19\workspace\transformed\navigation-runtime-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\94b6990f09ec80eceb9d5a00ad94b67b\workspace\transformed\navigation-common-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\36a90ed5cb88358b0f6958e0aa73d30f\workspace\transformed\navigation-compose-release-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\760071605c07fb4506af4b5db76bde3c\workspace\transformed\material3-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\3558c84fdd6d6d817089e6f003d518d1\workspace\transformed\foundation-layout-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\a78bea6974f2ec2f3582923b02ee4ec9\workspace\transformed\material-ripple-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\b2eabd2aa54cdd8e506e949ce0077cac\workspace\transformed\foundation-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\67589885d6f229ee53ddefe0638345ca\workspace\transformed\animation-core-api.jar;C:\Users\vener\.gradle\caches\9.2.1\transforms\f43c18ce9c6f8a
+java_class_path (initial): C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compiler-embeddable\2.3.10\6e349e33b398eb4f0227ceb5b99db2535a982670\kotlin-compiler-embeddable-2.3.10.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\2.3.10\8b80e2f80a3b7daa99c16017f91d4c72cd8b31a6\kotlin-stdlib-2.3.10.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-script-runtime\2.3.10\1964f711f069f184f7848971fdcbdd15f26ef79\kotlin-script-runtime-2.3.10.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\1.6.10\1cbe9c92c12a94eea200d23c2bbaedaf3daf5132\kotlin-reflect-1.6.10.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-daemon-embeddable\2.3.10\5d578a9d479980dcf1144e721cb3502f0c23316e\kotlin-daemon-embeddable-2.3.10.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.8.0\ac1dc37a30a93150b704022f8d895ee1bd3a36b3\kotlinx-coroutines-core-jvm-1.8.0.jar;C:\Users\vener\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 266338304                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4261412864                                {product} {ergonomic}
+   size_t MaxNewSize                               = 2556428288                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4261412864                             {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Release file:
+JAVA_VERSION="21.0.9" 
+MODULES="java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.hotspot.agent jdk.httpserver jdk.internal.ed jdk.internal.le jdk.internal.vm.ci jdk.jartool jdk.javadoc jdk.jcmd jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jsobject jdk.localedata jdk.management jdk.management.agent jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom" 
+IMPLEMENTOR="JetBrains s.r.o." 
+JAVA_RUNTIME_VERSION="21.0.9+-14649483-b1163.86" 
+LIBC="default" 
+OS_ARCH="x86_64" 
+OS_NAME="Windows" 
+SOURCE=".:git:554d0c326095" 
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-23
+PATH=C:\Program Files\OpenSSH\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\Programas\NodeJs\;C:\ProgramData\chocolatey\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-23\bin;D:\Programas\Git\Git\cmd;D:\Programas\StrawberryPerl\c\bin;D:\Programas\StrawberryPerl\perl\site\bin;D:\Programas\StrawberryPerl\perl\bin;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\PowerShell\7\;C:\Program Files\dotnet\;C:\Users\vener\AppData\Local\MEGAcmd;D:\Programas\7-Zip;;C:\Program Files\GnuPG\bin;C:\Users\vener\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\vener\AppData\Local\Programs\Python\Python313\;C:\Users\vener\AppData\Local\Programs\oh-my-posh\bin\;C:\Users\vener\AppData\Local\Microsoft\WindowsApps;C:\Users\vener\AppData\Roaming\npm;D:\Programas\VisualStudio Code\Microsoft VS Code\bin;C:\Program Files\Java\jdk-23\bin;D:\Programas\MikTex\miktex\bin\x64\;C:\Users\vener\AppData\Local\MEGAcmd;D:\Programas\Andorid_SDK\platform-tools;;D:\Programas\Warp\bin;C:\Users\vener\AppData\Local\PowerToys\DSCModules\
+USERNAME=vener
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+TMP=C:\Users\vener\AppData\Local\Temp
+TEMP=C:\Users\vener\AppData\Local\Temp
+
+
+
+
+Periodic native trim disabled
+
+JNI global refs:
+JNI global refs: 14, weak refs: 1
+
+JNI global refs memory usage: 835, weak refs: 833
+
+Process memory usage:
+Resident Set Size: 526296K (3% of 16641840K total physical memory with 662160K free physical memory)
+
+OOME stack traces (most recent first):
+Classloader memory used:
+Loader jdk.internal.loader.ClassLoaders$AppClassLoader                                 : 61432K
+Loader bootstrap                                                                       : 12182K
+Loader java.net.URLClassLoader                                                         : 710K
+Loader jdk.internal.jrtfs.JrtFileSystemProvider$JrtFsLoader                            : 325K
+Loader jdk.internal.loader.ClassLoaders$PlatformClassLoader                            : 67960B
+
+Classes loaded by more than one classloader:
+Class jdk.internal.jimage.BasicImageReader                                            : loaded 2 times (x 95B)
+Class jdk.internal.jimage.decompressor.StringSharingDecompressorFactory               : loaded 2 times (x 74B)
+Class jdk.internal.jrtfs.JrtFileSystemProvider                                        : loaded 2 times (x 101B)
+Class jdk.internal.jimage.ImageLocation                                               : loaded 2 times (x 90B)
+Class jdk.internal.jimage.ImageBufferCache$1                                          : loaded 2 times (x 83B)
+Class jdk.internal.jimage.ImageBufferCache$2                                          : loaded 2 times (x 91B)
+Class jdk.internal.jimage.ImageHeader                                                 : loaded 2 times (x 71B)
+Class jdk.internal.jimage.decompressor.ResourceDecompressor                           : loaded 2 times (x 70B)
+Class jdk.internal.jimage.ImageStringsReader                                          : loaded 2 times (x 80B)
+Class jdk.internal.jimage.ImageReader                                                 : loaded 2 times (x 75B)
+Class jdk.internal.jimage.ImageReader$SharedImageReader                               : loaded 2 times (x 95B)
+Class jdk.internal.jimage.decompressor.ResourceDecompressorFactory                    : loaded 2 times (x 74B)
+Class jdk.internal.jimage.ImageReader$Node                                            : loaded 2 times (x 84B)
+Class jdk.internal.jimage.BasicImageReader$1                                          : loaded 2 times (x 77B)
+Class jdk.internal.jimage.decompressor.Decompressor                                   : loaded 2 times (x 72B)
+Class jdk.internal.jimage.ImageBufferCache                                            : loaded 2 times (x 71B)
+Class jdk.internal.jrtfs.JrtPath                                                      : loaded 2 times (x 118B)
+Class jdk.internal.jimage.decompressor.ResourceDecompressorRepository                 : loaded 2 times (x 71B)
+Class jdk.internal.jimage.ImageReader$Directory                                       : loaded 2 times (x 84B)
+Class jdk.internal.jimage.decompressor.ZipDecompressorFactory                         : loaded 2 times (x 74B)
+Class jdk.internal.jimage.decompressor.ZipDecompressor                                : loaded 2 times (x 75B)
+Class jdk.internal.jimage.ImageStrings                                                : loaded 2 times (x 70B)
+Class jdk.internal.jrtfs.JrtFileSystem                                                : loaded 2 times (x 102B)
+Class jdk.internal.jimage.decompressor.CompressedResourceHeader                       : loaded 2 times (x 71B)
+Class jdk.internal.jimage.decompressor.ResourceDecompressor$StringsProvider           : loaded 2 times (x 70B)
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 26100 (10.0.26100.7705)
+OS uptime: 5 days 11:58 hours
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 165 stepping 2 microcode 0xe2, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, rdtscp, f16c, pku
+Processor Information for the first 12 processors :
+  Max Mhz: 2592, Current Mhz: 2592, Mhz Limit: 2592
+
+Memory: 4k page, system-wide physical 16251M (646M free)
+TotalPageFile size 21203M (AvailPageFile size 5M)
+current process WorkingSet (physical memory assigned to process): 515M, peak: 517M
+current process commit charge ("private bytes"): 542M, peak: 545M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.9+-14649483-b1163.86) for windows-amd64 JRE (21.0.9+-14649483-b1163.86), built on 2025-12-30T22:08:35Z by "builder" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.
