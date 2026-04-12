@@ -9,8 +9,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BarChart
+import androidx.compose.material.icons.outlined.Battery4Bar
+import androidx.compose.material.icons.outlined.BatteryStd
+import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material.icons.outlined.ElectricBolt
+import androidx.compose.material.icons.outlined.PhoneAndroid
+import androidx.compose.material.icons.outlined.Thermostat
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,12 +36,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.habitiora.batty.R
 import com.habitiora.batty.domain.model.BatteryState
+import com.habitiora.batty.domain.model.BatteryStats
+import com.habitiora.batty.domain.model.ChartType
+import com.habitiora.batty.domain.model.TimeRange
+import com.habitiora.batty.ui.components.charts.BatteryChartByType
 import com.habitiora.batty.ui.components.charts.line.BatteryChartConfig
 import com.habitiora.batty.ui.components.charts.line.BatteryHistoryLineChart
 import com.habitiora.batty.ui.components.charts.line.BatteryMetric
+import com.habitiora.batty.ui.utils.StatsUiState
 import com.habitiora.batty.utils.toDecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -43,6 +57,425 @@ fun BatteryHistoryScreen(
     modifier: Modifier = Modifier,
     viewModel: BatteryHistoryViewModel = hiltViewModel()
 ) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    when (val state = uiState) {
+        is StatsUiState.Loading -> CircularProgressIndicator()
+
+        is StatsUiState.Error -> Text(state.message, color = MaterialTheme.colorScheme.error)
+
+        is StatsUiState.Success -> StatsContent(
+            state = state,
+            onRangeSelected = viewModel::selectTimeRange,
+            onChartSelected = viewModel::selectChartType,
+            modifier = modifier
+        )
+    }
+}
+
+
+@Composable
+private fun StatsContent(
+    state: StatsUiState.Success,
+    onRangeSelected: (TimeRange) -> Unit,
+    onChartSelected: (ChartType) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // ── Time range ─────────────────────────────────────────────────
+        TimeRangeSelector(selected = state.selectedRange, onSelected = onRangeSelected)
+
+        if (!state.hasData) {
+            EmptyState()
+            return@Column
+        }
+
+        // ── Chart ──────────────────────────────────────────────────────
+        ChartCard(state = state, onChartSelected = onChartSelected)
+
+        // ── Overview ───────────────────────────────────────────────────
+        OverviewRow(stats = state.stats)
+
+        // ── Detail cards ───────────────────────────────────────────────
+        LevelStatsCard(stats = state.stats)
+        TemperatureStatsCard(stats = state.stats)
+        PowerStatsCard(stats = state.stats)
+        SystemUsageCard(stats = state.stats)
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Time range
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun TimeRangeSelector(selected: TimeRange, onSelected: (TimeRange) -> Unit) {
+    SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+        TimeRange.entries.forEachIndexed { index, range ->
+            SegmentedButton(
+                selected  = selected == range,
+                onClick   = { onSelected(range) },
+                shape     = SegmentedButtonDefaults.itemShape(index, TimeRange.entries.size),
+                label     = { Text(range.label) }
+            )
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Chart card
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun ChartCard(
+    state: StatsUiState.Success,
+    onChartSelected: (ChartType) -> Unit,
+) {
+    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 12.dp)) {
+
+            // Chart type selector — tabs compactos
+            ChartTypeSelector(
+                selected    = state.selectedChart,
+                onSelected  = onChartSelected
+            )
+
+            Spacer(Modifier.height(12.dp))
+
+            // Animated crossfade entre series
+            AnimatedContent(
+                targetState = state.selectedChart,
+                transitionSpec = {
+                    fadeIn() togetherWith fadeOut()
+                },
+                label = "chart_type_transition"
+            ) { chartType ->
+                BatteryChartByType(
+                    type     = chartType,
+                    data     = state.chartData,
+                    modifier = Modifier.fillMaxWidth(),
+                    height   = 200.dp
+                )
+            }
+
+            // Summary de la serie actual bajo el chart
+            Spacer(Modifier.height(8.dp))
+            ChartSeriesSummary(state = state)
+        }
+    }
+}
+
+@Composable
+private fun ChartTypeSelector(selected: ChartType, onSelected: (ChartType) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        ChartType.entries.forEach { type ->
+            val isSelected = type == selected
+            FilterChip(
+                selected = isSelected,
+                onClick  = { onSelected(type) },
+                label    = { Text(type.label, style = MaterialTheme.typography.labelMedium) },
+                leadingIcon = if (isSelected) {
+                    {
+                        Icon(
+                            Icons.Outlined.Check,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp)
+                        )
+                    }
+                } else null
+            )
+        }
+    }
+}
+
+@Composable
+private fun ChartSeriesSummary(state: StatsUiState.Success) {
+    val stats = state.stats
+    val (minLabel, avgLabel, maxLabel) = when (state.selectedChart) {
+        ChartType.LEVEL -> Triple(
+            "${stats.minLevel}%",
+            "${"%.1f".format(stats.avgLevel)}%",
+            "${stats.maxLevel}%"
+        )
+        ChartType.TEMPERATURE -> Triple(
+            "${"%.1f".format(stats.minTemperature)}°C",
+            "${"%.1f".format(stats.avgTemperature)}°C",
+            "${"%.1f".format(stats.maxTemperature)}°C"
+        )
+        ChartType.CURRENT -> Triple(
+            "—",
+            "${"%.0f".format(stats.avgCurrentMa)} mA",
+            "${"%.0f".format(stats.peakCurrentMa)} mA"
+        )
+    }
+
+    HorizontalDivider()
+    Spacer(Modifier.height(8.dp))
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        if (state.selectedChart != ChartType.CURRENT) {
+            MiniStat(label = "Min", value = minLabel)
+        }
+        MiniStat(label = "Avg", value = avgLabel)
+        MiniStat(label = if (state.selectedChart == ChartType.CURRENT) "Peak" else "Max", value = maxLabel)
+        MiniStat(label = "Samples", value = "${stats.totalSamples}")
+    }
+}
+
+@Composable
+private fun MiniStat(label: String, value: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(value, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+        Text(label, style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Overview row — 3 KPIs
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun OverviewRow(stats: BatteryStats) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        KpiCard(
+            icon    = Icons.Outlined.BatteryStd,
+            label   = "Avg Level",
+            value   = "${"%.0f".format(stats.avgLevel)}%",
+            modifier = Modifier.weight(1f)
+        )
+        KpiCard(
+            icon    = Icons.Outlined.Thermostat,
+            label   = "Avg Temp",
+            value   = "${"%.1f".format(stats.avgTemperature)}°C",
+            modifier = Modifier.weight(1f)
+        )
+        KpiCard(
+            icon    = Icons.Outlined.ElectricBolt,
+            label   = "Avg Power",
+            value   = "${"%.1f".format(stats.avgWatts)} W",
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+private fun KpiCard(
+    icon: ImageVector,
+    label: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    ElevatedCard(modifier = modifier) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(18.dp)
+            )
+            Text(value, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+            Text(label, style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Detail cards
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun LevelStatsCard(stats: BatteryStats) {
+    StatsDetailCard(
+        title = "Battery Level",
+        icon  = Icons.Outlined.Battery4Bar,
+    ) {
+        StatRow("Average", "${"%.1f".format(stats.avgLevel)}%")
+        StatRow("Minimum", "${stats.minLevel}%")
+        StatRow("Maximum", "${stats.maxLevel}%")
+        StatRow("Variation", "${stats.levelRange}% range")
+    }
+}
+
+@Composable
+private fun TemperatureStatsCard(stats: BatteryStats) {
+    StatsDetailCard(
+        title = "Temperature",
+        icon  = Icons.Outlined.Thermostat,
+    ) {
+        StatRow("Average", "${"%.1f".format(stats.avgTemperature)}°C")
+        StatRow("Minimum", "${"%.1f".format(stats.minTemperature)}°C")
+        StatRow("Maximum", "${"%.1f".format(stats.maxTemperature)}°C")
+        StatRow("Variation", "${"%.1f".format(stats.temperatureRange)}°C range")
+    }
+}
+
+@Composable
+private fun PowerStatsCard(stats: BatteryStats) {
+    StatsDetailCard(
+        title = "Power & Current",
+        icon  = Icons.Outlined.ElectricBolt,
+    ) {
+        StatRow("Avg current", "${"%.0f".format(stats.avgCurrentMa)} mA")
+        StatRow("Peak current", "${"%.0f".format(stats.peakCurrentMa)} mA")
+        StatRow("Avg power", "${"%.2f".format(stats.avgWatts)} W")
+        StatRow("Peak power", "${"%.2f".format(stats.peakWatts)} W")
+        StatRow("Avg voltage", "${"%.0f".format(stats.avgVoltage)} mV")
+    }
+}
+
+@Composable
+private fun SystemUsageCard(stats: BatteryStats) {
+    StatsDetailCard(
+        title = "System Usage",
+        icon  = Icons.Outlined.PhoneAndroid,
+    ) {
+        val screenOnPct     = (stats.screenOnRatio * 100).toInt()
+        val batterySaverPct = (stats.batterySaverRatio * 100).toInt()
+
+        StatRow("Screen on", "$screenOnPct% of samples")
+        UsageBar(
+            ratio = stats.screenOnRatio,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        StatRow("Battery saver", "$batterySaverPct% of samples")
+        UsageBar(
+            ratio = stats.batterySaverRatio,
+            color = MaterialTheme.colorScheme.tertiary
+        )
+
+        Spacer(Modifier.height(4.dp))
+        StatRow("Total snapshots", "${stats.totalSamples}")
+    }
+}
+
+@Composable
+private fun UsageBar(ratio: Float, color: androidx.compose.ui.graphics.Color) {
+    LinearProgressIndicator(
+        progress    = { ratio.coerceIn(0f, 1f) },
+        modifier    = Modifier
+            .fillMaxWidth()
+            .height(4.dp)
+            .padding(top = 2.dp),
+        color       = color,
+        trackColor  = color.copy(alpha = 0.12f)
+    )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared primitives
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun StatsDetailCard(
+    title: String,
+    icon: ImageVector,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    ElevatedCard(modifier = modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Icon(icon, contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(18.dp))
+                Text(title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold)
+            }
+            HorizontalDivider(modifier = Modifier.padding(vertical = 2.dp))
+            content()
+        }
+    }
+}
+
+@Composable
+private fun StatRow(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 2.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(value,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Medium)
+    }
+}
+
+@Composable
+private fun EmptyState() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                Icons.Outlined.BarChart,
+                contentDescription = null,
+                modifier = Modifier.size(48.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+            )
+            Text(
+                "No data for this period",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                "Enable monitoring to start collecting data",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+        }
+    }
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+/*@Composable
+private fun BatteryHistoryContent(
+    batteryHistory: List<BatteryState>,
+    selectedMetrics: List<BatteryMetric>,
+    isChartExpanded: Boolean,
+){
     val batteryHistory by viewModel.batteryHistory.collectAsState()
     var selectedBatteryState by remember { mutableStateOf<BatteryState?>(null) }
     var selectedMetrics by remember {
@@ -51,7 +484,6 @@ fun BatteryHistoryScreen(
     var isChartExpanded by remember { mutableStateOf(false) }
 
     val colorScheme = MaterialTheme.colorScheme
-
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -117,7 +549,7 @@ fun BatteryHistoryScreen(
             }
         }
     }
-}
+}*/
 
 @Composable
 private fun HeaderSection(
@@ -573,7 +1005,9 @@ private fun DetailInfoCard(
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(

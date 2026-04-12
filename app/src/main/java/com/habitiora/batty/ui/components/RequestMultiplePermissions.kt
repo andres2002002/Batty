@@ -55,10 +55,10 @@ fun RequestMultiplePermissions(
     ) { granted ->
         val request = currentRequest
         if (granted && request != null) {
-            Timber.d("Permission granted: ${request.code}")
+            Timber.d("Permission granted: ${request.name}")
             processNext()
         } else if (request != null) {
-            Timber.d("Permission denied: ${request.code}")
+            Timber.d("Permission denied: ${request.name}")
             handleDenied(request)
         }
     }
@@ -71,10 +71,10 @@ fun RequestMultiplePermissions(
         if (request != null) {
             // Verificar si se concedió tras volver de settings
             if (!PermissionsHelper.needs(context, request)) {
-                Timber.d("DND permission granted: ${request.code}")
+                Timber.d("DND permission granted: ${request.name}")
                 processNext()
             } else {
-                Timber.d("DND permission denied: ${request.code}")
+                Timber.d("DND permission denied: ${request.name}")
                 handleDenied(request)
             }
         }
@@ -86,11 +86,11 @@ fun RequestMultiplePermissions(
 
         if (request != null && !isProcessing) {
             isProcessing = true
-            Timber.d("Processing permission ${currentIndex + 1}/${requests.size}: ${request.code}")
+            Timber.d("Processing permission ${currentIndex + 1}/${requests.size}: ${request.name}")
 
             // Verificar si ya tiene el permiso
             if (!PermissionsHelper.needs(context, request)) {
-                Timber.d("Permission already granted: ${request.code}")
+                Timber.d("Permission already granted: ${request.name}")
                 processNext()
                 return@LaunchedEffect
             }
@@ -98,7 +98,7 @@ fun RequestMultiplePermissions(
             // Solicitar permiso según el tipo
             when (request) {
                 is PermissionRequest.NotificationAccess -> {
-                    PermissionsHelper.checkAndRequestPermission(context,request.code!!, runtimeLauncher){}
+                    PermissionsHelper.checkAndRequestPermission(context,request.code, runtimeLauncher){}
                 }
 
                 is PermissionRequest.DndAccess -> {

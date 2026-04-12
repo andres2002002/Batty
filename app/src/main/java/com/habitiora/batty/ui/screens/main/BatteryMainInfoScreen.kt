@@ -27,6 +27,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -34,11 +35,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -49,7 +47,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,12 +54,14 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.habitiora.batty.R
+import com.habitiora.batty.domain.model.BatteryPlugged
 import com.habitiora.batty.domain.model.BatteryState
 import com.habitiora.batty.services.PermissionRequest
-import com.habitiora.batty.services.PermissionsHelper
 import com.habitiora.batty.ui.components.RequestPermission
+import com.habitiora.batty.ui.utils.BatteryUiState
 import com.habitiora.batty.utils.toDecimalFormat
 
 @Composable
@@ -70,20 +69,48 @@ fun BatteryMainInfo(
     modifier: Modifier = Modifier,
     viewModel: BatteryInfoViewModel = hiltViewModel()
 ) {
-    val state by viewModel.batteryState.collectAsState()
-    val isMonitoring by viewModel.isMonitoring.collectAsState()
-    val colorScheme = MaterialTheme.colorScheme
-    val context = LocalContext.current
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if (isMonitoring){
+    if (uiState is BatteryUiState.Success && (uiState as BatteryUiState.Success).isMonitoring){
         RequestPermission(
             request = PermissionRequest.NotificationAccess,
-            onGranted = { viewModel.startBatteryMonitorService(context)},
+            onGranted = { viewModel.startService()},
             onDenied = { viewModel.toggleMonitoring(false)}
         )
     }
 
+    when (uiState) {
+        is BatteryUiState.Success -> {
+            BatteryInfoContent(
+                modifier = modifier,
+                viewModel = viewModel,
+                uiState = uiState as BatteryUiState.Success
+            )
+        }
+        is BatteryUiState.Loading -> {
+            Box(
+                Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) { CircularProgressIndicator() }
+        }
+        is BatteryUiState.Error -> {
+            val state = uiState as BatteryUiState.Error
+            Box(
+                Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) { Text(state.message, color = MaterialTheme.colorScheme.error) }
+        }
+    }
+}
 
+@Composable
+private fun BatteryInfoContent(
+    modifier: Modifier = Modifier,
+    viewModel: BatteryInfoViewModel,
+    uiState: BatteryUiState.Success
+){
+    val colorScheme = MaterialTheme.colorScheme
+    val info = uiState.liveInfo
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -100,10 +127,10 @@ fun BatteryMainInfo(
     ) {
         item {
             BatteryLevelCard(
-                batteryLevel = state?.batteryLevel ?: 0,
-                isCharging = state?.isCharging ?: false,
-                isMonitoring = isMonitoring,
-                chargingType = stringResource(state?.chargingType?.nameId ?: R.string.status_unknown) ,
+                batteryLevel = info.level,
+                isCharging = info.plugged != BatteryPlugged.NONE,
+                isMonitoring = uiState.isMonitoring,
+                chargingType = info.plugged.label,
                 onMonitoringChange = viewModel::toggleMonitoring
             )
         }
@@ -114,29 +141,29 @@ fun BatteryMainInfo(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 TemperatureCard(
-                    temperature = state?.temperature ?: -1,
+                    temperature = info.temperature,
                     modifier = Modifier.weight(1f)
                 )
                 VoltageCard(
-                    voltage = state?.voltage ?: -1,
+                    voltage = info.voltage,
                     modifier = Modifier.weight(1f)
                 )
             }
         }
 
         item {
-            TechnicalInfoCard(state = state)
+            TechnicalInfoCard(state = uiState)
         }
 
         item {
-            SystemStatusCard(state = state)
+            SystemStatusCard(state = uiState)
         }
 
-        if (state?.chargingRate != null || state?.dischargeRate != null || state?.estimatedTimeRemaining != null) {
+/*        if (state?.chargingRate != null || state?.dischargeRate != null || state?.estimatedTimeRemaining != null) {
             item {
                 StatisticsCard(state = state)
             }
-        }
+        }*/
     }
 }
 
@@ -319,30 +346,26 @@ private fun MonitoringStatus(
 }
 @Composable
 private fun TemperatureCard(
-    temperature: Int,
+    temperature: Float,
     modifier: Modifier = Modifier
 ) {
-    val tempCelsius = if (temperature > 0) temperature / 10f else null
-    val colorScheme = MaterialTheme.colorScheme
     val locale = Locale.current.platformLocale
     val tempColor = when {
-        tempCelsius == null -> colorScheme.onSurface
-        tempCelsius > 45 -> Color(0xFFFF5722)
-        tempCelsius > 35 -> Color(0xFFFF9800)
+        temperature > 45 -> Color(0xFFFF5722)
+        temperature > 35 -> Color(0xFFFF9800)
         else -> Color(0xFF4CAF50)
     }
 
     val subtitle = when {
-        tempCelsius == null -> R.string.temperature_not_available
-        tempCelsius > 45 -> R.string.temperature_very_warm
-        tempCelsius > 35 -> R.string.temperature_warm
-        tempCelsius < 10 -> R.string.temperature_cold
+        temperature > 45 -> R.string.temperature_very_warm
+        temperature > 35 -> R.string.temperature_warm
+        temperature < 10 -> R.string.temperature_cold
         else -> R.string.temperature_normal
     }
     InfoCard(
         modifier = modifier,
         title = stringResource(id = R.string.temperature_title),
-        value = tempCelsius?.let { "${it.toDecimalFormat(locale, 1)}°C" } ?: "--",
+        value = "${temperature.toDecimalFormat(locale, 1)}°C",
         icon = ImageVector.vectorResource(id = R.drawable.round_thermostat_24),
         iconColor = tempColor,
         subtitle = stringResource(id = subtitle)
@@ -374,7 +397,7 @@ private fun VoltageCard(
 }
 
 @Composable
-private fun TechnicalInfoCard(state: BatteryState?) {
+private fun TechnicalInfoCard(state: BatteryUiState.Success) {
     val colorScheme = MaterialTheme.colorScheme
 
     Card(
@@ -416,17 +439,17 @@ private fun TechnicalInfoCard(state: BatteryState?) {
             ) {
                 TechnicalInfoItem(
                     label = stringResource(id = R.string.current_title),
-                    value = state?.current?.let { "${it/1000}mA" } ?: "--",
+                    value = state.liveInfo.currentNowMa.let { "${it}mA" },
                     modifier = Modifier.weight(1f)
                 )
                 TechnicalInfoItem(
                     label = stringResource(id = R.string.current_capacity),
-                    value = state?.capacity?.let { "${it / 1000}mAh" } ?: "--",
+                    value = state.liveInfo.chargeCounterMah.let { "${it}mAh" },
                     modifier = Modifier.weight(1f)
                 )
                 TechnicalInfoItem(
                     label = stringResource(id = R.string.health_device),
-                    value = state?.batteryHealth?.nameId?.let { stringResource(id = it) } ?: "--",
+                    value = state.liveInfo.health.nameId.let { stringResource(id = it) },
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -435,7 +458,7 @@ private fun TechnicalInfoCard(state: BatteryState?) {
 }
 
 @Composable
-private fun SystemStatusCard(state: BatteryState?) {
+private fun SystemStatusCard(state: BatteryUiState.Success) {
     val colorScheme = MaterialTheme.colorScheme
 
     Card(
@@ -477,12 +500,12 @@ private fun SystemStatusCard(state: BatteryState?) {
             ) {
                 StatusIndicator(
                     label = stringResource(id = R.string.screen_status),
-                    isActive = state?.screenOn ?: false,
+                    isActive = state.liveInfo.isScreenOn,
                     modifier = Modifier.weight(1f)
                 )
                 StatusIndicator(
                     label = stringResource(id = R.string.energy_save_mode),
-                    isActive = state?.powerSaveMode ?: false,
+                    isActive = state.liveInfo.isBatterySaver,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -579,7 +602,9 @@ private fun InfoCard(
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(

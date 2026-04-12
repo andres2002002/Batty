@@ -20,19 +20,20 @@ import com.habitiora.batty.R
 import jakarta.inject.Inject
 import timber.log.Timber
 
-sealed class PermissionRequest(val code: String?){
+sealed class PermissionRequest{
     abstract val name: String
     @get:StringRes abstract val title: Int
     @get:StringRes abstract val description: Int
     @get:StringRes abstract val route: Int
     @SuppressLint("InlinedApi")
-    data object NotificationAccess: PermissionRequest(Manifest.permission.POST_NOTIFICATIONS){
+    data object NotificationAccess: PermissionRequest(){
+        const val code: String = Manifest.permission.POST_NOTIFICATIONS
         override val name: String = "Notification Access"
         override val title: Int = R.string.message_notification_title
         override val description: Int = R.string.message_notification_description
         override val route: Int = R.string.message_notification_route
     }
-    data object DndAccess : PermissionRequest(null){
+    data class DndAccess(val channelId: String) : PermissionRequest(){
         override val name: String = "DND Access"
         override val title: Int = R.string.message_dnd_title
         override val description: Int = R.string.message_dnd_description
@@ -72,21 +73,26 @@ object PermissionsHelper {
     fun needs(ctx: Context, request: PermissionRequest): Boolean =
         when(request) {
             PermissionRequest.NotificationAccess -> {
+                val code = (request as PermissionRequest.NotificationAccess).code
+                Timber.d("Checking notification permission: $code")
                 // Verificar si se necesita solicitar permiso
                 // si la version es >= 33 y no se tiene permiso
-                isVersionTiramisuOrHigher() && !checkPermission(ctx, request.code!!)
+                isVersionTiramisuOrHigher() && !checkPermission(ctx, code)
             }
 
-            PermissionRequest.DndAccess -> {
+            is PermissionRequest.DndAccess -> {
                 val nm = ctx.getSystemService(NotificationManager::class.java)
                 !nm.isNotificationPolicyAccessGranted
             }
         }
 
     /** Lanza la pantalla de ajustes para DND */
-    fun launchDndSettings(ctx: Context) {
-        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
-        ctx.startActivity(intent)
+    fun launchDndSettings(context: Context, channelId: String) {
+        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
+            putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+            putExtra(Settings.EXTRA_CHANNEL_ID, channelId)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        context.startActivity(intent)
     }
 }
