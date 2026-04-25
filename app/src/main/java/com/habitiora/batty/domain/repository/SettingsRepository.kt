@@ -1,25 +1,16 @@
 package com.habitiora.batty.domain.repository
 
+import com.habitiora.batty.domain.model.AlertPolicy
+import com.habitiora.batty.domain.model.MonitorSettings
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 
 interface SettingsRepository {
-    val isBatteryMonitorEnabled: Flow<Boolean>
-    suspend fun setBatteryMonitorEnabled(enabled: Boolean): Boolean
+    fun observe(): Flow<MonitorSettings>
+    suspend fun get(): MonitorSettings
+    suspend fun update(settings: MonitorSettings)
 
-    val isBatteryNotificationEnabled: Flow<Boolean>
-    suspend fun setBatteryNotificationEnabled(enabled: Boolean): Boolean
-
-    val isNotificationsDNDEnabled: Flow<Boolean>
-    suspend fun setNotificationsDNDEnabled(enabled: Boolean): Boolean
-
-    val batteryThresholdsUnder: Flow<List<Int>>
-    suspend fun addBatteryThresholdsUnder(level: Int): Boolean
-    suspend fun updateBatteryThresholdsUnder(currentLevel: Int, newLevel: Int): Boolean
-    suspend fun removeBatteryThresholdsUnder(level: Int): Boolean
-    val batteryThresholdsOver: Flow<List<Int>>
-    suspend fun addBatteryThresholdsOver(level: Int): Boolean
-    suspend fun updateBatteryThresholdsOver(currentLevel: Int, newLevel: Int): Boolean
-    suspend fun removeBatteryThresholdsOver(level: Int): Boolean
-
+    // Helpers granulares para evitar read-modify-write desde la UI
+    suspend fun setMonitorBattery(enabled: Boolean)
+    suspend fun setAlertPolicy(alertPolicy: AlertPolicy)
+    suspend fun setStartOnBoot(enabled: Boolean)
 }

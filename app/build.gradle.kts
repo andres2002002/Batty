@@ -20,12 +20,12 @@ kotlin{
 
 android {
     namespace = "com.habitiora.batty"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.habitiora.batty"
         minSdk = 28
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -119,6 +119,9 @@ dependencies {
 
     //MPA charts
     implementation(libs.github.mpandroidchart)
+
+    //Vico
+    implementation(libs.vico.compose.m3)
 
     //serialización
     implementation(libs.kotlinx.serialization.core)

@@ -21,8 +21,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.habitiora.batty.R
-import com.habitiora.batty.ui.screens.main.BatteryMainInfo
+import com.habitiora.batty.ui.screens.dashboard.DashboardScreen
 import com.habitiora.batty.ui.screens.history.BatteryHistoryScreen
+import com.habitiora.batty.ui.screens.main.BatteryMainInfo
 import com.habitiora.batty.ui.screens.info.InfoScreen
 import com.habitiora.batty.ui.screens.settings.SettingsScreen
 
@@ -35,7 +36,7 @@ fun MainNavHost(
         startDestination = Screens.BatteryMainInfo.route
     ) {
         composable(Screens.BatteryMainInfo.route) {
-            BatteryMainInfo()
+            DashboardScreen()
         }
         composable(Screens.History.route) {
             BatteryHistoryScreen()

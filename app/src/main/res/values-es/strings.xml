@@ -34,6 +34,15 @@
     <string name="current_title">Corriente</string>
     <string name="current_capacity">Capacidad Actual</string>
 
+    <!-- Alert Policies -->
+    <string name="alert_policy_title">Política de Alertas</string>
+    <string name="alert_policy_only_critical">Sólo Críticas</string>
+    <string name="alert_policy_critical_description">Sólo enviar alertas críticas</string>
+    <string name="alert_policy_all">Todas</string>
+    <string name="alert_policy_all_description">Enviar todas las alertas</string>
+    <string name="alert_policy_disabled">Desactivado</string>
+    <string name="alert_policy_disabled_description">No enviar alertas</string>
+
     <!-- Battery Health -->
     <string name="health_device">Salud</string>
     <string name="health_unknown">Desconocido</string>
