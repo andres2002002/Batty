@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,7 +33,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.domain.model.ServiceErrorCause
 import com.habitiora.batty.domain.model.ServiceState
 import com.habitiora.batty.ui.components.card.BattyCard
@@ -192,18 +196,44 @@ private fun MonitorStateControl(
                         modifier = Modifier.size(20.dp)
                     )
                 }
-                Switch(
+                MonitorSwitch(
                     checked = false,
-                    onCheckedChange = onToggle,
+                    onCheckedChange = onToggle
                 )
             }
         }
 
         ServiceState.Active, ServiceState.Inactive -> {
-            Switch(
+            MonitorSwitch(
                 checked = serviceState == ServiceState.Active,
                 onCheckedChange = onToggle
             )
         }
     }
+}
+
+@Composable
+private fun MonitorSwitch(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+){
+    Switch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        thumbContent = {
+            if (checked) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.batty_icon_open),
+                    contentDescription = "Active",
+                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                )
+            } else {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.batty_icon_close),
+                    contentDescription = "Inactive",
+                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                )
+            }
+        }
+    )
 }

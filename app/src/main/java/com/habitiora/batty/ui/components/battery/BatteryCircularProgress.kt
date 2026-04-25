@@ -9,6 +9,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -59,35 +61,51 @@ fun BatteryCircularProgress(
         contentAlignment = Alignment.Center,
         modifier = modifier.size(size)
     ) {
+        // Track Background Gauge
         CircularProgressIndicator(
-            progress = { progress },
+            progress = { 1f },
             modifier = Modifier.size(size),
-            color = levelColor,
-            trackColor = trackColor,
+            color = MaterialTheme.colorScheme.surfaceContainerHighest,
             strokeWidth = strokeWidth,
             strokeCap = StrokeCap.Round,
         )
 
-        Row(verticalAlignment = Alignment.Bottom) {
-            AnimatedContent(
-                targetState = clampedLevel,
-                transitionSpec = {
-                    fadeIn(tween(300)) togetherWith fadeOut(tween(150))
-                },
-                label = "level_number",
-            ) { animatedLevel ->
+        // Progress Indicator
+        CircularProgressIndicator(
+            progress = { progress },
+            modifier = Modifier.size(size),
+            color = levelColor,
+            trackColor = Color.Transparent,
+            strokeWidth = strokeWidth,
+            strokeCap = StrokeCap.Round,
+        )
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Row(verticalAlignment = Alignment.Top) {
+                AnimatedContent(
+                    targetState = clampedLevel,
+                    transitionSpec = { fadeIn(tween(400)) togetherWith fadeOut(tween(200)) },
+                    label = "level_number",
+                ) { animatedLevel ->
+                    Text(
+                        text = animatedLevel.toString(),
+                        style = MaterialTheme.typography.displayLarge.copy(
+                            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                        ),
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                }
                 Text(
-                    text = animatedLevel.toString(),
-                    style = MaterialTheme.typography.displayLarge,
+                    text = "%",
+                    style = MaterialTheme.typography.headlineMedium,
                     color = levelColor,
+                    modifier = Modifier.padding(top = 4.dp, start = 4.dp),
                 )
             }
-
             Text(
-                text = "%",
-                style = MaterialTheme.typography.headlineMedium,
-                color = levelColor,
-                modifier = Modifier.padding(bottom = 8.dp, start = 4.dp),
+                text = "Battery Level",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

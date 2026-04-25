@@ -4,17 +4,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
+import com.habitiora.batty.data.model.ColorUI
+import com.habitiora.batty.data.model.getInterpolatedColor
 
 /**
  * Fuente de verdad única para el color funcional del nivel de batería.
  * Mapeado estrictamente a la paleta semántica de Material 3.
  */
 @Composable
-fun batteryLevelColor(level: Int): Color = when {
-    level >= 60 -> MaterialTheme.colorScheme.primary
-    level >= 25 -> MaterialTheme.colorScheme.secondary
-    else -> MaterialTheme.colorScheme.error
-}
+fun batteryLevelColor(level: Int): Color = getInterpolatedColor(
+    level / 100f, listOf(
+        ColorUI.Red.color, ColorUI.Yellow.color, ColorUI.Green.color
+    )
+)
 
 /**
  * Variante de track (fondo) usando los contenedores nativos de M3.

@@ -36,8 +36,8 @@ object BattyCardDefaults {
 
     // Espaciados según la regla: denso interno, aireado externo
     val SoftPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
-    val ContentPadding = PaddingValues(all = 20.dp) // Más aire interno
-    val HeaderPadding = PaddingValues(top = 20.dp, bottom = 12.dp, start = 20.dp, end = 20.dp)
+    val ContentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 20.dp) // Más aire interno
+    val HeaderPadding = PaddingValues(top = 20.dp, bottom = 0.dp, start = 20.dp, end = 20.dp)
     // Espaciado entre elementos principales del Dashboard
     val InterGroupSpacing = 16.dp
     // Espaciado denso interno para datos

@@ -12,10 +12,10 @@ object BatteryFormatter {
         if (celsius <= 0f) null else "%.1f °C".format(celsius)
 
     fun voltage(millivolts: Int): String? =
-        if (millivolts <= 0) null else "%,d mV".format(millivolts).replace(",", " ")
+        if (millivolts <= 0) null else "%.2f V".format(millivolts/1000f)
 
     fun current(milliamps: Float): String? =
-        if (milliamps < 0f) null else "%,d mA".format(abs(milliamps).toInt()).replace(",", " ")
+        if (milliamps < 0f) null else "%.3f A".format(milliamps/1000f)
 
     fun watts(w: Float): String? =
         if (w <= 0f) null else "%.2f W".format(w)

@@ -27,10 +27,12 @@ import com.habitiora.batty.ui.utils.BatteryFormatter
  */
 @Composable
 fun ElectricalCard(
+    voltageMv: Int,
     currentNowMa: Float,
     currentAvgMa: Float,
     watts: Float,
     chargeCounterMah: Int,
+    fullCapacityMah: Int,
     estimatedMinutesRemaining: Int,
     isCharging: Boolean,
     modifier: Modifier = Modifier,
@@ -41,17 +43,25 @@ fun ElectricalCard(
         header = { SectionHeader(title = "Electrical") },
     ) {
         InfoRow(
+            label = "Voltage",
+            value = BatteryFormatter.voltage(voltageMv),
+            emphasis = InfoRowEmphasis.ValueHighlighted,
+        )
+        ElectricalCardDivider()
+        InfoRow(
             label = "Current (now)",
             value = BatteryFormatter.current(currentNowMa),
             emphasis = InfoRowEmphasis.ValueHighlighted,
         )
         ElectricalCardDivider()
-        InfoRow(
-            label = "Current (avg)",
-            value = BatteryFormatter.current(currentAvgMa),
-            emphasis = InfoRowEmphasis.ValueHighlighted,
-        )
-        ElectricalCardDivider()
+        if (currentAvgMa > 0f) {
+            InfoRow(
+                label = "Current (avg)",
+                value = BatteryFormatter.current(currentAvgMa),
+                emphasis = InfoRowEmphasis.ValueHighlighted,
+            )
+            ElectricalCardDivider()
+        }
         InfoRow(
             label = "Power",
             value = BatteryFormatter.watts(watts),
@@ -61,6 +71,12 @@ fun ElectricalCard(
         InfoRow(
             label = "Charge remaining",
             value = BatteryFormatter.chargeCounter(chargeCounterMah),
+            emphasis = InfoRowEmphasis.Default,
+        )
+        ElectricalCardDivider()
+        InfoRow(
+            label = "Current capacity",
+            value = BatteryFormatter.chargeCounter(fullCapacityMah),
             emphasis = InfoRowEmphasis.Default,
         )
         ElectricalCardDivider()

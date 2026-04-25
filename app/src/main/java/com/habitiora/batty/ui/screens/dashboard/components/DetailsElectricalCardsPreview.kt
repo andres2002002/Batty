@@ -29,7 +29,6 @@ private fun DetailsCardPreview() {
                 // Estado normal
                 DetailsCard(
                     temperatureCelsius = 29.5f,
-                    voltageMv = 4120,
                     health = BatteryHealth.GOOD,
                     technology = "Li-ion",
                 )
@@ -37,7 +36,6 @@ private fun DetailsCardPreview() {
                 // Temperatura alta (tertiary)
                 DetailsCard(
                     temperatureCelsius = 41.0f,
-                    voltageMv = 3950,
                     health = BatteryHealth.OVERHEAT,
                     technology = "Li-ion",
                 )
@@ -45,7 +43,6 @@ private fun DetailsCardPreview() {
                 // Temperatura crítica (error)
                 DetailsCard(
                     temperatureCelsius = 47.5f,
-                    voltageMv = 3800,
                     health = BatteryHealth.OVERHEAT,
                     technology = "Li-poly",
                 )
@@ -53,7 +50,6 @@ private fun DetailsCardPreview() {
                 // Datos no disponibles
                 DetailsCard(
                     temperatureCelsius = -1f,
-                    voltageMv = -1,
                     health = BatteryHealth.UNKNOWN,
                     technology = null,
                 )
@@ -76,30 +72,36 @@ private fun ElectricalCardPreview() {
             ) {
                 // Cargando — datos completos
                 ElectricalCard(
+                    voltageMv = 4120,
                     currentNowMa = 1450f,
                     currentAvgMa = 1380f,
                     watts = 5.85f,
                     chargeCounterMah = 2100,
+                    fullCapacityMah = 3000,
                     estimatedMinutesRemaining = 55,
                     isCharging = true,
                 )
 
                 // Descargando — datos completos
                 ElectricalCard(
+                    voltageMv = 4120,
                     currentNowMa = 780f,
                     currentAvgMa = 820f,
                     watts = 3.12f,
                     chargeCounterMah = 1450,
+                    fullCapacityMah = 2500,
                     estimatedMinutesRemaining = 112,
                     isCharging = false,
                 )
 
                 // Hardware sin soporte de corriente
                 ElectricalCard(
+                    voltageMv = 4120,
                     currentNowMa = -1f,
                     currentAvgMa = -1f,
                     watts = -1f,
                     chargeCounterMah = -1,
+                    fullCapacityMah = -1,
                     estimatedMinutesRemaining = -1,
                     isCharging = false,
                 )

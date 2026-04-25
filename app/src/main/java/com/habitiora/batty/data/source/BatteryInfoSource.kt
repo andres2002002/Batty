@@ -36,7 +36,11 @@ class BatteryInfoSource @Inject constructor(
                 trySend(buildBatteryInfo(intent))
             }
         }
-        context.registerReceiver(receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Context.RECEIVER_NOT_EXPORTED
+        } else 0
+
+        context.registerReceiver(receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED), flags)
         awaitClose {
             runCatching { context.unregisterReceiver(receiver) }
                 .onFailure { Timber.w(it, "Failed to unregister battery receiver") }
@@ -68,6 +72,12 @@ class BatteryInfoSource @Inject constructor(
             batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
         val chargeCounterUah =
             batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
+        val fullCapacityMah = if (chargeCounterUah > 0 && level > 0) {
+            (chargeCounterUah / (level / 100f) / 1000f).toInt()
+        } else {
+            -1
+        }
+        // Not Work yet
         val designCapacityMah =
             batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER) / 1000000f
 
@@ -81,11 +91,9 @@ class BatteryInfoSource @Inject constructor(
         }
 
         // ── Watts ──────────────────────────────────────────────────────────────
-        // P[W] = V[V] × I[A] = (voltage_mV / 1000) × (|currentNow_µA| / 1_000_000)
-        val watts = if (voltage > 0 && currentNowUa != Int.MIN_VALUE && currentNowUa != 0) {
-            abs((voltage / 1000f) * (currentNowUa / 1_000_000f))
-        } else if (voltage > 0 && currentNowMa != 0f) {
-            abs((voltage / 1000f) * (currentNowMa / 1000f))
+        // P = (mV * µA) / 10^9 = Watts
+        val watts = if (voltage > 0 && currentNowUa != Int.MIN_VALUE) {
+            abs((voltage.toLong() * currentNowUa.toLong()) / 1_000_000_000f)
         } else 0f
 
         // ── System state ───────────────────────────────────────────────────────
@@ -126,7 +134,7 @@ class BatteryInfoSource @Inject constructor(
             isDozeMode = isDozeMode,
             cycleCount = cycleCount,
             chargeTimeRemainingMs = chargeTimeRemainingMs,
-            fullCapacityMah = designCapacityMah.toInt(),
+            fullCapacityMah = fullCapacityMah,
             designCapacityMah = designCapacityMah.toInt()
         )
     }

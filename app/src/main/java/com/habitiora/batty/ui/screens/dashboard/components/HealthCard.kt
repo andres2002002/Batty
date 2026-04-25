@@ -57,11 +57,11 @@ fun HealthCard(
 
         HealthCardDivider()
 
-        InfoRow(
+/*        InfoRow(
             label = "Current capacity",
             value = BatteryFormatter.chargeCounter(fullCapacityMah),
             emphasis = InfoRowEmphasis.Default,
-        )
+        )*/
 
         HealthCardDivider()
 
