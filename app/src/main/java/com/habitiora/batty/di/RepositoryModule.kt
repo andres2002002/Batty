@@ -1,32 +1,38 @@
 package com.habitiora.batty.di
 
-import com.habitiora.batty.data.dao.BatteryEntityDao
-import com.habitiora.batty.data.proto.ThresholdsDataStore
-import com.habitiora.batty.data.repository.BatteryEntityRepository
-import com.habitiora.batty.data.repository.BatteryEntityRepositoryImpl
-import com.habitiora.batty.data.repository.SettingsRepositoryImp
+import com.habitiora.batty.data.manager.BatteryServiceControllerImpl
+import com.habitiora.batty.data.repository.BatteryRepositoryImpl
+import com.habitiora.batty.data.repository.SettingsRepositoryImpl
+import com.habitiora.batty.data.repository.ThresholdsRepositoryImpl
+import com.habitiora.batty.domain.controller.BatteryServiceController
+import com.habitiora.batty.domain.repository.BatteryRepository
 import com.habitiora.batty.domain.repository.SettingsRepository
-import com.habitiora.batty.services.SettingsDataStore
+import com.habitiora.batty.domain.repository.ThresholdsRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-    @Provides
-    @Singleton
-    fun provideBatteryEntityRepository(batteryEntityDao: BatteryEntityDao): BatteryEntityRepository =
-        BatteryEntityRepositoryImpl(batteryEntityDao)
+abstract class RepositoryModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun providesSettingsRepository(
-        thresholdsDataStore: ThresholdsDataStore,
-        settingsDataStore: SettingsDataStore
-    ): SettingsRepository =
-        SettingsRepositoryImp(thresholdsDataStore, settingsDataStore)
+    abstract fun bindBatteryRepository(impl: BatteryRepositoryImpl): BatteryRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindThresholdsRepository(impl: ThresholdsRepositoryImpl): ThresholdsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBatteryServiceController(
+        impl: BatteryServiceControllerImpl
+    ): BatteryServiceController
 }

@@ -1,39 +1,44 @@
 [versions]
-agp = "8.13.2"
-kotlin = "2.3.0"
-coreKtx = "1.17.0"
+agp = "9.2.1"
+kotlin = "2.3.21"
+coreKtx = "1.18.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.10.0"
-activityCompose = "1.12.2"
-composeBom = "2026.01.00"
+activityCompose = "1.13.0"
+composeBom = "2026.04.01"
 
-navigation = "2.9.6"
+navigation = "2.9.8"
 
 timber = "5.0.1"
 
-datastore = "1.2.0"
-protoBufPlugin = "0.9.6"
-protoBuf = "4.33.4"
+datastore = "1.2.1"
 
 hiltNavigationCompose = "1.3.0"
-daggerHilt = "2.57.2"
-hiltCompiler = "2.57.2"
+daggerHilt = "2.59.2"
+hiltCompiler = "2.59.2"
 
-firebaseBom = "34.7.0"
-firebaseCrashlytics = "3.0.6"
+firebaseBom = "34.12.0"
+firebaseCrashlytics = "3.0.7"
 
 room = "2.8.4"
 
-kspVersion = "2.2.21-2.0.4"
+kspVersion = "2.3.6"
 compiler = "3.2.0-alpha11"
+
+kotlinSerialization = "1.11.0"
+pluginKotlinSerialization = "2.3.21"
 
 mpandroidchart = "3.1.0"
 
-guava = "33.5.0-android"
+vico = "3.1.0"
+
+guava = "33.6.0-android"
 
 googleServices = "4.4.4"
+
+uicomponents = "1.1.33"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,14 +58,14 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 androidx-datastore-preferences = { group ="androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 androidx-datastore = { group ="androidx.datastore", name = "datastore", version.ref = "datastore" }
-protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protoBuf" }
-protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protoBuf" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltCompiler" }
@@ -69,6 +74,8 @@ androidx-compiler = { group = "androidx.databinding", name = "compiler", version
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 
 github-mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
+
+vico-compose-m3 = { group = "com.patrykandpatrick.vico", name = "compose-m3", version.ref = "vico" }
 
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
@@ -79,10 +86,12 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinSerialization" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+uicomponents = { group = "com.akari", name = "uicomponents", version.ref = "uicomponents" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 google-service = { id = "com.google.gms.google-services" , version.ref = "googleServices" }
@@ -93,4 +102,4 @@ dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt
 
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 
-protobuf = { id = "com.google.protobuf", version.ref = "protoBufPlugin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "pluginKotlinSerialization" }

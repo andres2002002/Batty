@@ -1,18 +1,63 @@
+# ---------------
+# Android & Gradle
+# ---------------
 *.iml
-*.aab
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/app/google-services.json
-/app/release
-.DS_Store
-/build
-/captures
+.gradle/
+local.properties
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/render.experimental.xml
+
+# Carpetas de construcción (Build)
+build/
+app/build/
 .externalNativeBuild
 .cxx
-local.properties
+
+# ---------------
+# Artifacts & Output
+# ---------------
+*.apk
+*.aab
+*.ap_
+*.dex
+/captures
+/outputs/
+
+# ---------------
+# Secrets & Security (CRÍTICO)
+# ---------------
+# Firebase / Google Services
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Keystores y firmas (Nunca subir esto)
+*.jks
+*.keystore
+*.pem
+*.p12
+*.key
+
+# Archivos de propiedades privadas (si usas variantes)
+keystore.properties
+secrets.properties
+
+# ---------------
+# OS System Files
+# ---------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

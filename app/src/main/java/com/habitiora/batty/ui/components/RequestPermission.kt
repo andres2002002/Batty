@@ -60,10 +60,10 @@ fun RequestPermission(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
-            Timber.d("Permission granted: ${request.code}")
+            Timber.d("Permission granted: ${request.name}")
             processNext()
         } else {
-            Timber.d("Permission denied: ${request.code}")
+            Timber.d("Permission denied: ${request.name}")
             handleDenied(request)
         }
     }
@@ -73,10 +73,10 @@ fun RequestPermission(
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (!PermissionsHelper.needs(context, request)) {
-            Timber.d("DND permission granted: ${request.code}")
+            Timber.d("DND permission granted: ${request.name}")
             processNext()
         } else {
-            Timber.d("DND permission denied: ${request.code}")
+            Timber.d("DND permission denied: ${request.name}")
             handleDenied(request)
         }
     }
@@ -84,7 +84,7 @@ fun RequestPermission(
     fun launchPermission() {
         // Verificar si ya está concedido
         if (!PermissionsHelper.needs(context, request)) {
-            Timber.d("Permission already granted: ${request.code}")
+            Timber.d("Permission already granted: ${request.name}")
             onGranted()
             return
         }
@@ -93,15 +93,19 @@ fun RequestPermission(
             is PermissionRequest.NotificationAccess -> {
                 PermissionsHelper.checkAndRequestPermission(
                     context,
-                    request.code!!,
+                    request.code,
                     runtimeLauncher,
                     onGranted
                 )
             }
 
             is PermissionRequest.DndAccess -> {
-                val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                    .apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK }
+                val channelId = request.channelId
+                val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
+                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    putExtra(Settings.EXTRA_CHANNEL_ID, channelId)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
                 dndLauncher.launch(intent)
             }
         }
@@ -189,7 +193,7 @@ fun chainRequests(
     }
 
     val request = requests.first()
-    Timber.d("Requesting permission: ${request.code}")
+    Timber.d("Requesting permission: ${request.name}")
     permissionsRequest(request, context, runtimeLauncher, dndLauncher){
         chainRequests(requests.drop(1), context, runtimeLauncher, dndLauncher, onGranted)
     }
@@ -204,7 +208,7 @@ private fun permissionsRequest(
 ) {
     when(request) {
         is PermissionRequest.NotificationAccess -> {
-            PermissionsHelper.checkAndRequestPermission(context,request.code!!, runtimeLauncher, onGranted)
+            PermissionsHelper.checkAndRequestPermission(context,request.code, runtimeLauncher, onGranted)
         }
         is PermissionRequest.DndAccess -> {
             if (PermissionsHelper.needs(context, request)) {

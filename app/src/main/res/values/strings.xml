@@ -36,6 +36,17 @@
     <string name="current_title">Current</string>
     <string name="current_capacity">Current Capacity</string>
 
+    <!-- Alert Policies -->
+    <string name="alert_policy_title">Alert Policy</string>
+    <string name="alert_policy_only_critical">Only Critical</string>
+    <string name="alert_policy_critical_description">Only send critical notifications</string>
+    <string name="alert_policy_all">All</string>
+    <string name="alert_policy_all_description">Send all notifications</string>
+    <string name="alert_policy_disabled">Disabled</string>
+    <string name="alert_policy_disabled_description">No notifications</string>
+
+    <!-- Thresholds -->
+
     <!-- Battery Health -->
     <string name="health_device">Health</string>
     <string name="health_unknown">Unknown</string>

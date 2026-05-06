@@ -2,91 +2,71 @@ package com.habitiora.batty.ui.screens.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.habitiora.batty.data.repository.BatteryEntityRepository
-import com.habitiora.batty.domain.model.BatteryState
-import com.habitiora.batty.ui.components.charts.line.BatteryChartConfig
-import com.habitiora.batty.ui.components.charts.line.BatteryMetric
+import com.habitiora.batty.domain.model.ChartType
+import com.habitiora.batty.domain.model.TimeRange
+import com.habitiora.batty.domain.useCase.GetBatteryStatsUseCase
+import com.habitiora.batty.domain.useCase.GetLastChargingCycleUseCase
+import com.habitiora.batty.domain.useCase.ObserveChartDataUseCase
+import com.habitiora.batty.ui.utils.StatsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class BatteryHistoryViewModel @Inject constructor(
-    private val batteryRepository: BatteryEntityRepository
+    private val getStatsUseCase: GetBatteryStatsUseCase,
+    private val observeChartDataUseCase: ObserveChartDataUseCase,
+    private val getLastChargingCycleUseCase: GetLastChargingCycleUseCase
 ) : ViewModel() {
-    companion object{
-        private const val ONE_DAY_IN_MILLIS = 24 * 60 * 60 * 1000
-    }
-    private val currentDayInMills = System.currentTimeMillis()
-    val batteryHistory = batteryRepository.getBatteryStatesSince(currentDayInMills - ONE_DAY_IN_MILLIS)
-        .map { fullList ->
-            reduceBatteryStatesByInterval(fullList)
+
+    private val _selectedRange = MutableStateFlow(TimeRange.LAST_24H)
+    private val _selectedChart = MutableStateFlow(ChartType.LEVEL)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val uiState: StateFlow<StatsUiState> = combine(
+        _selectedRange,
+        _selectedChart
+    ) { range, chart -> range to chart }
+        .flatMapLatest { (range, chart) ->
+            observeChartDataUseCase(range)
+                .map { data ->
+                    val stats = getStatsUseCase(range)
+                    val lastCycleStats = getLastChargingCycleUseCase(data)
+                    StatsUiState.Success(
+                        stats = stats,
+                        chartData = data,
+                        selectedRange = range,
+                        selectedChart = chart,
+                        lastCycleStats = lastCycleStats
+                    ) as StatsUiState
+                }
+                .onStart { emit(StatsUiState.Loading) }
+                .catch { e ->
+                    Timber.e(e, "Error loading stats for $range")
+                    emit(StatsUiState.Error(e.message ?: "Error loading stats"))
+                }
         }
-        .distinctUntilChanged()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = StatsUiState.Loading
+        )
 
-    fun reduceBatteryStatesByInterval(
-        states: List<BatteryState>,
-        intervalMillis: Long = 5 * 60 * 1000 // 5 minutos por defecto
-    ): List<BatteryState> {
-        if (states.isEmpty()) return emptyList()
-
-        val grouped = states
-            .sortedBy { it.timestamp }
-            .groupBy { it.timestamp / intervalMillis }
-
-        return grouped.mapNotNull { (_, group) ->
-            if (group.isEmpty()) return@mapNotNull null
-
-            val avgLevel = group.map { it.batteryLevel }.average().toInt()
-            val avgTimestamp = group.map { it.timestamp }.average().toLong()
-            val mostFrequentCharging = group.groupingBy { it.isCharging }.eachCount().maxByOrNull { it.value }?.key ?: false
-
-            group.first().copy(
-                timestamp = avgTimestamp,
-                batteryLevel = avgLevel,
-                isCharging = mostFrequentCharging
-            )
-        }
+    fun selectTimeRange(range: TimeRange) {
+        _selectedRange.value = range
     }
 
-}
-
-// Configuraciones preestablecidas para diferentes casos de uso
-object BatteryChartConfigs {
-    val BASIC_LEVEL = BatteryChartConfig(
-        metrics = listOf(BatteryMetric.BATTERY_LEVEL),
-        timeFormat = "HH:mm",
-        maxDataPoints = 100
-    )
-
-    val DETAILED_MONITORING = BatteryChartConfig(
-        metrics = listOf(
-            BatteryMetric.BATTERY_LEVEL,
-            BatteryMetric.TEMPERATURE,
-            BatteryMetric.VOLTAGE
-        ),
-        timeFormat = "HH:mm",
-        showCharging = true,
-        showTemperature = true,
-        maxDataPoints = 200
-    )
-
-    val CHARGING_ANALYSIS = BatteryChartConfig(
-        metrics = listOf(
-            BatteryMetric.BATTERY_LEVEL,
-            BatteryMetric.CHARGING_RATE,
-            BatteryMetric.CURRENT
-        ),
-        timeFormat = "HH:mm",
-        showCharging = true,
-        maxDataPoints = 50
-    )
+    fun selectChartType(type: ChartType) {
+        _selectedChart.value = type
+    }
 }

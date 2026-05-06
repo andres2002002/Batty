@@ -2,10 +2,13 @@ package com.habitiora.batty.di
 
 import android.app.NotificationManager
 import android.content.Context
-import com.habitiora.batty.data.proto.ThresholdsDataStore
-import com.habitiora.batty.services.NotificationHelper
-import com.habitiora.batty.services.SettingsDataStore
-import com.habitiora.batty.utils.BatteryHistoryStrategy
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.dataStoreFile
+import com.habitiora.batty.data.datastore.MonitorSettingsSerializer
+import com.habitiora.batty.domain.model.ThresholdsConfig
+import com.habitiora.batty.data.datastore.ThresholdsSerializer
+import com.habitiora.batty.domain.model.MonitorSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,28 +23,28 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideThresholdsDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<ThresholdsConfig> {
+        return DataStoreFactory.create(
+            serializer = ThresholdsSerializer,
+            produceFile = { context.dataStoreFile("thresholds_config.json") }
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun providesMonitorSettingsDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<MonitorSettings> {
+        return DataStoreFactory.create(
+            serializer = MonitorSettingsSerializer,
+            produceFile = { context.dataStoreFile("monitor_settings.json") }
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideNotificationManager(@ApplicationContext context: Context): NotificationManager =
         context.getSystemService(NotificationManager::class.java)
-
-    @Provides
-    @Singleton
-    fun provideNotificationHelper(
-        @ApplicationContext context: Context,
-        notificationManager: NotificationManager
-    ): NotificationHelper =
-        NotificationHelper(context, notificationManager)
-
-    @Provides
-    @Singleton
-    fun provideSettingsDataStore(@ApplicationContext context: Context): SettingsDataStore =
-        SettingsDataStore(context)
-
-    @Provides
-    @Singleton
-    fun provideThresholdsDataStore(@ApplicationContext context: Context): ThresholdsDataStore =
-        ThresholdsDataStore(context)
-
-    @Provides
-    @Singleton
-    fun provideBatteryHistoryStrategy(): BatteryHistoryStrategy = BatteryHistoryStrategy()
 }

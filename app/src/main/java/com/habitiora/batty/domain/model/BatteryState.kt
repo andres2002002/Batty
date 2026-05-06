@@ -1,5 +1,7 @@
 package com.habitiora.batty.domain.model
 
+import androidx.compose.runtime.Immutable
+
 /**
  * Clase que representa el estado de la batería.
  * @property id Identificador único de la batería.
@@ -19,6 +21,7 @@ package com.habitiora.batty.domain.model
  * @property estimatedTimeRemaining Tiempo estimado de descarga en minutos.
  * @property sessionId ID de sesión de carga/descarga.
  */
+@Immutable
 data class BatteryState(
     // Datos básicos
     val id: Long = 0,
