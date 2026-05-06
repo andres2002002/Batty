@@ -19,7 +19,8 @@ interface BatteryDao {
     @Query("SELECT * FROM battery_snapshots ORDER BY timestamp DESC LIMIT 1")
     fun observeLatest(): Flow<BatteryEntity?>
 
-    @Query("""
+    @Query(
+        """
         SELECT
             AVG(level)                  AS avgLevel,
             MIN(level)                  AS minLevel,
@@ -37,7 +38,8 @@ interface BatteryDao {
             COUNT(*)                    AS totalSamples
         FROM battery_snapshots
         WHERE timestamp >= :since
-    """)
+    """
+    )
     suspend fun getStatsSince(since: Long): BatteryStatsSummary
 
     @Query("""
@@ -46,7 +48,8 @@ interface BatteryDao {
         level,
         temperature,
         ABS(current_now_ma) AS currentNowMa,
-        watts
+        watts,
+        CASE WHEN status = 'Charging' OR plugged != 'Unplugged' THEN 1 ELSE 0 END AS isCharging
     FROM battery_snapshots
     WHERE timestamp >= :since
     ORDER BY timestamp ASC

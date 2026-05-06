@@ -5,6 +5,7 @@ import androidx.compose.runtime.Stable
 import com.habitiora.batty.domain.model.BatteryDataPoint
 import com.habitiora.batty.domain.model.BatteryStats
 import com.habitiora.batty.domain.model.ChartType
+import com.habitiora.batty.domain.model.LastCycleStats
 import com.habitiora.batty.domain.model.TimeRange
 
 @Stable
@@ -17,6 +18,7 @@ sealed interface StatsUiState {
         val chartData: List<BatteryDataPoint>,
         val selectedRange: TimeRange,
         val selectedChart: ChartType,
+        val lastCycleStats: LastCycleStats?
     ) : StatsUiState {
         val hasData: Boolean get() = chartData.isNotEmpty()
     }
