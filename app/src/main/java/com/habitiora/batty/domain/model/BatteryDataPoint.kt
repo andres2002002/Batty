@@ -7,8 +7,9 @@ data class BatteryDataPoint(
     val timestamp: Long,
     val level: Int,
     val temperature: Float,
-    val currentMa: Float,   // abs — sign-agnostic
+    val currentMa: Float,
     val watts: Float,
+    val isCharging: Boolean
 )
 
 typealias LevelDataPoint = BatteryDataPoint

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.habitiora.batty.domain.model.ChartType
 import com.habitiora.batty.domain.model.TimeRange
 import com.habitiora.batty.domain.useCase.GetBatteryStatsUseCase
+import com.habitiora.batty.domain.useCase.GetLastChargingCycleUseCase
 import com.habitiora.batty.domain.useCase.ObserveChartDataUseCase
 import com.habitiora.batty.ui.utils.StatsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,7 @@ import timber.log.Timber
 class BatteryHistoryViewModel @Inject constructor(
     private val getStatsUseCase: GetBatteryStatsUseCase,
     private val observeChartDataUseCase: ObserveChartDataUseCase,
+    private val getLastChargingCycleUseCase: GetLastChargingCycleUseCase
 ) : ViewModel() {
 
     private val _selectedRange = MutableStateFlow(TimeRange.LAST_24H)
@@ -39,11 +41,13 @@ class BatteryHistoryViewModel @Inject constructor(
             observeChartDataUseCase(range)
                 .map { data ->
                     val stats = getStatsUseCase(range)
+                    val lastCycleStats = getLastChargingCycleUseCase(data)
                     StatsUiState.Success(
-                        stats         = stats,
-                        chartData     = data,
+                        stats = stats,
+                        chartData = data,
                         selectedRange = range,
                         selectedChart = chart,
+                        lastCycleStats = lastCycleStats
                     ) as StatsUiState
                 }
                 .onStart { emit(StatsUiState.Loading) }
@@ -58,6 +62,11 @@ class BatteryHistoryViewModel @Inject constructor(
             initialValue = StatsUiState.Loading
         )
 
-    fun selectTimeRange(range: TimeRange) { _selectedRange.value = range }
-    fun selectChartType(type: ChartType)  { _selectedChart.value = type }
+    fun selectTimeRange(range: TimeRange) {
+        _selectedRange.value = range
+    }
+
+    fun selectChartType(type: ChartType) {
+        _selectedChart.value = type
+    }
 }

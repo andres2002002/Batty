@@ -4,5 +4,11 @@ enum class BatteryPlugged(val label: String) {
     AC("AC Power"),
     USB("USB"),
     WIRELESS("Wireless"),
-    NONE("Unplugged")
+    NONE("Unplugged");
+
+    companion object{
+        fun fromString(value: String): BatteryPlugged {
+            return entries.find { it.label == value } ?: NONE
+        }
+    }
 }

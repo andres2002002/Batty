@@ -5,5 +5,11 @@ enum class BatteryStatus(val label: String) {
     DISCHARGING("Discharging"),
     FULL("Full"),
     NOT_CHARGING("Not Charging"),
-    UNKNOWN("Unknown")
+    UNKNOWN("Unknown");
+
+    companion object{
+        fun fromString(value: String): BatteryStatus {
+            return entries.find { it.label == value } ?: UNKNOWN
+        }
+    }
 }

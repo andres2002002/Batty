@@ -10,5 +10,5 @@ enum class BatteryHealth(@StringRes val nameId: Int) {
     DEAD(R.string.health_dead),
     OVER_VOLTAGE(R.string.health_over_voltage),
     UNSPECIFIED_FAILURE(R.string.health_unspecified_failure),
-    COLD(R.string.health_cold)
+    COLD(R.string.health_cold);
 }

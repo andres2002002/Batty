@@ -23,7 +23,6 @@ import androidx.navigation.compose.composable
 import com.habitiora.batty.R
 import com.habitiora.batty.ui.screens.dashboard.DashboardScreen
 import com.habitiora.batty.ui.screens.history.BatteryHistoryScreen
-import com.habitiora.batty.ui.screens.main.BatteryMainInfo
 import com.habitiora.batty.ui.screens.info.InfoScreen
 import com.habitiora.batty.ui.screens.settings.SettingsScreen
 

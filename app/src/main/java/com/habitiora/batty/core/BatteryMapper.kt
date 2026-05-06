@@ -14,9 +14,9 @@ import com.habitiora.batty.domain.model.BatteryStatus
 fun BatteryInfo.toEntity(): BatteryEntity = BatteryEntity(
     id = id,
     level = level,
-    status = status.name,
+    status = status.label,
     health = health.name,
-    plugged = plugged.name,
+    plugged = plugged.label,
     temperature = temperature,
     voltage = voltage,
     technology = technology,
@@ -76,9 +76,10 @@ fun BatteryStatsSummary.toDomain(): BatteryStats = BatteryStats(
 
 
 fun BatteryDataPointEntity.toDomain(): BatteryDataPoint = BatteryDataPoint(
-    timestamp   = timestamp,
-    level       = level,
+    timestamp = timestamp,
+    level = level,
     temperature = temperature,
-    currentMa   = currentNowMa,
-    watts       = watts,
+    currentMa = currentNowMa,
+    watts = watts,
+    isCharging = isCharging
 )
