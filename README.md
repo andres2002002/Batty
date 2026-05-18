@@ -1,8 +1,7 @@
-<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="100" alt="Batty Icon">
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" width="192" alt="Batty Icon">
 
 # Batty — Battery Monitor
 
-[![Build Status](https://github.com/habitiora/batty/actions/workflows/build.yml/badge.svg)](https://github.com/habitiora/batty/actions)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.0-blue.svg?logo=kotlin)](https://kotlinlang.org)
 [![API](https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat)](https://developer.android.com/reference/android/os/Build.VERSION_CODES#O)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
