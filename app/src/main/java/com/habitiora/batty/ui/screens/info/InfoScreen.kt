@@ -83,7 +83,7 @@ fun InfoScreen(modifier: Modifier = Modifier) {
                 ) {
                     InfoPermission(
                         title = stringResource(R.string.notifications_permission),
-                        description = stringResource(R.string.notifications_permission) // Asumo typo original en tu repo, debería ser _description
+                        description = stringResource(R.string.notifications_permission_description)
                     )
                     InfoPermission(
                         title = stringResource(R.string.dnd_permission),

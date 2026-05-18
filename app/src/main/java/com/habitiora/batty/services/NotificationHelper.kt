@@ -230,33 +230,46 @@ class NotificationHelper @Inject constructor(
 
     private fun buildForegroundTitle(info: BatteryInfo): String {
         val statusLabel = when {
-            info.status == BatteryStatus.FULL -> "Fully charged"
-            info.isCharging -> "Charging"
-            else -> "Battery"
+            info.status == BatteryStatus.FULL -> context.getString(R.string.status_full)
+            info.isCharging -> context.getString(R.string.status_charging)
+            else -> context.getString(R.string.health_device) // "Salud" o "Battery"
         }
         return "$statusLabel • ${info.level}%"
     }
 
-    private fun buildForegroundText(info: BatteryInfo, state: ThresholdState): String = when {
-        state.hasActiveHighTrigger -> "Charge target reached • ${info.plugged.label}"
-        state.hasActiveLowTrigger -> "Low battery • ${info.plugged.label}"
-        else -> "${info.status.label} • ${info.plugged.label}"
+    private fun buildForegroundText(info: BatteryInfo, state: ThresholdState): String {
+        val pluggedLabel = context.getString(info.plugged.labelRes)
+        return when {
+            state.hasActiveHighTrigger -> "${context.getString(R.string.battery_level_high)} • $pluggedLabel"
+            state.hasActiveLowTrigger -> "${context.getString(R.string.battery_low)} • $pluggedLabel"
+            else -> "${context.getString(info.status.labelRes)} • $pluggedLabel"
+        }
     }
 
     private fun buildExpandedBody(info: BatteryInfo, state: ThresholdState): String = buildString {
-        append("<b>Status:</b> ${info.status.label} &nbsp;•&nbsp; <b>Plug:</b> ${info.plugged.label}<br>")
-        append("<b>Temp:</b> ${"%.1f".format(info.temperature)}°C &nbsp;•&nbsp; <b>Voltage:</b> ${info.voltage} mV<br>")
-        append("<b>Health:</b> ${info.health.name}")
+        val statusTitle = context.getString(R.string.history_point_status)
+        val statusValue = context.getString(info.status.labelRes)
+        val plugTitle = context.getString(R.string.history_point_charging_type)
+        val plugValue = context.getString(info.plugged.labelRes)
+        val tempTitle = context.getString(R.string.history_point_temperature)
+        val voltageTitle = context.getString(R.string.history_point_voltage)
+        val healthTitle = context.getString(R.string.health_device)
+        val healthValue = context.getString(info.health.nameId)
+
+        append("<b>$statusTitle:</b> $statusValue &nbsp;•&nbsp; <b>$plugTitle:</b> $plugValue<br>")
+        append("<b>$tempTitle:</b> ${"%.1f".format(info.temperature)}°C &nbsp;•&nbsp; <b>$voltageTitle:</b> ${info.voltage} mV<br>")
+        append("<b>$healthTitle:</b> $healthValue")
 
         if (info.watts > 0f) {
-            append("<br><b>Power:</b> ${"%.1f".format(info.watts)} W")
+            val powerTitle = context.getString(R.string.dashboard_power_label)
+            append("<br><b>$powerTitle:</b> ${"%.1f".format(info.watts)} W")
         }
 
         if (state.hasActiveTrigger) {
             append("<br><br><i>")
             append(
-                if (state.hasActiveLowTrigger) "⚠️ Low battery threshold active"
-                else "✅ Charge threshold reached"
+                if (state.hasActiveLowTrigger) context.getString(R.string.on_low_battery_threshold)
+                else context.getString(R.string.on_high_battery_threshold)
             )
             append("</i>")
         }

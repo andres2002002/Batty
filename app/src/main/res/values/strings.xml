@@ -6,16 +6,50 @@
     <string name="status_discharging">Discharging</string>
     <string name="status_full">Full</string>
     <string name="status_not_charging">Not charging</string>
+    <string name="status_unknown">Unknown</string>
+
+    <!-- Plugged Status -->
     <string name="status_ac_charger">AC Charger</string>
     <string name="status_usb_charger">USB Charger</string>
     <string name="status_wireless_charger">Wireless Charger</string>
-    <string name="status_unknown">Unknown</string>
+    <string name="status_unplugged">Unplugged</string>
 
     <string name="connected">Connected</string>
     <string name="disconnected">Disconnected</string>
 
     <string name="monitoring_on">Monitoring On</string>
     <string name="monitoring_off">Monitoring Off</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_monitor_active_label">Active — saving snapshots every 5 min</string>
+    <string name="dashboard_monitor_inactive_label">Inactive</string>
+    <string name="dashboard_monitor_starting_label">Starting…</string>
+    <string name="dashboard_monitor_error_disconnect">Service stopped unexpectedly</string>
+    <string name="dashboard_monitor_error_bind">Failed to start service</string>
+    <string name="dashboard_monitor_title">Battery monitor</string>
+    <string name="dashboard_full_in">Full in</string>
+    <string name="dashboard_empty_in">Empty in</string>
+    <string name="dashboard_electrical_title">Electrical</string>
+    <string name="dashboard_voltage_label">Voltage</string>
+    <string name="dashboard_current_now_label">Current (now)</string>
+    <string name="dashboard_current_avg_label">Current (avg)</string>
+    <string name="dashboard_power_label">Power</string>
+    <string name="dashboard_charge_remaining_label">Charge remaining</string>
+    <string name="dashboard_current_capacity_label">Current capacity</string>
+    <string name="dashboard_health_title">Battery health</string>
+    <string name="dashboard_capacity_health_label">Capacity health</string>
+    <string name="dashboard_design_capacity_label">Design capacity</string>
+    <string name="dashboard_cycle_count_label">Cycle count</string>
+    <string name="dashboard_system_title">System</string>
+    <string name="dashboard_screen_on">Screen on</string>
+    <string name="dashboard_screen_off">Screen off</string>
+    <string name="dashboard_battery_saver">Battery saver</string>
+    <string name="dashboard_doze">Doze</string>
+    <string name="dashboard_details_title">Details</string>
+    <string name="dashboard_technology_label">Technology</string>
+    <string name="dashboard_temperature_label">Temperature</string>
+    <string name="dashboard_battery_health_label">Battery Health</string>
+    <string name="dashboard_retry">Retry</string>
 
     <!-- Temperature -->
     <string name="temperature_title">Temperature</string>
@@ -46,6 +80,13 @@
     <string name="alert_policy_disabled_description">No notifications</string>
 
     <!-- Thresholds -->
+    <string name="thresholds_title">Thresholds</string>
+    <string name="threshold_low_title">Low battery</string>
+    <string name="threshold_high_title">High battery</string>
+    <string name="threshold_trigger_label">Alert at</string>
+    <string name="settings_general_title">General</string>
+    <string name="settings_start_on_boot">Start on boot</string>
+    <string name="settings_start_on_boot_description">Automatically start monitoring after device restart</string>
 
     <!-- Battery Health -->
     <string name="health_device">Health</string>
@@ -90,30 +131,58 @@
 
     <!-- Battery History Screen -->
     <string name="history_title">Battery History</string>
-    <string name="history_registers_count">Registers</string>
-    <string name="history_metrics_to_display">Metrics to display</string>
-    <string name="history_empty">No history available</string>
-    <string name="history_empty_description">The data will appear here once battery information is registered.</string>
-    
-    <string name="history_trends_chart_title">Trends Chart</string>
-    <string name="contract">Contract</string>
-    <string name="expand">Expand</string>
-    <string name="close">Close</string>
-    <string name="no_data">No data</string>
+    <string name="history_last_charge_cycle">Last Charge Cycle</string>
+    <string name="history_time_window">Time Window</string>
+    <string name="history_duration">Duration</string>
+    <string name="history_gain">Gain</string>
+    <string name="history_chart_series">Chart Series</string>
+    <string name="history_min">Min</string>
+    <string name="history_avg">Avg</string>
+    <string name="history_max">Max</string>
+    <string name="history_peak">Peak</string>
+    <string name="history_samples">Samples</string>
+    <string name="history_avg_level">Avg Level</string>
+    <string name="history_avg_temp">Avg Temp</string>
+    <string name="history_avg_power">Avg Power</string>
+    <string name="history_battery_level_card">Battery Level</string>
+    <string name="history_average">Average</string>
+    <string name="history_minimum">Minimum</string>
+    <string name="history_maximum">Maximum</string>
+    <string name="history_variation">Variation</string>
+    <string name="history_variation_range">%1$s range</string>
+    <string name="history_power_current_card">Power &amp; Current</string>
+    <string name="history_avg_current">Avg current</string>
+    <string name="history_peak_current">Peak current</string>
+    <string name="history_avg_voltage">Avg voltage</string>
+    <string name="history_peak_power">Peak power</string>
+    <string name="history_system_usage_card">System Usage</string>
+    <string name="history_screen_on">Screen on</string>
+    <string name="history_battery_saver">Battery saver</string>
+    <string name="history_samples_suffix">%1$d of samples</string>
+    <string name="history_total_snapshots">Total snapshots</string>
+    <string name="history_no_data_period">No data for this period</string>
+    <string name="history_enable_monitoring_msg">Enable monitoring to start collecting data</string>
 
-    <string name="history_point_details_title">Details of the Point</string>
-    <string name="history_point_level">Level</string>
+    <string name="history_time_now">Now</string>
+    <string name="history_duration_format_hm">%1$dh %2$dm</string>
+    <string name="history_duration_format_m">%1$dm</string>
+
     <string name="history_point_status">Status</string>
     <string name="history_point_temperature">Temperature</string>
     <string name="history_point_voltage">Voltage</string>
     <string name="history_point_charging_type">Charging Type</string>
-    <string name="history_point_current">Current</string>
-    <string name="history_point_time">Date and Time</string>
 
-    <string name="history_statistical_summary_title">Statistical Summary</string>
-    <string name="history_average_level">Average Level</string>
-    <string name="history_average_temperature">Average Temperature</string>
-    <string name="history_charging_time">Charging Time</string>
+    <!-- Chart Types -->
+    <string name="chart_level">Level</string>
+    <string name="chart_temperature">Temperature</string>
+    <string name="chart_current">Current</string>
+
+    <!-- Time Ranges -->
+    <string name="time_range_1h">1h</string>
+    <string name="time_range_6h">6h</string>
+    <string name="time_range_24h">24h</string>
+    <string name="time_range_7d">7d</string>
+    <string name="time_range_30d">30d</string>
 
     <!-- Battery Metrics -->
     <string name="metrics_battery_level">Battery Level</string>

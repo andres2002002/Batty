@@ -10,7 +10,9 @@ import androidx.compose.material.icons.outlined.EnergySavingsLeaf
 import androidx.compose.material.icons.outlined.NightShelter
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.ui.components.SectionHeader
 import com.habitiora.batty.ui.components.card.BattyCard
 import com.habitiora.batty.ui.components.card.BattyCardVariant
@@ -38,14 +40,18 @@ fun SystemStateCard(
     BattyCard(
         variant = BattyCardVariant.Default,
         modifier = modifier,
-        header = { SectionHeader(title = "System") },
+        header = { SectionHeader(title = stringResource(R.string.dashboard_system_title)) },
     ) {
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             SystemStateChip(
-                label = if (isScreenOn) "Screen on" else "Screen off",
+                label = if (isScreenOn) {
+                    stringResource(R.string.dashboard_screen_on)
+                } else {
+                    stringResource(R.string.dashboard_screen_off)
+                },
                 active = isScreenOn,
                 leadingIcon = if (isScreenOn) {
                     Icons.Outlined.BrightnessMedium
@@ -54,12 +60,12 @@ fun SystemStateCard(
                 },
             )
             SystemStateChip(
-                label = "Battery saver",
+                label = stringResource(R.string.dashboard_battery_saver),
                 active = isBatterySaver,
                 leadingIcon = Icons.Outlined.EnergySavingsLeaf,
             )
             SystemStateChip(
-                label = "Doze",
+                label = stringResource(R.string.dashboard_doze),
                 active = isDozeMode,
                 leadingIcon = Icons.Outlined.NightShelter,
             )

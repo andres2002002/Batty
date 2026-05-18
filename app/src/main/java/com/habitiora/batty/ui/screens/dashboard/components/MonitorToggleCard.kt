@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.habitiora.batty.R
 import com.habitiora.batty.domain.model.ServiceErrorCause
@@ -124,18 +125,18 @@ private fun MonitorToggleLabels(
 ) {
     val (text, color) = when (state) {
         ServiceState.Active ->
-            "Active — saving snapshots every 5 min" to MaterialTheme.colorScheme.onSurfaceVariant
+            stringResource(R.string.dashboard_monitor_active_label) to MaterialTheme.colorScheme.onSurfaceVariant
 
         ServiceState.Inactive ->
-            "Inactive" to MaterialTheme.colorScheme.onSurfaceVariant
+            stringResource(R.string.dashboard_monitor_inactive_label) to MaterialTheme.colorScheme.onSurfaceVariant
 
         ServiceState.Loading ->
-            "Starting…" to MaterialTheme.colorScheme.secondary
+            stringResource(R.string.dashboard_monitor_starting_label) to MaterialTheme.colorScheme.secondary
 
         is ServiceState.Error -> {
             val msg = when (state.cause) {
-                ServiceErrorCause.UNEXPECTED_DISCONNECT -> "Service stopped unexpectedly"
-                ServiceErrorCause.BIND_FAILED -> "Failed to start service"
+                ServiceErrorCause.UNEXPECTED_DISCONNECT -> stringResource(R.string.dashboard_monitor_error_disconnect)
+                ServiceErrorCause.BIND_FAILED -> stringResource(R.string.dashboard_monitor_error_bind)
             }
             msg to MaterialTheme.colorScheme.error
         }
@@ -154,7 +155,7 @@ private fun MonitorToggleLabels(
         verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Text(
-            text = "Battery monitor",
+            text = stringResource(R.string.dashboard_monitor_title),
             style = MaterialTheme.typography.bodyLarge,
             color = titleColor,
         )
@@ -191,7 +192,7 @@ private fun MonitorStateControl(
                 IconButton(onClick = onRetry, modifier = Modifier.size(36.dp)) {
                     Icon(
                         Icons.Outlined.Refresh,
-                        contentDescription = "Retry",
+                        contentDescription = stringResource(R.string.dashboard_retry),
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(20.dp)
                     )
@@ -224,13 +225,13 @@ private fun MonitorSwitch(
             if (checked) {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.batty_icon_open),
-                    contentDescription = "Active",
+                    contentDescription = stringResource(R.string.dashboard_monitor_active_label),
                     modifier = Modifier.size(SwitchDefaults.IconSize),
                 )
             } else {
                 Icon(
                     imageVector = ImageVector.vectorResource(R.drawable.batty_icon_close),
-                    contentDescription = "Inactive",
+                    contentDescription = stringResource(R.string.dashboard_monitor_inactive_label),
                     modifier = Modifier.size(SwitchDefaults.IconSize),
                 )
             }

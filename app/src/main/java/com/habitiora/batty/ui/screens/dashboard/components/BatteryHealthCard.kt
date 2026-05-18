@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.data.model.ColorUI
 import com.habitiora.batty.domain.model.BatteryHealth
 import com.habitiora.batty.ui.components.InfoColumn
@@ -20,7 +21,7 @@ import com.habitiora.batty.ui.components.chip.BatteryHealthChip
 fun BatteryHealthCard(health: BatteryHealth, modifier: Modifier = Modifier) {
     InfoColumn(
         modifier = modifier,
-        label = "Battery Health",
+        label = stringResource(R.string.dashboard_battery_health_label),
         value = stringResource(health.nameId),
         icon = {
             Icon(

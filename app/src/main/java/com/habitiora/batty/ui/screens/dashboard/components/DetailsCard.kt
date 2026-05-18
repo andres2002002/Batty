@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.domain.model.BatteryHealth
 import com.habitiora.batty.ui.components.InfoRow
 import com.habitiora.batty.ui.components.InfoRowEmphasis
@@ -37,7 +38,7 @@ fun DetailsCard(
     BattyCard(
         variant = BattyCardVariant.Default,
         modifier = modifier,
-        header = { SectionHeader(title = "Details") },
+        header = { SectionHeader(title = stringResource(R.string.dashboard_details_title)) },
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

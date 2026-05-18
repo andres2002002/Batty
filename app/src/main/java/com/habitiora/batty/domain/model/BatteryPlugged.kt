@@ -1,14 +1,11 @@
 package com.habitiora.batty.domain.model
 
-enum class BatteryPlugged(val label: String) {
-    AC("AC Power"),
-    USB("USB"),
-    WIRELESS("Wireless"),
-    NONE("Unplugged");
+import androidx.annotation.StringRes
+import com.habitiora.batty.R
 
-    companion object{
-        fun fromString(value: String): BatteryPlugged {
-            return entries.find { it.label == value } ?: NONE
-        }
-    }
+enum class BatteryPlugged(@StringRes val labelRes: Int) {
+    AC(R.string.status_ac_charger),
+    USB(R.string.status_usb_charger),
+    WIRELESS(R.string.status_wireless_charger),
+    NONE(R.string.status_unplugged);
 }

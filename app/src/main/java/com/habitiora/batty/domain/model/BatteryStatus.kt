@@ -1,15 +1,12 @@
 package com.habitiora.batty.domain.model
 
-enum class BatteryStatus(val label: String) {
-    CHARGING("Charging"),
-    DISCHARGING("Discharging"),
-    FULL("Full"),
-    NOT_CHARGING("Not Charging"),
-    UNKNOWN("Unknown");
+import androidx.annotation.StringRes
+import com.habitiora.batty.R
 
-    companion object{
-        fun fromString(value: String): BatteryStatus {
-            return entries.find { it.label == value } ?: UNKNOWN
-        }
-    }
+enum class BatteryStatus(@StringRes val labelRes: Int) {
+    CHARGING(R.string.status_charging),
+    DISCHARGING(R.string.status_discharging),
+    FULL(R.string.status_full),
+    NOT_CHARGING(R.string.status_not_charging),
+    UNKNOWN(R.string.status_unknown);
 }
