@@ -46,9 +46,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.habitiora.batty.R
 import com.habitiora.batty.domain.model.BatteryStats
 import com.habitiora.batty.domain.model.ChartType
 import com.habitiora.batty.domain.model.TimeRange
@@ -150,7 +152,7 @@ private fun TimeRangeSelector(
                 selected = selected == range,
                 onClick = { onSelected(range) },
                 shape = SegmentedButtonDefaults.itemShape(index, TimeRange.entries.size),
-                label = { Text(range.label) }
+                label = { Text(stringResource(range.labelRes)) }
             )
         }
     }
@@ -210,7 +212,7 @@ private fun ChartTypeSelector(
             FilterChip(
                 selected = isSelected,
                 onClick = { onSelected(type) },
-                label = { Text(type.label, style = MaterialTheme.typography.labelMedium) },
+                label = { Text(stringResource(type.labelRes), style = MaterialTheme.typography.labelMedium) },
                 leadingIcon = if (isSelected) {
                     {
                         Icon(
@@ -258,19 +260,24 @@ private fun ChartSeriesSummary(state: StatsUiState.Success) {
         val start = DateFormat.format("HH:mm", lastCycleStats.connectedAt)
         if (lastCycleStats.disconnectedAt != null) {
             val end = DateFormat.format("HH:mm", lastCycleStats.disconnectedAt)
-            "$start ➔ $end"
+            "$start \u2794 $end"
         } else {
-            "$start ➔ Now"
+            "$start \u2794 NOW_HOLDER"
         }
     }
 
-    val durationCharge = remember(lastCycleStats?.durationConnectedMs) {
-        lastCycleStats?.durationConnectedMs?.let { ms ->
-            val hours = ms / 3_600_000
-            val minutes = (ms % 3_600_000) / 60_000
-            if (hours > 0) "${hours}h ${minutes}m" else "${minutes}m"
-        } ?: "--"
-    }
+    val nowStr = stringResource(R.string.history_time_now)
+    val localizedCycleWindow = cycleWindow.replace("NOW_HOLDER", nowStr)
+
+    val durationCharge = lastCycleStats?.durationConnectedMs?.let { ms ->
+        val hours = ms / 3_600_000
+        val minutes = (ms % 3_600_000) / 60_000
+        if (hours > 0) {
+            stringResource(R.string.history_duration_format_hm, hours, minutes)
+        } else {
+            stringResource(R.string.history_duration_format_m, minutes)
+        }
+    } ?: "--"
 
     val levelGained = remember(lastCycleStats?.levelGained) {
         lastCycleStats?.levelGained?.let { "+$it%" } ?: "--%"
@@ -288,24 +295,24 @@ private fun ChartSeriesSummary(state: StatsUiState.Success) {
             // Sección: Ciclo de Carga (3 Columnas con anchos asimétricos para evitar amontonamiento)
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "Last Charge Cycle",
+                    text = stringResource(R.string.history_last_charge_cycle),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold
                 )
                 Row(modifier = Modifier.fillMaxWidth()) {
                     MiniStat(
-                        label = "Time Window",
-                        value = cycleWindow,
+                        label = stringResource(R.string.history_time_window),
+                        value = localizedCycleWindow,
                         modifier = Modifier.weight(1.3f)
                     )
                     MiniStat(
-                        label = "Duration",
+                        label = stringResource(R.string.history_duration),
                         value = durationCharge,
                         modifier = Modifier.weight(1f)
                     )
                     MiniStat(
-                        label = "Gain",
+                        label = stringResource(R.string.history_gain),
                         value = levelGained,
                         modifier = Modifier.weight(0.8f)
                     )
@@ -315,22 +322,26 @@ private fun ChartSeriesSummary(state: StatsUiState.Success) {
             // Sección: Métricas de la Gráfica (Mantenemos 4 columnas porque los datos son cortos)
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "Chart Series",
+                    text = stringResource(R.string.history_chart_series),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.SemiBold
                 )
                 Row(modifier = Modifier.fillMaxWidth()) {
                     if (state.selectedChart != ChartType.CURRENT) {
-                        MiniStat(label = "Min", value = minLabel, modifier = Modifier.weight(1f))
+                        MiniStat(label = stringResource(R.string.history_min), value = minLabel, modifier = Modifier.weight(1f))
                     }
-                    MiniStat(label = "Avg", value = avgLabel, modifier = Modifier.weight(1f))
+                    MiniStat(label = stringResource(R.string.history_avg), value = avgLabel, modifier = Modifier.weight(1f))
                     MiniStat(
-                        label = if (state.selectedChart == ChartType.CURRENT) "Peak" else "Max",
+                        label = if (state.selectedChart == ChartType.CURRENT) {
+                            stringResource(R.string.history_peak)
+                        } else {
+                            stringResource(R.string.history_max)
+                        },
                         value = maxLabel,
                         modifier = Modifier.weight(1f)
                     )
-                    MiniStat(label = "Samples", value = "${stats.totalSamples}", modifier = Modifier.weight(1f))
+                    MiniStat(label = stringResource(R.string.history_samples), value = "${stats.totalSamples}", modifier = Modifier.weight(1f))
                 }
             }
         }
@@ -376,19 +387,19 @@ private fun OverviewRow(
     ) {
         KpiCard(
             icon = Icons.Outlined.BatteryStd,
-            label = "Avg Level",
+            label = stringResource(R.string.history_avg_level),
             value = avgLevelStr,
             modifier = Modifier.weight(1f)
         )
         KpiCard(
             icon = Icons.Outlined.Thermostat,
-            label = "Avg Temp",
+            label = stringResource(R.string.history_avg_temp),
             value = avgTempStr,
             modifier = Modifier.weight(1f)
         )
         KpiCard(
             icon = Icons.Outlined.ElectricBolt,
-            label = "Avg Power",
+            label = stringResource(R.string.history_avg_power),
             value = avgWattsStr,
             modifier = Modifier.weight(1f)
         )
@@ -438,14 +449,14 @@ private fun LevelStatsCard(
     val avgLevel = remember(stats.avgLevel) { "${"%.1f".format(stats.avgLevel)}%" }
 
     StatsDetailCard(
-        title = "Battery Level",
+        title = stringResource(R.string.history_battery_level_card),
         icon = Icons.Outlined.Battery4Bar,
         modifier = modifier
     ) {
-        StatRow("Average", avgLevel)
-        StatRow("Minimum", "${stats.minLevel}%")
-        StatRow("Maximum", "${stats.maxLevel}%")
-        StatRow("Variation", "${stats.levelRange}% range")
+        StatRow(stringResource(R.string.history_average), avgLevel)
+        StatRow(stringResource(R.string.history_minimum), "${stats.minLevel}%")
+        StatRow(stringResource(R.string.history_maximum), "${stats.maxLevel}%")
+        StatRow(stringResource(R.string.history_variation), stringResource(R.string.history_variation_range, "${stats.levelRange}%"))
     }
 }
 
@@ -460,14 +471,14 @@ private fun TemperatureStatsCard(
     val varTemp = remember(stats.temperatureRange) { "${"%.1f".format(stats.temperatureRange)}°C range" }
 
     StatsDetailCard(
-        title = "Temperature",
+        title = stringResource(R.string.dashboard_temperature_label),
         icon = Icons.Outlined.Thermostat,
         modifier = modifier
     ) {
-        StatRow("Average", avgTemp)
-        StatRow("Minimum", minTemp)
-        StatRow("Maximum", maxTemp)
-        StatRow("Variation", varTemp)
+        StatRow(stringResource(R.string.history_average), avgTemp)
+        StatRow(stringResource(R.string.history_minimum), minTemp)
+        StatRow(stringResource(R.string.history_maximum), maxTemp)
+        StatRow(stringResource(R.string.history_variation), stringResource(R.string.history_variation_range, varTemp))
     }
 }
 
@@ -483,15 +494,15 @@ private fun PowerStatsCard(
     val avgVoltage = remember(stats.avgVoltage) { "${"%.0f".format(stats.avgVoltage)} mV" }
 
     StatsDetailCard(
-        title = "Power & Current",
+        title = stringResource(R.string.history_power_current_card),
         icon = Icons.Outlined.ElectricBolt,
         modifier = modifier
     ) {
-        StatRow("Avg current", avgCurrent)
-        StatRow("Peak current", peakCurrent)
-        StatRow("Avg power", avgWatts)
-        StatRow("Peak power", peakWatts)
-        StatRow("Avg voltage", avgVoltage)
+        StatRow(stringResource(R.string.history_avg_current), avgCurrent)
+        StatRow(stringResource(R.string.history_peak_current), peakCurrent)
+        StatRow(stringResource(R.string.history_avg_power), avgWatts)
+        StatRow(stringResource(R.string.history_peak_power), peakWatts)
+        StatRow(stringResource(R.string.history_avg_voltage), avgVoltage)
     }
 }
 
@@ -504,11 +515,11 @@ private fun SystemUsageCard(
     val batterySaverPct = remember(stats.batterySaverRatio) { (stats.batterySaverRatio * 100).toInt() }
 
     StatsDetailCard(
-        title = "System Usage",
+        title = stringResource(R.string.history_system_usage_card),
         icon = Icons.Outlined.PhoneAndroid,
         modifier = modifier
     ) {
-        StatRow("Screen on", "$screenOnPct% of samples")
+        StatRow(stringResource(R.string.history_screen_on), stringResource(R.string.history_samples_suffix, screenOnPct))
         UsageBar(
             ratio = stats.screenOnRatio,
             color = MaterialTheme.colorScheme.primary
@@ -516,14 +527,14 @@ private fun SystemUsageCard(
 
         Spacer(Modifier.height(8.dp))
 
-        StatRow("Battery saver", "$batterySaverPct% of samples")
+        StatRow(stringResource(R.string.history_battery_saver), stringResource(R.string.history_samples_suffix, batterySaverPct))
         UsageBar(
             ratio = stats.batterySaverRatio,
             color = MaterialTheme.colorScheme.tertiary
         )
 
         Spacer(Modifier.height(4.dp))
-        StatRow("Total snapshots", "${stats.totalSamples}")
+        StatRow(stringResource(R.string.history_total_snapshots), "${stats.totalSamples}")
     }
 }
 
@@ -627,12 +638,12 @@ private fun EmptyState(modifier: Modifier = Modifier) {
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
             )
             Text(
-                "No data for this period",
+                stringResource(R.string.history_no_data_period),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                "Enable monitoring to start collecting data",
+                stringResource(R.string.history_enable_monitoring_msg),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
             )

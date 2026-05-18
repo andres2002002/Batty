@@ -53,6 +53,11 @@ class BatteryMonitorService : Service() {
     private var lastNotifiedLevel: Int = -1
     private var lastNotifiedIsCharging: Boolean? = null
 
+    // Tracking de guardado de base de datos (Sustituto de delay/Deep Sleep)
+    private var lastSavedTimestamp = 0L
+    private var lastSavedLevel = -1
+    private var lastSavedIsCharging: Boolean? = null
+
     companion object {
         const val ACTION_START = "battery.monitor.ACTION_START"
         const val ACTION_STOP = "battery.monitor.ACTION_STOP"
@@ -157,7 +162,16 @@ class BatteryMonitorService : Service() {
 
     private fun onBatteryInfoChanged(info: BatteryInfo) {
         serviceScope.launch {
-            // Threshold check — siempre, independiente del throttle
+
+            if (lastNotifiedIsCharging != null && lastNotifiedIsCharging != info.isCharging) {
+                if (info.isCharging) {
+                    notificationHelper.cancelLowBatteryAlert()
+                } else {
+                    notificationHelper.cancelHighBatteryAlert()
+                }
+            }
+            evaluateAndSave(info)
+
             runCatching {
                 thresholdsManager.evaluate(
                     level = info.level,
@@ -173,6 +187,23 @@ class BatteryMonitorService : Service() {
                 lastNotifiedLevel = info.level
                 lastNotifiedIsCharging = info.isCharging
             }
+        }
+    }
+
+    private suspend fun evaluateAndSave(info: BatteryInfo) {
+        val currentTime = System.currentTimeMillis()
+        val timePassed = currentTime - lastSavedTimestamp >= SAVE_INTERVAL_MS
+        val levelChanged = lastSavedLevel != -1 && lastSavedLevel != info.level
+        val chargingStateChanged = lastSavedIsCharging != null && lastSavedIsCharging != info.isCharging
+
+        // Guarda si pasaron 5 mins, si el % de batería cambió, o si se enchufó/desenchufó
+        if (timePassed || levelChanged || chargingStateChanged) {
+            lastSavedTimestamp = currentTime
+            lastSavedLevel = info.level
+            lastSavedIsCharging = info.isCharging
+
+            runCatching { saveBatterySnapshotUseCase(info) }
+                .onFailure { Timber.e(it, "Error persisting snapshot") }
         }
     }
 

@@ -6,6 +6,7 @@ import androidx.compose.material.icons.outlined.BatteryFull
 import androidx.compose.material.icons.outlined.BatteryUnknown
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.habitiora.batty.domain.model.BatteryStatus
 
 @Composable
@@ -22,7 +23,7 @@ fun BatteryStatusChip(
     }
 
     BattyChip(
-        label = status.label,
+        label = stringResource(status.labelRes),
         modifier = modifier,
         style = style,
         colors = colors,

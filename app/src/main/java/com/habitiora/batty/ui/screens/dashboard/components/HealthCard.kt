@@ -6,7 +6,9 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.ui.components.InfoRow
 import com.habitiora.batty.ui.components.InfoRowEmphasis
 import com.habitiora.batty.ui.components.SectionHeader
@@ -39,7 +41,7 @@ fun HealthCard(
     BattyCard(
         variant = BattyCardVariant.Default,
         modifier = modifier,
-        header = { SectionHeader(title = "Battery health") },
+        header = { SectionHeader(title = stringResource(R.string.dashboard_health_title)) },
     ) {
         // Barra de salud — solo si hay dato
         if (capacityHealthPercent > 0) {
@@ -49,7 +51,7 @@ fun HealthCard(
 
         // Porcentaje de salud
         InfoRow(
-            label = "Capacity health",
+            label = stringResource(R.string.dashboard_capacity_health_label),
             value = if (capacityHealthPercent > 0) "$capacityHealthPercent%" else null,
             emphasis = InfoRowEmphasis.ValueHighlighted,
             valueColor = healthPercentColor(capacityHealthPercent),
@@ -66,7 +68,7 @@ fun HealthCard(
         HealthCardDivider()
 
         InfoRow(
-            label = "Design capacity",
+            label = stringResource(R.string.dashboard_design_capacity_label),
             value = BatteryFormatter.chargeCounter(designCapacityMah),
             emphasis = InfoRowEmphasis.Muted,
         )
@@ -74,7 +76,7 @@ fun HealthCard(
         HealthCardDivider()
 
         InfoRow(
-            label = "Cycle count",
+            label = stringResource(R.string.dashboard_cycle_count_label),
             value = if (cycleCount > 0) cycleCount.toString() else null,
             emphasis = InfoRowEmphasis.Default,
         )

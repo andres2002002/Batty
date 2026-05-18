@@ -83,7 +83,7 @@ fun InfoScreen(modifier: Modifier = Modifier) {
                 ) {
                     InfoPermission(
                         title = stringResource(R.string.notifications_permission),
-                        description = stringResource(R.string.notifications_permission) // Asumo typo original en tu repo, debería ser _description
+                        description = stringResource(R.string.notifications_permission_description)
                     )
                     InfoPermission(
                         title = stringResource(R.string.dnd_permission),
@@ -123,16 +123,13 @@ private fun AppHeader() {
     ) {
         // Envolvemos el logo en un contenedor suave para darle jerarquía
         Box(
-            modifier = Modifier
-                .size(100.dp)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)),
+            modifier = Modifier,
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.batty_logo_foreground),
+                imageVector = ImageVector.vectorResource(R.drawable.batty_icon_fg),
                 contentDescription = stringResource(R.string.app_name),
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(150.dp),
                 tint = Color.Unspecified
             )
         }

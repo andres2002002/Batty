@@ -4,6 +4,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.habitiora.batty.R
 import com.habitiora.batty.ui.components.InfoRow
 import com.habitiora.batty.ui.components.InfoRowEmphasis
 import com.habitiora.batty.ui.components.SectionHeader
@@ -40,48 +42,52 @@ fun ElectricalCard(
     BattyCard(
         variant = BattyCardVariant.Default,
         modifier = modifier,
-        header = { SectionHeader(title = "Electrical") },
+        header = { SectionHeader(title = stringResource(R.string.dashboard_electrical_title)) },
     ) {
         InfoRow(
-            label = "Voltage",
+            label = stringResource(R.string.dashboard_voltage_label),
             value = BatteryFormatter.voltage(voltageMv),
             emphasis = InfoRowEmphasis.ValueHighlighted,
         )
         ElectricalCardDivider()
         InfoRow(
-            label = "Current (now)",
+            label = stringResource(R.string.dashboard_current_now_label),
             value = BatteryFormatter.current(currentNowMa),
             emphasis = InfoRowEmphasis.ValueHighlighted,
         )
         ElectricalCardDivider()
         if (currentAvgMa > 0f) {
             InfoRow(
-                label = "Current (avg)",
+                label = stringResource(R.string.dashboard_current_avg_label),
                 value = BatteryFormatter.current(currentAvgMa),
                 emphasis = InfoRowEmphasis.ValueHighlighted,
             )
             ElectricalCardDivider()
         }
         InfoRow(
-            label = "Power",
+            label = stringResource(R.string.dashboard_power_label),
             value = BatteryFormatter.watts(watts),
             emphasis = InfoRowEmphasis.ValueHighlighted,
         )
         ElectricalCardDivider()
         InfoRow(
-            label = "Charge remaining",
+            label = stringResource(R.string.dashboard_charge_remaining_label),
             value = BatteryFormatter.chargeCounter(chargeCounterMah),
             emphasis = InfoRowEmphasis.Default,
         )
         ElectricalCardDivider()
         InfoRow(
-            label = "Current capacity",
+            label = stringResource(R.string.dashboard_current_capacity_label),
             value = BatteryFormatter.chargeCounter(fullCapacityMah),
             emphasis = InfoRowEmphasis.Default,
         )
         ElectricalCardDivider()
         InfoRow(
-            label = if (isCharging) "Full in" else "Empty in",
+            label = if (isCharging) {
+                stringResource(R.string.dashboard_full_in)
+            } else {
+                stringResource(R.string.dashboard_empty_in)
+            },
             value = BatteryFormatter.estimatedTime(estimatedMinutesRemaining),
             emphasis = if (estimatedMinutesRemaining > 0) {
                 InfoRowEmphasis.ValueHighlighted

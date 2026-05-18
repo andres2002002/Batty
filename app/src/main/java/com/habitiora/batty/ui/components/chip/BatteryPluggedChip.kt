@@ -6,6 +6,7 @@ import androidx.compose.material.icons.outlined.Usb
 import androidx.compose.material.icons.outlined.Wifi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.habitiora.batty.domain.model.BatteryPlugged
 
 @Composable
@@ -23,7 +24,7 @@ fun BatteryPluggedChip(
     }
 
     BattyChip(
-        label = plugged.label,
+        label = stringResource(plugged.labelRes),
         modifier = modifier,
         style = BattyChipStyle.Tonal,
         colors = BattyChipDefaults.tertiary(),

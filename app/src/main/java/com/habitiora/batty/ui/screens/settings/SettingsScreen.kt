@@ -113,19 +113,19 @@ private fun SettingsContent(
 
         item(key = "header_thresholds") {
             SectionHeader(
-                title = "Thresholds",
+                title = stringResource(R.string.thresholds_title),
                 modifier = Modifier.padding(top = 16.dp, bottom = 4.dp),
             )
         }
 
         item(key = "threshold_low") {
             ThresholdCard(
-                title = "Low battery",
+                title = stringResource(R.string.threshold_low_title),
                 icon = Icons.Outlined.BatteryAlert,
                 thresholds = thresholds.lowThresholds.sorted(),
                 valueRange = 1f..49f,
                 steps = 47,  // pasos entre 1 y 49 sin extremos = 47
-                triggerLabel = "Alert at",
+                triggerLabel = stringResource(R.string.threshold_trigger_label),
                 enabled = settings.alertPolicy.isNotDisabled,
                 onAdd = viewModel::addLowThreshold,
                 onUpdate = viewModel::updateLowThreshold,
@@ -135,12 +135,12 @@ private fun SettingsContent(
 
         item(key = "threshold_high") {
             ThresholdCard(
-                title = "High battery",
+                title = stringResource(R.string.threshold_high_title),
                 icon = Icons.Outlined.BatteryChargingFull,
                 thresholds = thresholds.highThresholds.sortedDescending(),
                 valueRange = 51f..100f,
                 steps = 48,  // pasos entre 51 y 100 sin extremos = 48
-                triggerLabel = "Alert at",
+                triggerLabel = stringResource(R.string.threshold_trigger_label),
                 enabled = settings.alertPolicy.isNotDisabled,
                 onAdd = viewModel::addHighThreshold,
                 onUpdate = viewModel::updateHighThreshold,
@@ -152,7 +152,7 @@ private fun SettingsContent(
 
         item(key = "header_general") {
             SectionHeader(
-                title = "General",
+                title = stringResource(R.string.settings_general_title),
                 modifier = Modifier.padding(top = 16.dp, bottom = 4.dp),
             )
         }
@@ -163,8 +163,8 @@ private fun SettingsContent(
                 contentPadding = BattyCardDefaults.ContentPadding,
             ) {
                 SettingsToggleItem(
-                    title = "Start on boot",
-                    description = "Automatically start monitoring after device restart",
+                    title = stringResource(R.string.settings_start_on_boot),
+                    description = stringResource(R.string.settings_start_on_boot_description),
                     checked = settings.startOnBoot,
                     onCheckedChange = viewModel::setStartOnBoot,
                     icon = Icons.Outlined.PowerSettingsNew,

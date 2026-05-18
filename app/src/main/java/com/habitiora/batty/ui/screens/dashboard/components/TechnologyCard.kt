@@ -8,7 +8,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.habitiora.batty.R
 import com.habitiora.batty.data.model.ColorUI
 import com.habitiora.batty.ui.components.InfoColumn
 import com.habitiora.batty.ui.components.InfoColumnDefaults
@@ -22,7 +24,7 @@ fun TechnologyCard(
 ) {
     InfoColumn(
         modifier = modifier,
-        label = "Technology",
+        label = stringResource(R.string.dashboard_technology_label),
         value = BatteryFormatter.technology(technology),
         icon = {
             Icon(

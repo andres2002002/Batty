@@ -14,9 +14,9 @@ import com.habitiora.batty.domain.model.BatteryStatus
 fun BatteryInfo.toEntity(): BatteryEntity = BatteryEntity(
     id = id,
     level = level,
-    status = status.label,
+    status = status.name,
     health = health.name,
-    plugged = plugged.label,
+    plugged = plugged.name,
     temperature = temperature,
     voltage = voltage,
     technology = technology,

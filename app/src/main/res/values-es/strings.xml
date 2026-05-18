@@ -7,14 +7,48 @@
     <string name="status_discharging">Descargando</string>
     <string name="status_full">Completo</string>
     <string name="status_not_charging">No cargando</string>
+    <string name="status_unknown">Desconocido</string>
+
+    <!-- Plugged Status -->
     <string name="status_ac_charger">Cargador AC</string>
     <string name="status_usb_charger">Cargador USB</string>
     <string name="status_wireless_charger">Cargador Inalámbrico</string>
-    <string name="status_unknown">Desconocido</string>
+    <string name="status_unplugged">Desenchufado</string>
     <string name="connected">Conectado</string>
     <string name="disconnected">Desconectado</string>
     <string name="monitoring_on">Monitoreo Activo</string>
     <string name="monitoring_off">Monitoreo Inactivo</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_monitor_active_label">Activo — guardando capturas cada 5 min</string>
+    <string name="dashboard_monitor_inactive_label">Inactivo</string>
+    <string name="dashboard_monitor_starting_label">Iniciando…</string>
+    <string name="dashboard_monitor_error_disconnect">El servicio se detuvo inesperadamente</string>
+    <string name="dashboard_monitor_error_bind">Error al iniciar el servicio</string>
+    <string name="dashboard_monitor_title">Monitor de batería</string>
+    <string name="dashboard_full_in">Lleno en</string>
+    <string name="dashboard_empty_in">Vacío en</string>
+    <string name="dashboard_electrical_title">Eléctrico</string>
+    <string name="dashboard_voltage_label">Voltaje</string>
+    <string name="dashboard_current_now_label">Corriente (ahora)</string>
+    <string name="dashboard_current_avg_label">Corriente (prom.)</string>
+    <string name="dashboard_power_label">Potencia</string>
+    <string name="dashboard_charge_remaining_label">Carga restante</string>
+    <string name="dashboard_current_capacity_label">Capacidad actual</string>
+    <string name="dashboard_health_title">Salud de la batería</string>
+    <string name="dashboard_capacity_health_label">Salud de capacidad</string>
+    <string name="dashboard_design_capacity_label">Capacidad de diseño</string>
+    <string name="dashboard_cycle_count_label">Ciclos de carga</string>
+    <string name="dashboard_system_title">Sistema</string>
+    <string name="dashboard_screen_on">Pantalla encendida</string>
+    <string name="dashboard_screen_off">Pantalla apagada</string>
+    <string name="dashboard_battery_saver">Ahorro de batería</string>
+    <string name="dashboard_doze">Doze</string>
+    <string name="dashboard_details_title">Detalles</string>
+    <string name="dashboard_technology_label">Tecnología</string>
+    <string name="dashboard_temperature_label">Temperatura</string>
+    <string name="dashboard_battery_health_label">Salud de Batería</string>
+    <string name="dashboard_retry">Reintentar</string>
 
     <!-- Temperature -->
     <string name="temperature_title">Temperatura</string>
@@ -42,6 +76,15 @@
     <string name="alert_policy_all_description">Enviar todas las alertas</string>
     <string name="alert_policy_disabled">Desactivado</string>
     <string name="alert_policy_disabled_description">No enviar alertas</string>
+
+    <!-- Thresholds -->
+    <string name="thresholds_title">Umbrales</string>
+    <string name="threshold_low_title">Batería baja</string>
+    <string name="threshold_high_title">Batería alta</string>
+    <string name="threshold_trigger_label">Alertar al</string>
+    <string name="settings_general_title">General</string>
+    <string name="settings_start_on_boot">Iniciar al arrancar</string>
+    <string name="settings_start_on_boot_description">Iniciar monitoreo automáticamente tras reiniciar el dispositivo</string>
 
     <!-- Battery Health -->
     <string name="health_device">Salud</string>
@@ -81,36 +124,64 @@
 
     <!-- Battery History Screen -->
     <string name="history_title">Historial de la batería</string>
-    <string name="history_registers_count">Registros</string>
-    <string name="history_metrics_to_display">Métricas para mostrar</string>
-    <string name="history_empty">No hay historial disponible</string>
-    <string name="history_empty_description">Los datos aparecerán aquí una vez registrada la información de la batería.</string>
+    <string name="history_last_charge_cycle">Último Ciclo de Carga</string>
+    <string name="history_time_window">Ventana de Tiempo</string>
+    <string name="history_duration">Duración</string>
+    <string name="history_gain">Ganancia</string>
+    <string name="history_chart_series">Series de Gráfica</string>
+    <string name="history_min">Mín</string>
+    <string name="history_avg">Prom</string>
+    <string name="history_max">Máx</string>
+    <string name="history_peak">Pico</string>
+    <string name="history_samples">Muestras</string>
+    <string name="history_avg_level">Nivel Prom.</string>
+    <string name="history_avg_temp">Temp. Prom.</string>
+    <string name="history_avg_power">Potencia Prom.</string>
+    <string name="history_battery_level_card">Nivel de Batería</string>
+    <string name="history_average">Promedio</string>
+    <string name="history_minimum">Mínimo</string>
+    <string name="history_maximum">Máximo</string>
+    <string name="history_variation">Variación</string>
+    <string name="history_variation_range">Rango de %1$s</string>
+    <string name="history_power_current_card">Potencia y Corriente</string>
+    <string name="history_avg_current">Corriente prom.</string>
+    <string name="history_peak_current">Corriente pico</string>
+    <string name="history_avg_voltage">Voltaje prom.</string>
+    <string name="history_peak_power">Potencia pico</string>
+    <string name="history_system_usage_card">Uso del Sistema</string>
+    <string name="history_screen_on">Pantalla enc.</string>
+    <string name="history_battery_saver">Ahorro batería</string>
+    <string name="history_samples_suffix">%1$d de muestras</string>
+    <string name="history_total_snapshots">Total de capturas</string>
+    <string name="history_no_data_period">Sin datos para este periodo</string>
+    <string name="history_enable_monitoring_msg">Activa el monitoreo para empezar a recolectar datos</string>
 
-    <string name="history_trends_chart_title">Gráfico de tendencias</string>
-    <string name="contract">Contraer</string>
-    <string name="expand">Expandir</string>
-    <string name="close">Cerrar</string>
-    <string name="no_data">Sin datos</string>
+    <string name="history_time_now">Ahora</string>
+    <string name="history_duration_format_hm">%1$dh %2$dm</string>
+    <string name="history_duration_format_m">%1$dm</string>
 
-    <string name="history_point_details_title">Detalles del Punto</string>
-    <string name="history_point_level">Nivel</string>
     <string name="history_point_status">Estado</string>
     <string name="history_point_temperature">Temperatura</string>
     <string name="history_point_voltage">Voltaje</string>
     <string name="history_point_charging_type">Tipo de carga</string>
-    <string name="history_point_current">Corriente</string>
-    <string name="history_point_time">Fecha y hora</string>
 
-    <string name="history_statistical_summary_title">Resumen Estadístico</string>
-    <string name="history_average_level">Nivel Promedio</string>
-    <string name="history_average_temperature">Temperatura Promedio</string>
-    <string name="history_charging_time">Tiempo de carga</string>
+    <!-- Chart Types -->
+    <string name="chart_level">Nivel</string>
+    <string name="chart_temperature">Temperatura</string>
+    <string name="chart_current">Corriente</string>
+
+    <!-- Time Ranges -->
+    <string name="time_range_1h">1h</string>
+    <string name="time_range_6h">6h</string>
+    <string name="time_range_24h">24h</string>
+    <string name="time_range_7d">7d</string>
+    <string name="time_range_30d">30d</string>
 
     <!-- Battery Metrics -->
     <string name="metrics_battery_level">Nivel de Batería</string>
     <string name="metrics_temperature">Temperatura</string>
     <string name="metrics_voltage">Voltaje</string>
-    <string name="metrics_current">Current</string>
+    <string name="metrics_current">Corriente</string>
     <string name="metrics_charging_rate">Tasa de Carga</string>
     <string name="metrics_discharge_rate">Tasa de Descarga</string>
 
