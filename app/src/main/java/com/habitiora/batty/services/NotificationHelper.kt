@@ -43,7 +43,8 @@ class NotificationHelper @Inject constructor(
         const val CRITICAL_CHANNEL_ID = "battery_critical"
 
         const val FOREGROUND_NOTIFICATION_ID = 1001
-        const val ALERT_NOTIFICATION_ID = 1002
+        const val ALERT_LOW_NOTIFICATION_ID = 1002
+        const val ALERT_HIGH_NOTIFICATION_ID = 1003
     }
 
     private val notificationManager =
@@ -169,9 +170,23 @@ class NotificationHelper @Inject constructor(
             return
         }
         val notification = buildAlertNotification(content, event)
-        // val notification = buildAlertNotification(content)
-        NotificationManagerCompat.from(context).notify(ALERT_NOTIFICATION_ID, notification)
+
+        val notificationId = if (event is ThresholdEvent.LowBattery) {
+            ALERT_LOW_NOTIFICATION_ID
+        } else {
+            ALERT_HIGH_NOTIFICATION_ID
+        }
+
+        NotificationManagerCompat.from(context).notify(notificationId, notification)
         Timber.i("Alert shown: ${content.title}")
+    }
+
+    fun cancelLowBatteryAlert() {
+        notificationManager.cancel(ALERT_LOW_NOTIFICATION_ID)
+    }
+
+    fun cancelHighBatteryAlert() {
+        notificationManager.cancel(ALERT_HIGH_NOTIFICATION_ID)
     }
 
     private fun buildAlertNotification(
